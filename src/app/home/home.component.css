@@ -1,0 +1,45 @@
+body {
+    background-color: #f8f9fa; /* Light background color */
+}
+.hero {
+    background: linear-gradient(135deg, #190c63, #9cb2c0); /* Gradient from dark purple to bright yellow */
+    color: white;
+    height: 670px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+.hero p {
+    font-size: 1.5rem;
+}
+.hero .btn {
+    background-color: #83dfe6; /* Bright yellow */
+    color: #6a1b9a; /* Dark purple */
+    border: none;
+}
+.hero .btn:hover {
+    background-color: #fdd835; /* Lighter yellow */
+}
+.category-card {
+    transition: transform 0.3s;
+}
+.category-card:hover {
+    transform: scale(1.05);
+}
+.footer {
+    background: linear-gradient(135deg, #6a1b9a, #ffeb3b); /* Gradient for footer */
+    color: white;
+    padding: 20px 0;
+}
+.footer a {
+    color: #ffeb3b; /* Bright yellow for links */
+}
+.footer a:hover {
+    color: #fff; /* White on hover */
+}

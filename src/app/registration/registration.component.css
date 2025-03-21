@@ -1,0 +1,82 @@
+
+.error {
+    border-color: rgb(0, 0, 0);
+    border: 2px;
+    background-color: rgb(228, 135, 135);
+    margin: 5px;
+    padding: 5px;
+    border-radius: 50px;
+    /* width: 50%; */
+  }
+  
+  .label {
+    display: block;
+    font-weight: bold;
+  }
+  /* .myclass{
+    margin-left: 500px;
+  } */
+  .background-radial-gradient {
+    background-color: hsl(218, 41%, 15%);
+    background-image: radial-gradient(650px circle at 0% 0%,
+        hsl(218, 41%, 35%) 15%,
+        hsl(218, 41%, 30%) 35%,
+        hsl(218, 41%, 20%) 75%,
+        hsl(218, 41%, 19%) 80%,
+        transparent 100%),
+        radial-gradient(1250px circle at 100% 100%,
+        hsl(218, 41%, 45%) 15%,
+        hsl(218, 41%, 30%) 35%,
+        hsl(218, 41%, 20%) 75%,
+        hsl(218, 41%, 19%) 80%,
+        transparent 100%);
+}
+
+#radius-shape-1 {
+    height: 220px;
+    width: 220px;
+    top: -60px;
+    left: -130px;
+    background: radial-gradient(#44006b, #ad1fff);
+    overflow: hidden;
+}
+
+#radius-shape-2 {
+    border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+    bottom: -60px;
+    right: -110px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(#44006b, #ad1fff);
+    overflow: hidden;
+}
+
+.bg-glass {
+    background-color: hsla(0, 0%, 100%, 0.9) !important;
+    backdrop-filter: saturate(200%) blur(25px);
+/* }
+.bg-body-tertiary:hover {
+    transform: scale(1.05); /* Slightly enlarge the card */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+} */
+
+/* Style for the input fields */
+.form-control {
+    transition: border-color 0.3s ease; /* Smooth transition for border color */
+}
+
+.form-control:focus {
+    border-color: rgb(53, 119, 206); /* Change border color on focus */
+    box-shadow: 0 0 5px rgba(53, 119, 206, 0.5); /* Add shadow on focus */
+}
+
+/* Style for the labels */
+.form-label {
+    transition: color 0.3s ease; /* Smooth transition for label color */
+}
+
+.form-control:focus + .form-label {
+    color: rgb(53, 119, 206); /* Change label color on input focus */
+}
+
+/* Error message styling */

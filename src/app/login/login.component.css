@@ -1,0 +1,15 @@
+
+.error {
+  border-color: rgb(0, 0, 0);
+  border: 2px;
+  background-color: rgb(228, 135, 135);
+  margin: 5px;
+  padding: 5px;
+  border-radius: 50px;
+  width: 50%;
+}
+
+.label {
+  display: block;
+  font-weight: bold;
+}
