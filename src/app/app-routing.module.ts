@@ -6,15 +6,21 @@ import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { AuthGuard } from './_auth/auth.guard';
+import { AddNewProductComponent } from './add-new-product/add-new-product.component';
+import { ProductDisplayComponent } from './product-display-component/product-display-component.component';
 
 const routes: Routes = [
   // import { AppRoutingModule } from './app-routing.module';
   {path:'home',component:HomeComponent},
-  {path:'user',component:UserComponent},
-  {path:'admin',component:AdminComponent},
+  {path:'user',component:UserComponent, canActivate:[AuthGuard], data:{roles:['User']}},
+  {path:'admin',component:AdminComponent, canActivate:[AuthGuard], data:{roles:['Admin']}},
   {path:'login',component:LoginComponent},
   {path:'registartion',component:RegistrationComponent},
   {path:'forbidden',component:ForbiddenComponent},
+  {path:'Showproduct',component:ProductDisplayComponent},
+  {path:"AddNewProduct",component:AddNewProductComponent,canActivate:[AuthGuard], data:{roles:['Admin']}},
+  {path:'**',component:ForbiddenComponent},
    { path: '', redirectTo: '/home', pathMatch: 'full' }
 
 ];

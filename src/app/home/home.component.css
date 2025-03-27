@@ -1,45 +1,78 @@
-body {
-    background-color: #f8f9fa; /* Light background color */
-}
-.hero {
-    background: linear-gradient(135deg, #190c63, #9cb2c0); /* Gradient from dark purple to bright yellow */
+
+ .hero {
+    background: url('https://plus.unsplash.com/premium_photo-1684785617105-2ebfbd278671?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
+    background-blend-mode: multiply;
+    height: 475px;
+    width: 100%;
     color: white;
-    height: 670px;
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     text-align: center;
+}
+
+.welcome-container {
+    width: 800px;
     position: relative;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 20px 40px;
+    border-radius: 10px;
+    animation: fadeIn 2s ease-in-out;
 }
-.hero h1 {
-    font-size: 3rem;
+
+.welcome-text {
+    font-size: 3.5rem;
     font-weight: bold;
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: slideUp 1.5s ease-in-out forwards;
 }
-.hero p {
-    font-size: 1.5rem;
-}
-.hero .btn {
-    background-color: #83dfe6; /* Bright yellow */
-    color: #6a1b9a; /* Dark purple */
-    border: none;
-}
-.hero .btn:hover {
-    background-color: #fdd835; /* Lighter yellow */
-}
-.category-card {
-    transition: transform 0.3s;
-}
-.category-card:hover {
-    transform: scale(1.05);
-}
-.footer {
-    background: linear-gradient(135deg, #6a1b9a, #ffeb3b); /* Gradient for footer */
+
+.cta-btn {
+    margin-top: 15px;
+    padding: 12px 25px;
+    font-size: 1.2rem;
     color: white;
-    padding: 20px 0;
+    background: #ff6b6b;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
 }
-.footer a {
-    color: #ffeb3b; /* Bright yellow for links */
+
+.cta-btn:hover {
+    transform: scale(1.1);
+    background: #ff4d4d;
 }
-.footer a:hover {
-    color: #fff; /* White on hover */
+
+.carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 }
+
+.carousel-image {
+    width: 400px; 
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: opacity 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(-20px); opacity: 1; }
+    100% { transform: translateY(0); opacity: 0.5; }
+} 
+ 

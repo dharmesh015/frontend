@@ -66,9 +66,23 @@
                   <input type="text" id="form3Example1" class="form-control" 
                          placeholder="Enter Your Name" 
                          #username="ngModel" ngModel name="username" required />
-                  <label class="form-label" for="form3Example1">First Name</label>
+                  <label class="form-label" for="form3Example1">User Name</label>
                   <div *ngIf="username.invalid && username.touched" class="error">
-                    <div *ngIf="username.errors?.['required']">User fisrt Name is required</div>
+                    <div *ngIf="username.errors?.['required']">User Name is required</div>
+                  </div>
+                </div>
+
+
+
+                <!-- Email input -->
+                <div class="form-outline mb-4">
+                  <input type="text" id="form3Example2" class="form-control" 
+                         placeholder="Enter Your userFirstName" 
+                         #userFirstName="ngModel" ngModel name="userFirstName" required  />
+                  <label class="form-label" for="form3Example2">FirstName</label>
+                  <div *ngIf="userFirstName.invalid && userFirstName.touched" class="error">
+                    <div *ngIf="userFirstName.errors?.['required']">userFirstName is required</div>
+                    <!-- <div *ngIf="email.errors?.['email']">Enter a valid email</div> -->
                   </div>
                 </div>
                 <div class="form-outline mb-4">
@@ -77,37 +91,53 @@
                            #Lastname="ngModel" ngModel name="Lastname" required />
                     <label class="form-label" for="form3Example1">Last Name</label>
                     <div *ngIf="Lastname.invalid && Lastname.touched" class="error">
-                      <div *ngIf="Lastname.errors?.['required']">User fisrt Name is required</div>
+                      <div *ngIf="Lastname.errors?.['required']">Last Name is required</div>
                     </div>
                   </div>
                 
   
-                <!-- Email input -->
+                
+
                 <div class="form-outline mb-4">
-                  <input type="email" id="form3Example2" class="form-control" 
-                         placeholder="Enter Your Email" 
-                         #email="ngModel" ngModel name="email" required email />
-                  <label class="form-label" for="form3Example2">Your Email</label>
-                  <div *ngIf="email.invalid && email.touched" class="error">
-                    <div *ngIf="email.errors?.['required']">Email is required</div>
-                    <div *ngIf="email.errors?.['email']">Enter a valid email</div>
+                  <input type="text" id="form3Example2" class="form-control" 
+                         placeholder="Enter Email" 
+                         #Email="ngModel" ngModel name="Email" required
+                         pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"/>
+                  <label class="form-label" for="form3Example2">Email</label>
+                  <div *ngIf="Email.invalid && Email.touched" class="error">
+                    <div *ngIf="Email.errors?.['required']">Email is required</div>
+                    <div *ngIf="Email.errors?.['pattern']">Enter a valid email</div>
+                  </div>
+                </div>
+                <div class="form-outline mb-4">
+                  <input type="tel" id="form3Example3" class="form-control" 
+                         placeholder="Enter Mobile Number" 
+                         #Mobile="ngModel" ngModel name="Mobile" required pattern="^[0-9]{10}$"/>
+                  <label class="form-label" for="form3Example3">Mobile Number</label>
+                  <div *ngIf="Mobile.invalid && Mobile.touched" class="error">
+                    <div *ngIf="Mobile.errors?.['required']">Mobile Number is required</div>
+                    <div *ngIf="Mobile.errors?.['pattern']">Enter a valid 10-digit mobile number</div>
                   </div>
                 </div>
   
                 <!-- Password input -->
                 <div class="form-outline mb-4">
-                  <input type="password" id="form3Example3" class="form-control" 
+                  <input type="text" id="form3Example4" class="form-control" 
                          placeholder="Enter Password" 
-                         #password="ngModel" ngModel name="password" required minlength="7" />
-                  <label class="form-label" for="form3Example3">Password</label>
-                  <div *ngIf="password.invalid && password.touched" class="error">
-                    <div *ngIf="password.errors?.['required']">Password is required</div>
-                    <div *ngIf="password.errors?.['minlength']">Password must be at least 7 characters long</div>
+                         #Password="ngModel" ngModel name="Password" required
+                         
+                         />
+                  <label class="form-label" for="form3Example4">Password</label>
+                  <div *ngIf="Password.invalid && Password.touched" class="error">
+                    <div *ngIf="Password.errors?.['required']">Password is required</div>
+                    <!-- <div *ngIf="Password.errors?.['pattern']">
+                      Password must be at least 7 characters long, include one uppercase letter, and one special character.
+                    </div> -->
                   </div>
                 </div>
   
                 <!-- Submit button -->
-                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4 mx-2" [disabled]="registrationForm.invalid">
+                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn   mb-4 mx-2 submit" [disabled]="registrationForm.invalid">
                   Register
                 </button>
   
@@ -119,4 +149,6 @@
         </div>
       </div>
     </div>
+    <!-- Bootstrap Modal -->
+
   </section>

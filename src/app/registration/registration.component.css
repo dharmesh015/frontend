@@ -58,7 +58,7 @@
 .bg-body-tertiary:hover {
     transform: scale(1.05); /* Slightly enlarge the card */
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
-} */
+} 
 
 /* Style for the input fields */
 .form-control {
@@ -80,3 +80,10 @@
 }
 
 /* Error message styling */
+
+.submit{
+    /* background-color:  
+     */
+     background-color: #44006b;
+     color: #ffffff;
+  }
