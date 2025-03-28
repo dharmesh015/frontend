@@ -29,10 +29,12 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { DragDirective } from './drag.directive';
 import { AddNewProductComponent } from './add-new-product/add-new-product.component';
 import { ProductDisplayComponent } from './product-display-component/product-display-component.component';
+import { ProductListComponent } from './product-list/product-list.component';
+import { ProductDetailDialogComponent } from './product-detail-dialog/product-detail-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 
 
-
-  
 
 @NgModule({
   declarations: [
@@ -46,7 +48,9 @@ import { ProductDisplayComponent } from './product-display-component/product-dis
     RegistrationComponent,
     FooterComponent,
     AddNewProductComponent,
-    ProductDisplayComponent
+    ProductDisplayComponent,
+    ProductListComponent,
+    ProductDetailDialogComponent
     
   ],
   imports: [
@@ -62,7 +66,12 @@ import { ProductDisplayComponent } from './product-display-component/product-dis
     MatInputModule,
     MatIconModule,
     MatGridListModule,
-    DragDirective
+    DragDirective,
+    MatDialogModule,
+    MatCardModule,
+    
+    
+    
 
 
   

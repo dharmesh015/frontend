@@ -1,37 +1,15 @@
-<div class="container " style="background-color:black; margin: 20px;">
+<mat-toolbar class="nav">
+  <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+    <button mat-raised-button (click)="showProducts()">Show Products</button>
+    <button mat-raised-button (click)="addProduct()">Add Product</button>
+  </div>
+</mat-toolbar>
+<div class="container" fxLayout="column" fxLayoutAlign="center center">
+  <div *ngIf="showProductList">
+    <app-product-list></app-product-list>
+  </div>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-  
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-         
-        
-          <li class="nav-item" >
-            <a
-              class="nav-link active"
-              aria-current="page"
-              routerLink="/AddNewProduct"
-              routerLinkActive="active"
-              >AddNewProduct</a
-            >
-            <!-- AddNewProduct -->
-          </li>
-          <li class="nav-item" >
-            <a
-              class="nav-link active"
-              aria-current="page"
-              routerLink="/Showproduct"
-              routerLinkActive="active"
-              >showProduct</a
-            >
-            <!-- AddNewProduct -->
-          </li>
-        </ul>
-      </div>
-     
-      
-    </div>
-  </nav>
-  
+  <div *ngIf="!showProductList">
+    <app-add-new-product></app-add-new-product>
+  </div>
 </div>

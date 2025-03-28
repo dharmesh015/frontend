@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FileHandel } from '../_model/file-handel.model';
 import { ProductService } from '../_service/product.service';
 import { Console } from 'node:console';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-new-product',
@@ -17,6 +18,7 @@ import { Console } from 'node:console';
 export class AddNewProductComponent implements OnInit {
   isNewProduct = true;
   product: Product = {
+    productId:0,
     productName: "",
     productDescription: "",
     productDiscountedPrice: 0,
@@ -40,16 +42,48 @@ export class AddNewProductComponent implements OnInit {
   }
 
   addProduct(productForm: NgForm) {
-    console.log("call service--"+productForm.value);
+    // Check if productImages is empty
+
+    if(productForm.invalid){
+      Swal.fire({
+        title: "No data Provided",
+        text: "Please give data for the product.",
+        icon: "warning", // Use 'warning' icon to indicate a caution
+        confirmButtonText: "OK" // Customize the button text
+      });
+      return;
+    }
+    if (this.product.productImages.length === 0) {
+      Swal.fire({
+        title: "No Images Provided",
+        text: "Please upload at least one image for the product.",
+        icon: "warning", // Use 'warning' icon to indicate a caution
+        confirmButtonText: "OK" // Customize the button text
+      });
+      return; // Exit the method if no images are provided
+    }
+  
     const productFormData = this.prepareFormData(this.product);
     
     this.productService.addProduct(productFormData).subscribe(
       (response: Product) => {
         productForm.reset();
         this.product.productImages = [];
+        Swal.fire({
+          title: "Product Added",
+          text: "The product has been successfully added.",
+          icon: "success",
+          confirmButtonText: "OK"
+        });
+        // window.location.reload();
       },
       (error: HttpErrorResponse) => {
-        console.log(error);
+        Swal.fire({
+          title: "Error",
+          text: "An error occurred while adding the product. Please try again.",
+          icon: "error",
+          confirmButtonText: "OK"
+        });
       }
     );
   }
@@ -72,7 +106,9 @@ export class AddNewProductComponent implements OnInit {
         const file = files[i];
         const fileHandel: FileHandel = {
           file: file,
-          url: this.sanitizer.bypassSecurityTrustUrl(window.URL .createObjectURL(file)),
+          url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file)),
+          type: '',
+          picByte: ''
         };
         this.product.productImages.push(fileHandel);
       }
@@ -92,9 +128,12 @@ export class AddNewProductComponent implements OnInit {
         const fileHandel: FileHandel = {
           file: file,
           url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file)),
+          type: '',
+          picByte: ''
         };
         this.product.productImages.push(fileHandel);
       }
     }
   }
+  
 }

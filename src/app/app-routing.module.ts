@@ -9,6 +9,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { AuthGuard } from './_auth/auth.guard';
 import { AddNewProductComponent } from './add-new-product/add-new-product.component';
 import { ProductDisplayComponent } from './product-display-component/product-display-component.component';
+import { ProductListComponent } from './product-list/product-list.component';
 
 const routes: Routes = [
   // import { AppRoutingModule } from './app-routing.module';
@@ -18,7 +19,7 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'registartion',component:RegistrationComponent},
   {path:'forbidden',component:ForbiddenComponent},
-  {path:'Showproduct',component:ProductDisplayComponent},
+  {path:'Showproduct',component:ProductListComponent},
   {path:"AddNewProduct",component:AddNewProductComponent,canActivate:[AuthGuard], data:{roles:['Admin']}},
   {path:'**',component:ForbiddenComponent},
    { path: '', redirectTo: '/home', pathMatch: 'full' }

@@ -12,7 +12,7 @@ export class ProductService {
 
  
 
-
+  apiUrl="http://localhost:9090/addNewProduct"
 
   public addProduct(product: FormData){
     console.log("in service"+product);
@@ -25,4 +25,8 @@ export class ProductService {
     return this.httpClient.get<Product[]>("http://localhost:9090/getAllProducts");
   }
 
+  deleteProduct(productId: number): Observable<any> {
+    console.log("service");
+    return this.httpClient.delete(`${this.apiUrl}/deleteProduct/${productId}`);
+  }
 }

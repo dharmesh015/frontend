@@ -10,22 +10,7 @@ import { ProductService } from '../_service/product.service';
   styleUrls: ['./product-display-component.component.css']
 })
 export class ProductDisplayComponent implements OnInit {
-  products: Product[] = []; // Array to hold the products
-
-  constructor(private productService: ProductService) {}
-
   ngOnInit(): void {
-    this.loadProducts(); // Load products when the component initializes
-  }
-
-  loadProducts(): void {
-    this.productService.getAllProducts().subscribe(
-      (data: Product[]) => {
-        this.products = data; // Assign the fetched products to the products array
-      },
-      (error) => {
-        console.error('Error fetching products:', error);
-      }
-    );
+    throw new Error('Method not implemented.');
   }
 }

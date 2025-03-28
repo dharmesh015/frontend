@@ -1,38 +1,50 @@
-mat-grid-tile {
+.dropzone {
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-    border: 1px solid #eee;
+.dropzone:hover {
+    background-color: #f0f0f0;
 }
 
 .btn-remove-image {
     position: absolute;
-    cursor: pointer;
-    top: -10px;
-    right: -10px;
+    top: 5px;
+    right: 5px;
     background-color: red;
-    color: antiquewhite;
+    color: white;
     border-radius: 50%;
-    width: 20px;
-    height: auto;
-    text-align: center;
+    padding: 5px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
-.dropzone {
-    height: 150px;
-    min-width: 100px;
-    display: table;
-    background-color: #eee;
-    width: 300px;
-    border: dashed 1px #aaa;
-    border-radius: 10px;
-    margin-left: auto;
-    margin-right: auto;
+.mat-grid-tile img {
+    width: 100%; 
+    height: auto; 
+    border-radius: 5px;
 }
 
-.text-wrapper{
-    display: table-cell;
-    vertical-align: middle;
+.error {
+    border: 1px solid transparent; 
 }
 
-.center{
-    text-align: center;
+.mat-form-field-underline.error {
+    background-color: transparent; 
+}
+
+.mat-form-field-appearance-outline .mat-form-field-underline {
+    background-color: #2196f3; 
+}
+
+.mat-form-field-appearance-outline .mat-form-field-label {
+    color: #2196f3;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-label.mat-focused {
+    color: #1976d2; 
 }

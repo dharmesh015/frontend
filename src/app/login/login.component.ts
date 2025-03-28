@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import { UserAuthServiceService } from '../_service/user-auth-service.service';
 import { Router } from '@angular/router';
 import { Requestuser } from '../modul/requestuser';
+import Swal from 'sweetalert2';
 // import { Requestuser } from '../modul/requestuser';
 
 
@@ -49,7 +50,12 @@ login(form: NgForm) {
     }
   },
   (error) => {
-    console.log(error);
+    Swal.fire({
+      title: "Invalid Credentials",
+      text: "The username or password you entered is incorrect. Please try again.",
+      icon: "error", // Change the icon to 'error' to indicate a problem
+      confirmButtonText: "OK" // Customize the button text
+    });
   }
   );
 

@@ -7,5 +7,13 @@ import { Component } from '@angular/core';
   styleUrl: './admin.component.css'
 })
 export class AdminComponent {
+  showProductList: boolean = true; // Default to showing product list
 
+  showProducts() {
+    this.showProductList = true; // Show product list
+  }
+
+  addProduct() {
+    this.showProductList = false; // Show add product form
+  }
 }

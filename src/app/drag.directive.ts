@@ -37,7 +37,11 @@ export class DragDirective {
       for (let i = 0; i < dataTransfer.files.length; i++) {
         const file = dataTransfer.files[i];
         const url = this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file));
-        fileHandels.push({ file, url });
+        fileHandels.push({
+          file, url,
+          type: '',
+          picByte: ''
+        });
       }
       this.files.emit(fileHandels);
     }

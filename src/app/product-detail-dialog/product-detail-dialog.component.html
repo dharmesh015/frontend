@@ -1,0 +1,63 @@
+<h2 mat-dialog-title>{{ data.productName }}</h2>
+<mat-dialog-content>
+  <div class="product-details">
+    <p class="product-description">{{ data.productDescription }}</p>
+    <p class="product-price">Actual Price: {{ data.productActualPrice | currency }}</p>
+    <p class="product-discounted-price">Discounted Price: {{ data.productDiscountedPrice | currency }}</p>
+    <div class="image-gallery">
+      <img
+        *ngFor="let image of data.productImages"
+        [src]="image.url"
+        class="product-image"
+      />
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button (click)="close()">Close</button>
+  <button mat-button color="warn" (click)="deleteProduct(data.productId)">Delete</button>
+  <button mat-button color="primary" (click)="updateProduct()">Update</button>
+</mat-dialog-actions>
+
+<style>
+  .product-details {
+    padding: 16px;
+    text-align: center;
+    width: 300px; /* Adjust or remove if needed */
+    margin: 0 auto;
+  }
+
+  .product-description,
+  .product-price,
+  .product-discounted-price {
+    margin-bottom: 8px;
+  }
+
+  .image-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 16px;
+    gap: 8px;
+  }
+
+  .product-image {
+    max-width: 100%; /* Ensure images don't exceed container width */
+    object-fit: contain; /* Maintain aspect ratio, show full image */
+    border: 2px solid #000000;
+    box-sizing: border-box;
+  }
+
+  mat-dialog-actions {
+    padding: 8px 16px 16px 16px;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (max-width: 600px) {
+    .product-details {
+      max-width: 100%;
+      padding: 8px;
+    }
+  }
+</style>
