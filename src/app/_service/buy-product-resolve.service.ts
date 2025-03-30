@@ -7,3 +7,4 @@ import { Product } from '../_model/product.model';
 })
 export class BuyProductResolveService {
 }
+
