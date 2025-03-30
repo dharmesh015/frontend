@@ -13,6 +13,7 @@ export class ProductService {
 
  
   private baseUrl = 'http://localhost:9090';
+  
 
   public addProduct(product: FormData){
     console.log("in service"+product);
