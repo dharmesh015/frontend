@@ -68,4 +68,11 @@ login(form: NgForm) {
 
 register(){
 
+}
+
+
+
+isloggin(){
+
+  return !this.userAuthService.isLoggedIn();
 }}

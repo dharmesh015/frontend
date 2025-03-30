@@ -1,19 +1,32 @@
 <div class="container mt-5">
-    <div class="product-list">
-      <mat-card *ngFor="let product of products" (click)="openDialog(product)" class="product-card" style="cursor: pointer;">
-        <mat-card-header>
-          <mat-card-title>{{ product.productName }}</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          <div class="image-container">
-            <img *ngFor="let image of product.productImages" 
-                 [src]="image.url" 
-                 alt="{{ product.productName }}" 
-                 class="product-image" />
-          </div>
-          <p class="product-description">{{ product.productDescription }}</p>
-          <p class="product-price">Price: {{ product.productActualPrice | currency }}</p>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
+  <table mat-table [dataSource]="products" class="mat-elevation-z8">
+
+    <!-- Product Name Column -->
+    <ng-container matColumnDef="productName">
+      <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Product Name </th>
+      <td mat-cell *matCellDef="let product" class="mat-cell" (click)="openDialog(product)" style="cursor: pointer;">
+        {{ product.productName }}
+      </td>
+    </ng-container>
+
+    <!-- Product Description Column -->
+    <ng-container matColumnDef="productDescription">
+      <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Description </th>
+      <td mat-cell *matCellDef="let product" class="mat-cell">
+        {{ product.productDescription }}
+      </td>
+    </ng-container>
+
+    <!-- Product Price Column -->
+    <ng-container matColumnDef="productActualPrice">
+      <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Price </th>
+      <td mat-cell *matCellDef="let product" class="mat-cell">
+        {{ product.productActualPrice | currency }}
+      </td>
+    </ng-container>
+
+    <!-- Header and Row Declarations -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-row" (click)="openDialog(row)" style="cursor: pointer;"></tr>
+  </table>
+</div>

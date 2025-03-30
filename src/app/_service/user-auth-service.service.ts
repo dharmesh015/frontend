@@ -1,46 +1,103 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+// import { Injectable } from '@angular/core';
+// import { BehaviorSubject } from 'rxjs';
+
+// @Injectable({
+//   providedIn: 'root'
+// })
+// export class UserAuthServiceService {
+  
+//   constructor() { }
+
+
+  
+
+//   public setRoles(roles: any[]): void {
+//     localStorage.setItem('roles', JSON.stringify(roles));
+//   }
+
+//   public getRoles(): any[] {
+//     const roles = localStorage.getItem('roles');
+//     return roles ? JSON.parse(roles) : []; 
+//   }
+
+//   public setToken(jwtToken: string): void {
+//     localStorage.setItem('jwtToken', jwtToken); 
+//   }
+
+//   public getToken() {
+//     return localStorage.getItem('jwtToken') ; 
+//   }
+
+//   public clear(): void {
+//     localStorage.removeItem('jwtToken'); 
+//     localStorage.removeItem('roles'); 
+//   }
+
+//   public isLoggedIn(): boolean {
+//     return !!this.getRoles() && !!this.getToken(); 
+// }
+
+// public isAdmin(){
+//   const roles:any[]=this.getRoles();
+//   // console.log(roles);
+//   return roles[0].roleName==='Admin';
+// }
+
+// }
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserAuthServiceService {
   
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
 
-
-  
+  private isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
 
   public setRoles(roles: any[]): void {
-    localStorage.setItem('roles', JSON.stringify(roles));
+    if (this.isBrowser()) {
+      localStorage.setItem('roles', JSON.stringify(roles));
+    }
   }
 
   public getRoles(): any[] {
-    const roles = localStorage.getItem('roles');
-    return roles ? JSON.parse(roles) : []; 
+    if (this.isBrowser()) {
+      const roles = localStorage.getItem('roles');
+      return roles ? JSON.parse(roles) : [];
+    }
+    return [];
   }
 
   public setToken(jwtToken: string): void {
-    localStorage.setItem('jwtToken', jwtToken); 
+    if (this.isBrowser()) {
+      localStorage.setItem('jwtToken', jwtToken);
+    }
   }
 
-  public getToken() {
-    return localStorage.getItem('jwtToken') ; 
+  public getToken(): string | null {
+    if (this.isBrowser()) {
+      return localStorage.getItem('jwtToken');
+    }
+    return null;
   }
 
   public clear(): void {
-    localStorage.removeItem('jwtToken'); 
-    localStorage.removeItem('roles'); 
+    if (this.isBrowser()) {
+      localStorage.removeItem('jwtToken');
+      localStorage.removeItem('roles');
+    }
   }
 
   public isLoggedIn(): boolean {
-    return !!this.getRoles() && !!this.getToken(); 
-}
+    return !!this.getRoles().length && !!this.getToken();
+  }
 
-public isAdmin(){
-  const roles:any[]=this.getRoles();
-  // console.log(roles);
-  return roles[0].roleName==='Admin';
-}
-
+  public isAdmin(): boolean {
+    const roles: any[] = this.getRoles();
+    return roles.length > 0 && roles[0].roleName === 'Admin';
+  }
 }

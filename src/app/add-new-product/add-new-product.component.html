@@ -3,6 +3,8 @@
     <div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="16px">
       <div fxFlex="50" fxFlex.xs="100">
         <form #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
+
+          
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Product Name</mat-label>
             <mat-icon matPrefix>shopping_cart</mat-icon>
@@ -11,7 +13,8 @@
               placeholder="Product Name"
               [(ngModel)]="product.productName"
               name="productName"
-              required
+            
+              
             />
           </mat-form-field>
 
@@ -23,7 +26,7 @@
               placeholder="Product Description"
               [(ngModel)]="product.productDescription"
               name="productDescription"
-              required
+            
             />
           </mat-form-field>
 
@@ -35,7 +38,7 @@
               placeholder="Product Actual Price"
               [(ngModel)]="product.productActualPrice"
               name="productActualPrice"
-              required
+             
             />
           </mat-form-field>
 
@@ -47,7 +50,7 @@
               placeholder="Product Discounted Price"
               [(ngModel)]="product.productDiscountedPrice"
               name="productDiscountedPrice"
-              required
+              
             />
           </mat-form-field>
 

@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import{FormsModule} from '@angular/forms'
+import { MatTableModule } from '@angular/material/table';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
@@ -33,6 +34,9 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailDialogComponent } from './product-detail-dialog/product-detail-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
+import { ProductViewDetailsComponent } from './product-view-details/product-view-details.component';
+import { BuyProductComponent } from './buy-product/buy-product.component';
+// import{mat-form-field}
 
 
 
@@ -50,7 +54,9 @@ import { MatCardModule } from '@angular/material/card';
     AddNewProductComponent,
     ProductDisplayComponent,
     ProductListComponent,
-    ProductDetailDialogComponent
+    ProductDetailDialogComponent,
+    ProductViewDetailsComponent,
+    BuyProductComponent
     
   ],
   imports: [
@@ -69,6 +75,7 @@ import { MatCardModule } from '@angular/material/card';
     DragDirective,
     MatDialogModule,
     MatCardModule,
+    MatTableModule
     
     
     

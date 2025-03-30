@@ -44,15 +44,40 @@ export class AddNewProductComponent implements OnInit {
   addProduct(productForm: NgForm) {
     // Check if productImages is empty
 
-    if(productForm.invalid){
+    if(productForm.value.productName === ""  ){
       Swal.fire({
-        title: "No data Provided",
-        text: "Please give data for the product.",
-        icon: "warning", // Use 'warning' icon to indicate a caution
-        confirmButtonText: "OK" // Customize the button text
+        title: "Incomplete Product Data",
+        text: " product name  is not provide.",
+        icon: "warning",
+        confirmButtonText: "OK"
       });
       return;
     }
+    if(productForm.value.productDescription === ""  ){
+      Swal.fire({
+        title: "Incomplete Product Data",
+        text: "product Description  is not provide.",
+        icon: "warning",
+        confirmButtonText: "OK"
+      });
+      return;
+    }
+
+    if(
+      productForm.value.productDiscountedPrice === 0 ||  
+      productForm.value.productActualPrice === 0) {
+       
+       Swal.fire({
+         title: "Incomplete Product Data",
+         text: " Price values cannot be 0.",
+         icon: "warning",
+         confirmButtonText: "OK"
+       });
+       return;
+   }
+   
+
+   
     if (this.product.productImages.length === 0) {
       Swal.fire({
         title: "No Images Provided",
