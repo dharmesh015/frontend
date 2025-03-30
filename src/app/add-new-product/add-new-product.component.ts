@@ -33,7 +33,7 @@ export class AddNewProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Initialize product from route data or keep default
+
     const productData = this.activatedRoute.snapshot.data['product'];
     if (productData) {
       this.product = productData;
@@ -42,7 +42,7 @@ export class AddNewProductComponent implements OnInit {
   }
 
   addProduct(productForm: NgForm) {
-    // Check if productImages is empty
+ 
 
     if(productForm.value.productName === ""  ){
       Swal.fire({
@@ -82,11 +82,10 @@ export class AddNewProductComponent implements OnInit {
       Swal.fire({
         title: "No Images Provided",
         text: "Please upload at least one image for the product.",
-        icon: "warning", // Use 'warning' icon to indicate a caution
-        confirmButtonText: "OK" // Customize the button text
+        icon: "warning", 
+        confirmButtonText: "OK" 
       });
-      return; // Exit the method if no images are provided
-    }
+      return; 
   
     const productFormData = this.prepareFormData(this.product);
     
