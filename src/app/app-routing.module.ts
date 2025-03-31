@@ -8,11 +8,14 @@ import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { AuthGuard } from './_auth/auth.guard';
 import { AddNewProductComponent } from './add-new-product/add-new-product.component';
-import { ProductDisplayComponent } from './product-display-component/product-display-component.component';
+// import { ProductDisplayComponent } from './product-display-component/product-display-component.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductViewDetailsComponent } from './product-view-details/product-view-details.component';
 import { ProductResolveServiceService } from './_service/product-resolve-service.service';
 import { BuyProductComponent } from './buy-product/buy-product.component';
+import { ProductDetailDialogComponent } from './product-detail-dialog/product-detail-dialog.component';
+import { EditproductComponent } from './editproduct/editproduct.component';
+import { ProfilepageComponent } from './profilepage/profilepage.component';
 
 const routes: Routes = [
   // import { AppRoutingModule } from './app-routing.module';
@@ -44,13 +47,13 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['Admin'] },
   },
-
+  {path:"Profilepage",component:ProfilepageComponent},
+  {path:'editproduct/:id', component:EditproductComponent},
   { path: 'ProductViewDetails/:id', component: ProductViewDetailsComponent },
   { path: 'buyProduct/:issingleProducrCheckout/:productId', component: BuyProductComponent,canActivate: [AuthGuard],
     data: { roles: ['User'] }},
   { path: '**', component: ForbiddenComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
-
 
   // {path:'buyProduct/:issingleProducrCheckout/:productId',component:BuyProductComponent},
 ];

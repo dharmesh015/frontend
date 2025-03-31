@@ -43,4 +43,9 @@ export class HeaderComponent {
   public isAdmin(){
      this.userathservice.isAdmin();
   }
+
+
+  public Profilepage(){
+    this.router.navigate(['/Profilepage'])
+  }
 }

@@ -29,13 +29,15 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { DragDirective } from './drag.directive';
 import { AddNewProductComponent } from './add-new-product/add-new-product.component';
-import { ProductDisplayComponent } from './product-display-component/product-display-component.component';
+// import { ProductDisplayComponent } from './product-display-component/product-display-component.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailDialogComponent } from './product-detail-dialog/product-detail-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { ProductViewDetailsComponent } from './product-view-details/product-view-details.component';
 import { BuyProductComponent } from './buy-product/buy-product.component';
+import { EditproductComponent } from './editproduct/editproduct.component';
+import { ProfilepageComponent } from './profilepage/profilepage.component';
 // import{mat-form-field}
 
 
@@ -52,11 +54,13 @@ import { BuyProductComponent } from './buy-product/buy-product.component';
     RegistrationComponent,
     FooterComponent,
     AddNewProductComponent,
-    ProductDisplayComponent,
+  
     ProductListComponent,
     ProductDetailDialogComponent,
     ProductViewDetailsComponent,
-    BuyProductComponent
+    BuyProductComponent,
+    EditproductComponent,
+    ProfilepageComponent
     
   ],
   imports: [

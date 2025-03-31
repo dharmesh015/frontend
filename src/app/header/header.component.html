@@ -1,63 +1,8 @@
-<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Quick Cart</a>
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent"
-      aria-expanded="false"
-      aria-label="Toggle navigation"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-       /
-        <li class="nav-item"  *ngIf="roleMatchs(['Admin'])">
-          <a
-            class="nav-link active"
-            aria-current="page"
-            routerLink="/admin"
-            routerLinkActive="active"
-            >Admin Dashbord</a
-          >
-        
-        <li class="nav-item" *ngIf="roleMatchs(['User'])">
-          <a
-            class="nav-link active"
-            aria-current="page"
-            routerLink="/user"
-            routerLinkActive="active"
-            >User Dashbord</a
-          >
-        </li>
-      </ul>
-    </div>
-    <div class="d-flex gap-2">
-      <button
-        *ngIf="!isLoggedIn()"
-        class="btn btn-custom-login"
-        type="button"
-        routerLink="/login"
-      >
-        Login
-      </button>
-      <button
-        *ngIf="isLoggedIn()"
-        class="btn btn-custom-logout"
-        type="button"
-        (click)="logout()"
-      >
-        Logout
-      </button>
-    </div>
-  </div>
-</nav> -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Quick Cart</a>
+    <a class="navbar-brand" href="#">
+      QC
+  </a>
     <button
       class="navbar-toggler"
       type="button"
@@ -90,7 +35,7 @@
           >
         </li>
       </ul>
-      
+
       <div class="d-flex auth-buttons">
         <button
           *ngIf="!isLoggedIn()"
@@ -104,6 +49,16 @@
           *ngIf="isLoggedIn()"
           class="btn btn-custom-logout"
           type="button"
+          (click)="Profilepage()"
+        >
+          <div class="icon">
+            <mat-icon class="icon">account_circle</mat-icon>Profile
+          </div>
+        </button>
+        <button
+          *ngIf="isLoggedIn()"
+          class="btn btn-custom-logout"
+          type="button"
           (click)="logout()"
         >
           Logout
@@ -112,3 +67,5 @@
     </div>
   </div>
 </nav>
+<!-- 
+ -->

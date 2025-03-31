@@ -1,116 +1,125 @@
 /* Container Styling */
 .container {
-    padding: 20px;
-  }
+  padding: 10px;
+  display: flex;
+  flex-direction: column; /* Stack elements vertically */
+  margin-bottom: 10px;
+  justify-content: center;
+  /* justify-items: center; */
+  align-items: center;
+}
 
-  .card {
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  }
-  
-  /* Form Field Styling */
-  mat-form-field {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  /* Input Styling */
-  mat-input-element {
-    padding: 10px;
-    border-radius: 4px;
-    font-size: 14px;
-  }
-  
-  /* Label Styling */
-  mat-label {
-    font-weight: bold;
-    font-size: 16px;
-  }
-  
-  /* Button Styling */
-  button {
-    font-size: 14px;
-    padding: 10px 20px;
-    margin-top: 15px;
-    border-radius: 4px;
-  }
-  
-  button.mat-stroked-button {
-    border: 2px solid #6200ea;
-    color: #6200ea;
-  }
-  
-  button.mat-stroked-button:hover {
-    background-color: #6200ea;
-    color: white;
-  }
-  
-  /* Clear Button Styling */
-  button[type='button'] {
-    background-color: transparent;
-    color: #6200ea;
-  }
-  
-  button[type='button']:hover {
-    background-color: #f1f1f1;
-  }
-  
-  /* Dropzone Styling */
-  .dropzone {
-    border: 2px dashed #6200ea;
-    padding: 40px;
-    text-align: center;
-    border-radius: 8px;
-    background-color: #fafafa;
-    margin-bottom: 20px;
-  }
-  
-  .dropzone .text-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .dropzone .center {
-    font-size: 16px;
-    color: #6200ea;
-  }
-  
-  /* Image Grid Styling */
-  .image-container {
-    position: relative;
-  }
-  
-  .product-image {
-    width: 100%;
-    border-radius: 8px;
-    height: 150px;
-    object-fit: cover;
-  }
-  
-  .btn-remove-image {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    padding: 5px 10px;
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  
-  .btn-remove-image:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-  
-  /* Grid Styling for Images */
-  .mat-grid-list {
-    margin-top: 10px;
-  }
-  
-  .mat-grid-tile {
-    padding: 5px;
-  }
-  
+/* Card Styling */
+.card {
+  width: 70%; /* Full width on smaller screens */
+ /* Limit max width */
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+/* Form Field Styling */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+/* Input Styling */
+mat-input-element {
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+/* Label Styling */
+mat-label {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Button Styling */
+button {
+  font-size: 14px;
+  padding: 10px 20px;
+  margin-top: 15px;
+  border-radius: 4px;
+}
+
+button.mat-stroked-button {
+  border: 2px solid #6200ea;
+  color: #6200ea;
+}
+
+button.mat-stroked-button:hover {
+  background-color: #6200ea;
+  color: white;
+}
+
+/* Clear Button Styling */
+button[type='button'] {
+  background-color: transparent;
+  color: #6200ea;
+}
+.image{
+ 
+   width: 70%; 
+
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+
+}
+button[type='button']:hover {
+  background-color: #f1f1f1;
+}
+
+/* Dropzone Styling */
+.dropzone {
+  /* width: 100%; */
+  border: 2px dashed #6200ea;
+  padding: 40px;
+  text-align: center;
+  border-radius: 8px;
+  background-color: #fafafa;
+  margin-bottom: 20px;
+}
+
+
+
+/* Image Grid Styling */
+.image-container {
+  position: relative;
+}
+
+.product-image {
+  width: 100%;
+  border-radius: 8px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.btn-remove-image {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.btn-remove-image:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Grid Styling for Images */
+.mat-grid-list {
+  margin-top: 10px;
+}
+
+.mat-grid-tile {
+  padding: 5px;
+}

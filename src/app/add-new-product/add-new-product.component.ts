@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product } from '../_model/product.model';
+// import { Product } from '../_model/product.model';
 import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -8,6 +8,7 @@ import { FileHandel } from '../_model/file-handel.model';
 import { ProductService } from '../_service/product.service';
 import { Console } from 'node:console';
 import Swal from 'sweetalert2';
+import { Product } from '../_model/product.model';
 
 @Component({
   selector: 'app-add-new-product',
@@ -86,7 +87,7 @@ export class AddNewProductComponent implements OnInit {
         confirmButtonText: "OK" 
       });
       return; 
-  
+    }
     const productFormData = this.prepareFormData(this.product);
     
     this.productService.addProduct(productFormData).subscribe(

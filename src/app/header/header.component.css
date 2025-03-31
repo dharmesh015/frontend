@@ -18,9 +18,9 @@
   }
   
   .btn-custom-login:hover, .btn-custom-logout:hover {
-    color: aliceblue;
-    background-color: #333;
-    transform: translateY(-2px);
+    /* color: rgb(0, 0, 0); */
+    /* background-color: #ece2c6cb; */
+    /* transform: translateY(-2px); */
   }
   
   /* Make navbar links more noticeable */
@@ -30,16 +30,19 @@
     padding: 8px 15px;
     margin: 0 2px;
   }
-  
-  /* .nav-link:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    border-radius: 5px;
-  } */
-  
-  /* .nav-link.active {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 5px;
-  } */
+
+  .auth-buttons {
+   gap: 5px;
+
+  }
+  .icon{
+    display: flex;
+   gap: 3px;
+  }
+
+
+/* Background image for the navbar */
+
   
   /* Responsive adjustments */
   @media (max-width: 991px) {
@@ -74,3 +77,30 @@
       padding: 8px 10px;
     }
   }
+
+  .dropdown-menu {
+    background-color: #343a40; /* Match the navbar background */
+}
+
+.dropdown-item {
+    color: #ffffff; /* White text for dropdown items */
+}
+
+.dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Hover effect */
+}
+.dropdown-toggle {
+  display: flex;
+  align-items: center; /* Center the icon vertically */
+}
+
+.dropdown-toggle i {
+  margin-right: 5px; /* Space between icon and text */
+  font-size: 1.2rem; /* Adjust icon size */
+  color: white; /* Change icon color if needed */
+}
+
+.dropdown-menu{
+   width: 10px ;
+   background-color: #ffffff;
+}

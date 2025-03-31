@@ -1,48 +1,4 @@
-<!-- 
- <section class="background-radial-gradient overflow-hidden">
-  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-    <div class="row gx-lg-5 align-items-center mb-5">
 
-      <div class="hero">
-        <div class="welcome-container">
-          <div class="welcome-text">Welcome to Quick Cart</div>
-    
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="main container mt-5">
-    <mat-grid-list cols="4" rowHeight="550px" gutterSize="20px">
-      <mat-grid-tile *ngFor="let product of products">
-        <mat-card class="product-card">
-          <mat-card-content>
-            <div class="image-container">
-              <img
-                *ngFor="let image of product.productImages"
-                [src]="image.url"
-                alt="{{ product.productName }}"
-                class="product-image"
-              />
-            </div>
-            <mat-card-title>{{ product.productName }}</mat-card-title>
-            <div class="desciption">
-            <p class="product-description">{{ product.productDescription }}</p>
-            </div>
-          
-            <mat-card-actions class="action-row">
-              <span class="product-price">
-                Price: {{ product.productActualPrice  }}
-              </span>
-              <button mat-button class="button" (click)="viewProduct(product.productId)">View</button>
-            </mat-card-actions>
-          </mat-card-content>
-        </mat-card>
-      </mat-grid-tile>
-    </mat-grid-list>
-  </div>
-</section> -->
 <section class="background-radial-gradient overflow-hidden">
   <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
     <div class="row gx-lg-5 align-items-center mb-5">

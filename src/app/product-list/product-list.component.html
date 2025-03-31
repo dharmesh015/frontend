@@ -1,32 +1,59 @@
-<div class="container mt-5">
-  <table mat-table [dataSource]="products" class="mat-elevation-z8">
+<!-- 
+<table class="table">
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Description</th>
+      <th>Actual Price</th>
+      <th>Discounted Price</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let product of products">
+      <td>{{ product.productName }}</td>
+      <td>{{ product.productDescription }}</td>
+      <td>{{ product.productActualPrice | currency }}</td>
+      <td>{{ product.productDiscountedPrice | currency }}</td>
+      <td>
+        <button mat-button color="primary" (click)="editProduct(product.productId)">Update</button>
+        <button mat-button color="warn" (click)="deleteProduct(product.productId)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+</table> -->
 
-    <!-- Product Name Column -->
+<div class="main mat-elevation-z8">
+  <table mat-table [dataSource]="products">
     <ng-container matColumnDef="productName">
-      <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Product Name </th>
-      <td mat-cell *matCellDef="let product" class="mat-cell" (click)="openDialog(product)" style="cursor: pointer;">
-        {{ product.productName }}
-      </td>
+      <th mat-header-cell *matHeaderCellDef> Product Name </th>
+      <td mat-cell *matCellDef="let product"> {{ product.productName }} </td>
     </ng-container>
 
-    <!-- Product Description Column -->
     <ng-container matColumnDef="productDescription">
-      <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Description </th>
-      <td mat-cell *matCellDef="let product" class="mat-cell">
-        {{ product.productDescription }}
-      </td>
+      <th mat-header-cell *matHeaderCellDef> Description </th>
+      <td mat-cell *matCellDef="let product"> {{ product.productDescription }} </td>
     </ng-container>
 
-    <!-- Product Price Column -->
     <ng-container matColumnDef="productActualPrice">
-      <th mat-header-cell *matHeaderCellDef class="mat-header-cell"> Price </th>
-      <td mat-cell *matCellDef="let product" class="mat-cell">
-        {{ product.productActualPrice | currency }}
+      <th mat-header-cell *matHeaderCellDef> Actual Price </th>
+      <td mat-cell *matCellDef="let product"> {{ product.productActualPrice | currency }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="productDiscountedPrice">
+      <th mat-header-cell *matHeaderCellDef> Discounted Price </th>
+      <td mat-cell *matCellDef="let product"> {{ product.productDiscountedPrice | currency }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef> Actions </th>
+      <td mat-cell *matCellDef="let product">
+        <button mat-button color="primary" (click)="editProduct(product.productId)">Update</button>
+        <button mat-button color="warn" (click)="deleteProduct(product.productId)">Delete</button>
       </td>
     </ng-container>
 
-    <!-- Header and Row Declarations -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="mat-row" (click)="openDialog(row)" style="cursor: pointer;"></tr>
+    <tr mat-header-row *matHeaderRowDef="['productName', 'productDescription', 'productActualPrice', 'actions']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['productName', 'productDescription', 'productActualPrice', 'actions'];"></tr>
   </table>
 </div>

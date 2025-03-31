@@ -3,7 +3,7 @@
   <div class="card p-2">
     <div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutGap="16px">
       <div fxFlex="100" fxFlex.sm="50">
-        <form #productForm="ngForm" (ngSubmit)="addProduct(productForm)">
+        <form #productForm="ngForm" (ngSubmit)="updateProduct(productForm)">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Product Name</mat-label>
             <mat-icon matPrefix>shopping_cart</mat-icon>
