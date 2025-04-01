@@ -9,7 +9,11 @@
   align-items: center;
   text-align: center;
 }
+.productlist{
+  display: flex;
+  margin-bottom: 20px;
 
+}
 .welcome-container {
   width: 90%;
   max-width: 800px;
@@ -224,4 +228,5 @@ mat-card-title {
       hsl(220, 50%, 18%) 80%, 
       transparent 100%
   );
+
 }

@@ -16,7 +16,7 @@ export class ProductListComponent implements OnInit {
   // products: Product[] = [];
   products: Product[] = [];
   page: number = 0;
-  size: number = 10; 
+  size: number = 5; 
   sortBy: string = 'productName';
   sortDir: string = 'asc';
   totalProducts: number = 0; 
@@ -66,30 +66,6 @@ export class ProductListComponent implements OnInit {
     this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc'; // Toggle sort direction
     this.loadProducts();
   }
-  // Method to fetch all products from the backend
-  // loadProducts(): void {
-  //   this.productService.getAllProducts().subscribe(
-  //     (data: Product[]) => {
-  //       // Map through the response to format product images
-  //       this.products = data.map(product => {
-  //         if (product.productImages) {
-  //           product.productImages = product.productImages.map(image => {
-  //             return {
-  //               ...image,
-  //               url: `data:${image.type};base64,${image.picByte}` // Convert base64 image data to a usable URL
-  //             };
-  //           });
-  //         }
-  //         return product;
-  //       });
-  //     },
-  //     (error) => {
-  //       // Handle any error that occurs during the request
-  //       Swal.fire('Error', 'Failed to load products. Please try again later.', 'error');
-  //       console.error('Error fetching products', error);
-  //     }
-  //   );
-  // }
 
   // Method to redirect the user to the edit product page
   editProduct(id: number): void {

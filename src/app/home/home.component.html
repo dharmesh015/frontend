@@ -1,8 +1,8 @@
-
+<!-- 
 <section class="background-radial-gradient overflow-hidden">
   <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
     <div class="row gx-lg-5 align-items-center mb-5">
-      <!-- Hero Section -->
+
       <div class="hero">
         <div class="welcome-container">
           <div class="welcome-text">Welcome to Quick Cart</div>
@@ -11,9 +11,9 @@
     </div>
   </div>
 
-  <!-- Product Grid Section -->
+ 
   <div class="main container mt-5">
-    <!-- Replace mat-grid-list with custom grid system -->
+
     <div class="product-grid">
       <div *ngFor="let product of products" class="product-card-container">
         <mat-card class="product-card">
@@ -30,7 +30,7 @@
             <div class="description">
               <p class="product-description">{{ product.productDescription }}</p>
             </div>
-            <!-- Price & Button Row -->
+          
             <div class="action-row">
               <span class="product-price">
                 Price: {{ product.productActualPrice }}
@@ -41,5 +41,78 @@
         </mat-card>
       </div>
     </div>
+  </div>
+</section> -->
+
+<section class="background-radial-gradient overflow-hidden">
+  <div class="container px-4 py-5 px-md-5 text-center text-lg-start " >
+    <div class="row gx-lg-5 align-items-center mb-5">
+      <!-- Hero Section -->
+      <div class="hero">
+        <div class="welcome-container">
+          <div class="welcome-text">Welcome to Quick Cart</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Product Grid Section -->
+  <div class="productlist">
+
+      <button mat-button (click)="previousPage()"  style=" margin-top: 450px; margin-left: 60px; color: #fffcfc;" [disabled]="page === 0">
+        <mat-icon>code</mat-icon>
+      </button>
+     
+    
+
+    <div class="main container mt-5">
+      <div class="product-grid">
+        <div *ngFor="let product of products" class="product-card-container">
+          <mat-card class="product-card">
+            <mat-card-content>
+              <div class="image-container">
+                <img
+                  *ngIf="
+                    product.productImages && product.productImages.length > 0
+                  "
+                  [src]="product.productImages[0].url"
+                  alt="{{ product.productName }}"
+                  class="product-image"
+                />
+              </div>
+              <mat-card-title>{{ product.productName }}</mat-card-title>
+              <div class="description">
+                <p class="product-description">
+                  {{ product.productDescription }}
+                </p>
+              </div>
+              <!-- Price & Button Row -->
+              <div class="action-row">
+                <span class="product-price">
+                  Price: {{ product.productActualPrice }}
+                </span>
+                <button
+                  mat-button
+                  class="button"
+                  
+                  (click)="viewProduct(product.productId)"
+                >
+                  View
+                </button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+
+      <!-- Pagination Buttons -->
+    </div>
+    <button
+      mat-button
+      (click)="nextPage()"
+      style=" margin-top: 450px; margin-right: 50px; color: #fffcfc;"
+      [disabled]="!hasMoreProducts"
+    >
+      <mat-icon>code</mat-icon>
+    </button>
   </div>
 </section>

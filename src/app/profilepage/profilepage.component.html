@@ -1,141 +1,151 @@
-<section style="background-color: #eee; padding: 50px">
+<section style="background-color: #eee; padding: 20px">
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card mb-4">
+        <div class="card-body text-center">
+          <img
+            src="https://media.licdn.com/dms/image/v2/D4E03AQG-zSGm5MsVEg/profile-displayphoto-shrink_200_200/B4EZSocYGVGgAg-/0/1737992799819?e=2147483647&v=beta&t=JrBXviIBQ1k6rLwlC66g4oiHF7IvggROwQuG8adTSEM"
+            alt="avatar"
+            class="rounded-circle img-fluid"
+            style="width: 150px"
+          />
+          <h5 class="my-3">{{ userData.userName }}</h5>
 
-      <div class="row">
-        <div class="col-lg-4">
-          <div class="card mb-4">
-            <div class="card-body text-center">
-              <img src="https://avatars.githubusercontent.com/u/161964320?v=4" alt="avatar"
-                class="rounded-circle img-fluid" style="width: 150px;">
-              <h5 class="my-3">{{userData.userName}}</h5>
-             
-              <!-- <div class="d-flex justify-content-center mb-2">
-                <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary"></button>
-                <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary ms-1">Message</button>
-              </div> -->
-            </div>
-          </div>
-          <div class="card mb-4 mb-lg-0">
-            <div class="card-body p-0">
-              <ul class="list-group list-group-flush rounded-3">
-                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                  <i class="fas fa-globe fa-lg text-warning"></i>
-                  <p class="mb-0">https://mdbootstrap.com</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                  <i class="fab fa-github fa-lg text-body"></i>
-                  <p class="mb-0">mdbootstrap</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                  <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
-                  <p class="mb-0">mdbootstrap</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                  <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
-                  <p class="mb-0">mdbootstrap</p>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center p-3">
-                  <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
-                  <p class="mb-0">mdbootstrap</p>
-                </li>
-              </ul>
-            </div>
-          </div>
+          <div class="d-flex justify-content-center mb-2">
+                <!-- <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary"></button> -->
+                <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary ">change</button>
+              </div>
         </div>
-        <div class="col-lg-8">
-          <div class="card mb-4">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Full Name</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{userData.userFirstName+" "+userData.userLastName}}</p>
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Email</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{userData.email}}</p>
-                </div>
-              </div>
-              <hr>
-              
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Mobile</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{userData.mobileNumber}}</p>
-                  
-                </div>
-              </div>
-              <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Address</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">{{userData.address}}</p>
-                </div>
-              </div>
+      </div>
+      <div class="card mb-4 mb-lg-0">
+        <div class="card-body p-0">
+          <ul class="list-group list-group-flush rounded-3">
+            
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center p-3"
+            >
+              <i class="fab fa-github fa-lg text-body"></i>
+              <p class="mb-0">mdbootstrap</p>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center p-3"
+            >
+              <i class="fab fa-twitter fa-lg" style="color: #55acee"></i>
+              <p class="mb-0">mdbootstrap</p>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center p-3"
+            >
+              <i class="fab fa-instagram fa-lg" style="color: #ac2bac"></i>
+              <p class="mb-0">mdbootstrap</p>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center p-3"
+            >
+              <i class="fab fa-facebook-f fa-lg" style="color: #3b5998"></i>
+              <p class="mb-0">mdbootstrap</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-8">
+      <div class="card mb-4">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Full Name</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">
+                {{ userData.userFirstName + " " + userData.userLastName }}
+              </p>
             </div>
           </div>
+          <hr />
           <div class="row">
-            <div class="col-md-6">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                  </p>
-                  <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                 
-                  
-                </div>
-              </div>
+            <div class="col-sm-3">
+              <p class="mb-0">Email</p>
             </div>
-            <div class="col-md-6">
-              <div class="card mb-4 mb-md-0">
-                <div class="card-body">
-                  <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
-                  </p>
-                  <p class="mb-1" style="font-size: .77rem;">Web Design</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
-                  <div class="progress rounded" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                 
-                 
-                  <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
-                  <div class="progress rounded mb-2" style="height: 5px;">
-                    <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
-                      aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                </div>
-              </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ userData.email }}</p>
+            </div>
+          </div>
+          <hr />
+
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Mobile</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ userData.mobileNumber }}</p>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-sm-3">
+              <p class="mb-0">Address</p>
+            </div>
+            <div class="col-sm-9">
+              <p class="text-muted mb-0">{{ userData.address }}</p>
             </div>
           </div>
         </div>
       </div>
+      <div class="col-lg-18" *ngIf="isadmin()">
+        <div class="card ">
+          <div class="card-body">
+             admin
 
-  </section>
+          </div>
+        </div>
+        
+      </div>
+      <div class="col-lg-18" *ngIf="!isadmin()">
+        <div class="card ">
+          <div class="card-body">
+            <div class="container ">
+              <h1 class="text-center">Order History</h1>
+            
+              <div class="table-responsive">
+                <table mat-table [dataSource]="products" class="table table-striped table-bordered">
+                  <ng-container matColumnDef="productName">
+                    <th mat-header-cell *matHeaderCellDef (click)="sortProducts('productName')"> Product Name </th>
+                    <td mat-cell *matCellDef="let product"> {{ product.productName }} </td>
+                  </ng-container>
+            
+                  <ng-container matColumnDef="productDescription">
+                    <th mat-header-cell *matHeaderCellDef (click)="sortProducts('productDescription')"> Description </th>
+                    <td mat-cell *matCellDef="let product"> {{ product.productDescription }} </td>
+                  </ng-container>
+            
+                  <ng-container matColumnDef="productActualPrice">
+                    <th mat-header-cell *matHeaderCellDef (click)="sortProducts('productActualPrice')"> Actual Price </th>
+                    <td mat-cell *matCellDef="let product"> {{ product.productActualPrice | currency }} </td>
+                  </ng-container>
+            
+                  <ng-container matColumnDef="productDiscountedPrice">
+                    <th mat-header-cell *matHeaderCellDef (click)="sortProducts('productDiscountedPrice')"> Discounted Price </th>
+                    <td mat-cell *matCellDef="let product"> {{ product.productDiscountedPrice | currency }} </td>
+                  </ng-container>
+            
+              
+                  <tr mat-header-row *matHeaderRowDef="['productName', 'productDescription', 'productActualPrice', 'productDiscountedPrice']"></tr>
+                  <tr mat-row *matRowDef="let row; columns: ['productName', 'productDescription', 'productActualPrice', 'productDiscountedPrice'];"></tr>
+                </table>
+              </div>
+            
+              <div class="pagination-controls d-flex justify-content-between mt-3">
+                <button mat-button (click)="previousPage()" [disabled]="page === 0">Previous</button>
+                <span>Page {{ page + 1 }}</span>
+                <button mat-button (click)="nextPage()" [disabled]="!hasMoreProducts">Next</ button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+</section>

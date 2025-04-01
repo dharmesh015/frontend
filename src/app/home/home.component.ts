@@ -4,6 +4,7 @@ import { Product } from '../_model/product.model';
 import { ProductService } from '../_service/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,12 @@ export class HomeComponent implements OnInit {
   showWelcomeMessage = true;
   products: Product[] = [];
   screenWidth: number;
+  page: number = 0;
+  size: number = 4; 
+  sortBy: string = 'productName';
+  sortDir: string = 'asc';
+  totalProducts: number = 0; 
+  hasMoreProducts: boolean = true; 
 
   constructor(
     private productService: ProductService,
@@ -34,31 +41,54 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     setTimeout(() => {
       this.showWelcomeMessage = false;
-      this.getAllProducts();
+      this.loadProducts();
     }, 3000);
-    this.getAllProducts();
+    this.loadProducts();
   }
-
-  getAllProducts(): void {
-        this.productService.getAllProducts().subscribe(
-          (response: Product[]) => {
-            this.products = response.map((product) => {
-              product.productImages = product.productImages.map((image) => {
-                return {
-                  ...image,
-                  url: `data:${image.type};base64,${image.picByte}`, 
-                };
-              });
-              return product;
-            });
-          },
-          (error) => {
-            console.error('Error fetching products', error);
-          }
-        );
-      }
 
   viewProduct(productId: number) {
     this.router.navigate(['/ProductViewDetails', productId]);
   }
+  
+  loadProducts(): void {
+    this.productService.getAllProductsPageWise(this.page, this.size, this.sortBy, this.sortDir).subscribe(
+      (data) => {
+        console.log(data.content);
+        this.products = data.content.map((product:any) => {
+          // Map over the product images to set the base64 URL
+          product.productImages = product.productImages.map((image: { type: any; picByte: any; }) => {
+            return {
+              ...image,
+              url: `data:${image.type};base64,${image.picByte}`, // Set the base64 URL
+            };
+          });
+          return product;
+        });
+        this.totalProducts = data.totalElements;
+        this.hasMoreProducts = this.products.length === this.size;
+        console.log(data);
+        return this.products;
+      },
+      (error) => {
+        Swal.fire('Error', 'Failed to load products. Please try again later.', 'error');
+        console.error('Error fetching products', error);
+      }
+    );
+  }
+  
+    nextPage(): void {
+      if (this.hasMoreProducts) {
+        this.page++;
+        this.loadProducts();
+      }
+    }
+  
+    previousPage(): void {
+      if (this.page > 0) {
+        this.page--;
+        this.loadProducts();
+      }
+    }
+  
+   
 }
