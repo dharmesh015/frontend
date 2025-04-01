@@ -62,4 +62,7 @@ public register(data:Registrationuser){
       const token =this.userAuthService.getToken();
       return this.httpclient.get<Registrationuser>("http://localhost:9090/getdata/"+token);
     }
+
+
+    
 }

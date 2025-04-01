@@ -41,6 +41,10 @@ export class LoginComponent {
         (response: any) => {
           this.userAuthService.setRoles(response.user.role);
           this.userAuthService.setToken(response.jwtToken);
+          this.userAuthService.setEmail(response.user.email);
+          this.userAuthService.setName(response.user.name);
+          this.userAuthService.setUser(response.user);
+          console.log("saved data-->",this.userAuthService.getUser());
           // this.userAuthService.setAuthData(response.jwtToken,response.user.role);
           console.log('respose' + response);
           const role = response.user.role[0].roleName;

@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../_service/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
+import { UserAuthServiceService } from '../_service/user-auth-service.service';
 
 @Component({
   selector: 'app-profilepage',
@@ -14,6 +15,7 @@ import Swal from 'sweetalert2';
 export class ProfilepageComponent implements OnInit {
 
   userData: Registrationuser = new Registrationuser("","","","","","");
+  email!:any;
   // productId!: number;
   // mainImageIndex: number = 0; // Track which image is currently shown as the main image
 
@@ -21,17 +23,15 @@ export class ProfilepageComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private userAuth:UserAuthServiceService
   ) {}
 
   ngOnInit(): void {
-       const userData= this.userService.getuser().subscribe(
-
-          (response: Registrationuser) => {
-                      console.log(response)
-          }
-        );
+    this.userData= this.userAuth.getUser();
+    console.log(this.userData);
   }
+
   // isNewProduct = true;
 
   // updateProduct(productForm: NgForm) {

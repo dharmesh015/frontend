@@ -1,27 +1,3 @@
-<!-- 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Product Name</th>
-      <th>Description</th>
-      <th>Actual Price</th>
-      <th>Discounted Price</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let product of products">
-      <td>{{ product.productName }}</td>
-      <td>{{ product.productDescription }}</td>
-      <td>{{ product.productActualPrice | currency }}</td>
-      <td>{{ product.productDiscountedPrice | currency }}</td>
-      <td>
-        <button mat-button color="primary" (click)="editProduct(product.productId)">Update</button>
-        <button mat-button color="warn" (click)="deleteProduct(product.productId)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
-</table> -->
 
 <div class="main mat-elevation-z8">
   <table mat-table [dataSource]="products">

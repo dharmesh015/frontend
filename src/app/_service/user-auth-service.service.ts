@@ -1,6 +1,7 @@
 
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Registrationuser } from '../modul/registrationuser';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,41 @@ export class UserAuthServiceService {
     }
   }
 
+  public setName(name:any){
+    if (this.isBrowser()) {
+      localStorage.setItem('name', name);
+    }
+  }
+
+  public setEmail(email:any){
+    if (this.isBrowser()) {
+      localStorage.setItem('email', email
+      );
+    }
+  }
+  public setUser (user: any) {
+    // Convert the user object to a JSON string before storing it
+    localStorage.setItem("user", JSON.stringify(user));
+  }
+  
+  public getUser () {
+    // Retrieve the user string from localStorage
+    const data = localStorage.getItem("user");
+    
+    // If data is not null, parse it back to an object, otherwise return null
+    return data ? JSON.parse(data) : null;
+  }
+
+
+  
+  public getemail() {
+    if (this.isBrowser()) {
+      const roles = localStorage.getItem('email');
+      // return roles ? JSON.parse(roles) : [];
+      return roles;
+    }
+    return null;
+  }
   public getRoles(): any[] {
     if (this.isBrowser()) {
       const roles = localStorage.getItem('roles');

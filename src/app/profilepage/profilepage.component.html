@@ -6,7 +6,7 @@
             <div class="card-body text-center">
               <img src="https://avatars.githubusercontent.com/u/161964320?v=4" alt="avatar"
                 class="rounded-circle img-fluid" style="width: 150px;">
-              <h5 class="my-3">John Smith</h5>
+              <h5 class="my-3">{{userData.userName}}</h5>
              
               <!-- <div class="d-flex justify-content-center mb-2">
                 <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary"></button>
@@ -49,7 +49,7 @@
                   <p class="mb-0">Full Name</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">Johnatan Smith</p>
+                  <p class="text-muted mb-0">{{userData.userFirstName+" "+userData.userLastName}}</p>
                 </div>
               </div>
               <hr>
@@ -58,25 +58,18 @@
                   <p class="mb-0">Email</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">exampleexample.com</p>
+                  <p class="text-muted mb-0">{{userData.email}}</p>
                 </div>
               </div>
               <hr>
-              <div class="row">
-                <div class="col-sm-3">
-                  <p class="mb-0">Phone</p>
-                </div>
-                <div class="col-sm-9">
-                  <p class="text-muted mb-0">(097) 234-5678</p>
-                </div>
-              </div>
-              <hr>
+              
               <div class="row">
                 <div class="col-sm-3">
                   <p class="mb-0">Mobile</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">(098) 765-4321</p>
+                  <p class="text-muted mb-0">{{userData.mobileNumber}}</p>
+                  
                 </div>
               </div>
               <hr>
@@ -85,7 +78,7 @@
                   <p class="mb-0">Address</p>
                 </div>
                 <div class="col-sm-9">
-                  <p class="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                  <p class="text-muted mb-0">{{userData.address}}</p>
                 </div>
               </div>
             </div>

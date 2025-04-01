@@ -112,7 +112,7 @@
                 <div class="form-outline mb-4">
                   <input type="tel" id="form3Example3" class="form-control" 
                          placeholder="Enter Mobile Number" 
-                         #Mobile="ngModel" ngModel name="Mobile" required pattern="^[0-9]{10}$"/>
+                         #Mobile="ngModel" ngModel name="mobileNumber" required pattern="^[0-9]{10}$"/>
                   <label class="form-label" for="form3Example3">Mobile Number</label>
                   <div *ngIf="Mobile.invalid && Mobile.touched" class="error">
                     <div *ngIf="Mobile.errors?.['required']">Mobile Number is required</div>
@@ -135,7 +135,16 @@
                     </div> -->
                   </div>
                 </div>
-  
+
+                <div class="form-outline mb-4">
+                  <textarea id="fullAddress" class="form-control" 
+                            placeholder="Enter Full Address" 
+                            #FullAddress="ngModel" ngModel name="address" required></textarea>
+                  <label class="form-label" for="fullAddress">Full Address</label>
+                  <div *ngIf="FullAddress.invalid && FullAddress.touched" class="error">
+                    <div *ngIf="FullAddress.errors?.['required']">Full Address is required</div>
+                  </div>
+                </div>
                 <!-- Submit button -->
                 <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn   mb-4 mx-2 submit" [disabled]="registrationForm.invalid">
                   Register

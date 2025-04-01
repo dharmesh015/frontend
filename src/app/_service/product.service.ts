@@ -54,4 +54,9 @@ public placeOrder(orderDetails: OrderDetails){
   console.log(orderDetails);
   return this.httpClient.post("http://localhost:9090/placeOrder",orderDetails);
  }
+
+
+ getAllProductsPageWise(page: number, size: number): Observable<Product[]> {
+  return this.httpClient.get<Product[]>(`${this.baseUrl}/getAllProductsPageWise?page=${page}&size=${size}`);
+}
 }

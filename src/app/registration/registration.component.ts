@@ -15,7 +15,7 @@ import { Registrationuser } from '../modul/registrationuser';
 })
 export class RegistrationComponent {
 
-  userData: Registrationuser = new Registrationuser("","","","","","");
+  userData: Registrationuser = new Registrationuser("","","","","","","");
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -36,10 +36,11 @@ export class RegistrationComponent {
       this.userData.userLastName = form.value.Lastname;
       this.userData.userFirstName = form.value.userFirstName;
       this.userData.email = form.value.Email;
-      this.userData.mobile = form.value.Mobile;
-      console.log("Form Password:", form.value.Password);
+      this.userData.mobileNumber = form.value.mobileNumber;
       this.userData.userPassword = form.value.Password;
-      console.log("User Password:", this.userData.userPassword);
+      this.userData.address=form.value.address;
+      console.log(form.value.address);
+   
       
       this.userService.register(this.userData).subscribe(
         (response) => {
