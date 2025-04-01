@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../_model/product.model';
@@ -60,4 +60,30 @@ getAllProductsPageWise(page: number, size: number, sortBy: string, sortDir: stri
   return this.httpClient.get(`${this.baseUrl}/getAllProductsPageWise?page=${page}&size=${size}&sortBy=${sortBy}&sortDir=${sortDir}`);
 }
 
+
+getOrderDetails(username: string, page: number, size: number, sortBy: string, sortDir: string): Observable<any> {
+  console.log("user name -"+username);
+  // Set up HTTP request parameters
+  const params = new HttpParams()
+    .set('page', page.toString())
+    .set('size', size.toString())
+    .set('sortBy', sortBy)
+    .set('sortDir', sortDir);
+   
+  // Make the GET request
+  return this.httpClient.get(`${this.baseUrl}/getorderdetails/${username}`, { params });
+}
+
+uploadUserImage(userName: string, imageFile: File): Observable<any> {
+  console.log("here service")
+  const formData = new FormData();
+  formData.append('userName', userName);
+  formData.append('imageFile', imageFile);
+  
+  return this.httpClient.post(`${this.baseUrl}/upload-image`, formData);
+}
+
+getUserImage(userName: string): Observable<Blob> {
+  return this.httpClient.get(`${this.baseUrl}/image/${userName}`, { responseType: 'blob' });
+}
 }

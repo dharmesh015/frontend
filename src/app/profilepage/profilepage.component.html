@@ -3,18 +3,35 @@
     <div class="col-lg-4">
       <div class="card mb-4">
         <div class="card-body text-center">
+          <!-- Show loading spinner while image is loading -->
+          <div *ngIf="imageLoading" class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+          
+          <!-- Profile image -->
           <img
-            src="https://media.licdn.com/dms/image/v2/D4E03AQG-zSGm5MsVEg/profile-displayphoto-shrink_200_200/B4EZSocYGVGgAg-/0/1737992799819?e=2147483647&v=beta&t=JrBXviIBQ1k6rLwlC66g4oiHF7IvggROwQuG8adTSEM"
-            alt="avatar"
+            *ngIf="!imageLoading"
+            [src]="profileImageUrl || 'assets/default-avatar.jpg'"
+            alt="Profile Image"
             class="rounded-circle img-fluid"
-            style="width: 150px"
+            style="width: 150px; height: 150px; object-fit: cover;"
           />
+          
           <h5 class="my-3">{{ userData.userName }}</h5>
 
           <div class="d-flex justify-content-center mb-2">
-                <!-- <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary"></button> -->
-                <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary ">change</button>
-              </div>
+            <div class="file-upload">
+              <input type="file" accept="image/*" (change)="onFileSelected($event)" class="d-none" #fileInput>
+              <button type="button" class="btn btn-outline-primary me-2" (click)="fileInput.click()">
+                <i class="fas fa-image me-1"></i> Select Image
+              </button>
+              <button type="button" class="btn btn-primary" [disabled]="!selectedFile || imageLoading" (click)="uploadImage()">
+                <i class="fas fa-upload me-1"></i> 
+                <span *ngIf="!imageLoading">Upload</span>
+                <span *ngIf="imageLoading">Uploading...</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="card mb-4 mb-lg-0">
@@ -106,41 +123,57 @@
           <div class="card-body">
             <div class="container ">
               <h1 class="text-center">Order History</h1>
-            
               <div class="table-responsive">
-                <table mat-table [dataSource]="products" class="table table-striped table-bordered">
-                  <ng-container matColumnDef="productName">
-                    <th mat-header-cell *matHeaderCellDef (click)="sortProducts('productName')"> Product Name </th>
-                    <td mat-cell *matCellDef="let product"> {{ product.productName }} </td>
+                <table mat-table [dataSource]="OrderDetails" class="table table-striped table-bordered">
+                  
+                  <!-- Order Full Name Column -->
+                  <ng-container matColumnDef="orderFullName">
+                    <th mat-header-cell *matHeaderCellDef (click)="sortOrderDetails('orderFullName')"> Full Name </th>
+                    <td mat-cell *matCellDef="let order"> {{ order.orderFullName }} </td>
                   </ng-container>
-            
-                  <ng-container matColumnDef="productDescription">
-                    <th mat-header-cell *matHeaderCellDef (click)="sortProducts('productDescription')"> Description </th>
-                    <td mat-cell *matCellDef="let product"> {{ product.productDescription }} </td>
-                  </ng-container>
-            
-                  <ng-container matColumnDef="productActualPrice">
-                    <th mat-header-cell *matHeaderCellDef (click)="sortProducts('productActualPrice')"> Actual Price </th>
-                    <td mat-cell *matCellDef="let product"> {{ product.productActualPrice | currency }} </td>
-                  </ng-container>
-            
-                  <ng-container matColumnDef="productDiscountedPrice">
-                    <th mat-header-cell *matHeaderCellDef (click)="sortProducts('productDiscountedPrice')"> Discounted Price </th>
-                    <td mat-cell *matCellDef="let product"> {{ product.productDiscountedPrice | currency }} </td>
-                  </ng-container>
-            
               
-                  <tr mat-header-row *matHeaderRowDef="['productName', 'productDescription', 'productActualPrice', 'productDiscountedPrice']"></tr>
-                  <tr mat-row *matRowDef="let row; columns: ['productName', 'productDescription', 'productActualPrice', 'productDiscountedPrice'];"></tr>
+                  <!-- Order Contact Number Column -->
+                  <ng-container matColumnDef="orderContactNumber">
+                    <th mat-header-cell *matHeaderCellDef (click)="sortOrderDetails('orderContactNumber')"> Contact Number </th>
+                    <td mat-cell *matCellDef="let order"> {{ order.orderContactNumber }} </td>
+                  </ng-container>
+              
+                  <!-- Order Status Column -->
+                  <ng-container matColumnDef="orderStatus">
+                    <th mat-header-cell *matHeaderCellDef (click)="sortOrderDetails('orderStatus')"> Status </th>
+                    <td mat-cell *matCellDef="let order"> {{ order.orderStatus }} </td>
+                  </ng-container>
+              
+                  <!-- Order Amount Column -->
+                  <ng-container matColumnDef="orderAmount">
+                    <th mat-header-cell *matHeaderCellDef (click)="sortOrderDetails('orderAmount')"> Amount </th>
+                    <td mat-cell *matCellDef="let order"> {{ order.orderAmount | currency }} </td>
+                  </ng-container>
+              
+                  <!-- Product Name Column -->
+                  <ng-container matColumnDef="productName">
+                    <th mat-header-cell *matHeaderCellDef (click)="sortOrderDetails('productName')"> Product Name </th>
+                    <td mat-cell *matCellDef="let order"> {{ order.product.productName }} </td>
+                  </ng-container>
+                  <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef (click)="sortOrderDetails('date')"> Date </th>
+                    <td mat-cell *matCellDef="let order"> {{ order.date | date: 'shortDate' }} </td>
+                  </ng-container>
+              
+                  <!-- Table Rows -->
+                  <tr mat-header-row *matHeaderRowDef="['orderFullName', 'orderContactNumber', 'orderStatus', 'orderAmount', 'productName','date']"></tr>
+                  <tr mat-row *matRowDef="let row; columns: ['orderFullName', 'orderContactNumber', 'orderStatus', 'orderAmount', 'productName','date'];"></tr>
                 </table>
               </div>
-            
+              
+              <!-- Pagination Controls -->
               <div class="pagination-controls d-flex justify-content-between mt-3">
                 <button mat-button (click)="previousPage()" [disabled]="page === 0">Previous</button>
                 <span>Page {{ page + 1 }}</span>
-                <button mat-button (click)="nextPage()" [disabled]="!hasMoreProducts">Next</ button>
+                <button mat-button (click)="nextPage()" [disabled]="!hasMoreProducts">Next</button>
               </div>
-            </div>
+              
+              </div>
 
           </div>
         </div>

@@ -1,3 +1,4 @@
+import { Registrationuser } from "../modul/registrationuser";
 import { Product } from "./product.model";
 
 export interface MyOrderDetails {
@@ -9,5 +10,6 @@ export interface MyOrderDetails {
     orderStatus : string;
     orderAmount : number;
     product : Product;
-    user : any;
+    user : Registrationuser;
+    date: string; // Add this field
 }
