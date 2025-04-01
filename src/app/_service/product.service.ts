@@ -56,7 +56,8 @@ public placeOrder(orderDetails: OrderDetails){
  }
 
 
- getAllProductsPageWise(page: number, size: number): Observable<Product[]> {
-  return this.httpClient.get<Product[]>(`${this.baseUrl}/getAllProductsPageWise?page=${page}&size=${size}`);
+getAllProductsPageWise(page: number, size: number, sortBy: string, sortDir: string): Observable<any> {
+  return this.httpClient.get(`${this.baseUrl}/getAllProductsPageWise?page=${page}&size=${size}&sortBy=${sortBy}&sortDir=${sortDir}`);
 }
+
 }
