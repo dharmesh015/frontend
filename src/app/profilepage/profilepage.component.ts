@@ -43,7 +43,9 @@ export class ProfilepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userData = this.userAuth.getUser();
-    this.loadProducts();
+    if(!this.userAuth.isAdmin()){
+      this.loadProducts();
+    }
     this.loadProfileImage();
     console.log(this.userData.userName);
   }

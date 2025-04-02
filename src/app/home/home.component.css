@@ -1,5 +1,5 @@
 .hero {
-  background: url('https://plus.unsplash.com/premium_photo-1684785617105-2ebfbd278671?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') center/cover no-repeat;
+  /* background: url('quickcart-logo.svg') center/cover no-repeat; */
   background-blend-mode: multiply;
   height: 475px;
   width: 100%;
@@ -10,18 +10,24 @@
   text-align: center;
 }
 .productlist{
+  /* border: 4px salmon solid; */
   display: flex;
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 
 }
-.welcome-container {
+
+/* .welcome-container {
   width: 90%;
+  height: 300px;
+  border: 4px dotted black;
   max-width: 800px;
   position: relative;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(250, 250, 250, 0.7);
   padding: 20px;
   border-radius: 10px;
   animation: fadeIn 2s ease-in-out;
+  color: black;
+  padding: 50px;
 }
 
 .welcome-text {
@@ -30,13 +36,14 @@
   letter-spacing: 2px;
   opacity: 0;
   animation: slideUp 1.5s ease-in-out forwards;
-}
+} */
 
 /* Responsive Product Grid */
 .main.container {
   width: 95%;
   max-width: 1200px;
   padding: 0 15px;
+
 }
 
 /* Custom grid system to replace mat-grid-list for better responsiveness */
@@ -48,7 +55,7 @@
 }
 
 .product-card {
-  background-color: #afaca7;
+  background-color: #fff5f5f3;
   border-radius: 8px;
   height: auto;
   min-height: 450px;
@@ -120,11 +127,11 @@ mat-card-title {
 
 .product-price {
   font-weight: bold;
-  color: #FF5733;
+  color: #0e3b41;
 }
 
 .button {
-  background-color: #3b5e41ef;
+  background-color:#706262;
   color: #F1EFEC;
   border-radius: 8px;
   padding: 8px 16px;
@@ -132,7 +139,7 @@ mat-card-title {
 }
 
 .button:hover {
-  background-color: #2a4530;
+  background-color: #504343fd;
   transform: scale(1.05);
 }
 
@@ -211,8 +218,8 @@ mat-card-title {
 
 /* Background Gradient */
 .background-radial-gradient {
-  background-color: hsl(220, 50%, 10%);
-  background-image: radial-gradient(
+  background-color: #eee;
+  /* background-image: radial-gradient(
       650px circle at 0% 0%, 
       hsl(220, 50%, 30%) 15%, 
       hsl(220, 50%, 25%) 35%, 
@@ -227,6 +234,6 @@ mat-card-title {
       hsl(220, 50%, 20%) 75%, 
       hsl(220, 50%, 18%) 80%, 
       transparent 100%
-  );
-
+  ); */
+/* border: 4px solid red; */
 }

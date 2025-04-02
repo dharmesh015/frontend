@@ -112,7 +112,28 @@
       <div class="col-lg-18" *ngIf="isadmin()">
         <div class="card ">
           <div class="card-body">
-             admin
+            <div class="rating-review-section">
+              <h2>Ratings and Reviews</h2>
+              <div class="average-rating">
+                  <span class="stars">
+                      ★★★★☆ <!-- You can use JavaScript to dynamically fill in the stars based on the rating -->
+                  </span>
+                  <span class="rating-value">(4.0/5.0)</span>
+              </div>
+              <div class="review-list">
+                  <div class="review-item">
+                      <div class="review-header">
+                          <span class="reviewer-name">John Doe</span>
+                          <span class="review-date">March 15, 2023</span>
+                      </div>
+                      <div class="review-text">
+                          "Great product! It exceeded my expectations and arrived on time."
+                      </div>
+                  </div>
+                 
+                  <!-- Add more review items as needed -->
+              </div>
+          </div>
 
           </div>
         </div>

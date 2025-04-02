@@ -1,68 +1,80 @@
-<!-- 
 <section class="background-radial-gradient overflow-hidden">
-  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+  <div class="container px-3 py-5 text-center text-lg-start">
     <div class="row gx-lg-5 align-items-center mb-5">
-
       <div class="hero">
-        <div class="welcome-container">
-          <div class="welcome-text">Welcome to Quick Cart</div>
-        </div>
-      </div>
-    </div>
-  </div>
+        <svg viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
+          <!-- Light gray background -->
+          <rect width="500" height="150" fill="#eee" />
 
- 
-  <div class="main container mt-5">
+          <!-- Simple, modern shopping cart symbol -->
+          <g transform="translate(60, 75)">
+            <!-- Cart body -->
+            <path
+              d="M0,0 H20 L35,45 H85 L100,15 H45 L40,0"
+              fill="none"
+              stroke="#3b82f6"
+              stroke-width="5"
+              stroke-linejoin="round"
+            />
+            <!-- Cart wheels -->
+            <circle cx="45" cy="55" r="7" fill="#3b82f6" />
+            <circle cx="85" cy="55" r="7" fill="#3b82f6" />
+            <!-- Fast motion lines -->
+            <path
+              d="M95,15 L110,15 M90,25 L105,25 M85,35 L100,35"
+              stroke="#3b82f6"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+          </g>
 
-    <div class="product-grid">
-      <div *ngFor="let product of products" class="product-card-container">
-        <mat-card class="product-card">
-          <mat-card-content>
-            <div class="image-container">
-              <img
-                *ngIf="product.productImages && product.productImages.length > 0"
-                [src]="product.productImages[0].url"
-                alt="{{ product.productName }}"
-                class="product-image"
-              />
-            </div>
-            <mat-card-title>{{ product.productName }}</mat-card-title>
-            <div class="description">
-              <p class="product-description">{{ product.productDescription }}</p>
-            </div>
-          
-            <div class="action-row">
-              <span class="product-price">
-                Price: {{ product.productActualPrice }}
-              </span>
-              <button mat-button class="button" (click)="viewProduct(product.productId)">View</button>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  </div>
-</section> -->
+          <!-- Company name in clean, professional font -->
+          <text
+            x="200"
+            y="80"
+            font-family="Arial, sans-serif"
+            font-size="50"
+            font-weight="700"
+            text-anchor="start"
+            fill="#3b82f6"
+          >
+            QuickCart
+          </text>
 
-<section class="background-radial-gradient overflow-hidden">
-  <div class="container px-4 py-5 px-md-5 text-center text-lg-start " >
-    <div class="row gx-lg-5 align-items-center mb-5">
-      <!-- Hero Section -->
-      <div class="hero">
-        <div class="welcome-container">
-          <div class="welcome-text">Welcome to Quick Cart</div>
-        </div>
+          <!-- Tagline -->
+          <text
+            x="202"
+            y="105"
+            font-family="Arial, sans-serif"
+            font-size="14"
+            font-weight="400"
+            text-anchor="start"
+            fill="#666666"
+          >
+            E-Commerce Platform
+          </text>
+
+          <!-- Simple underline accent -->
+          <path
+            d="M200,85 L400,85"
+            stroke="#06b6d4"
+            stroke-width="3"
+            fill="none"
+          />
+        </svg>
       </div>
     </div>
   </div>
   <!-- Product Grid Section -->
   <div class="productlist">
-
-      <button mat-button (click)="previousPage()"  style=" margin-top: 450px; margin-left: 60px; color: #fffcfc;" [disabled]="page === 0">
-        <mat-icon>code</mat-icon>
-      </button>
-     
-    
+    <button
+      mat-button
+      (click)="previousPage()"
+      style="margin-top: 450px; margin-left: 60px; color: #fffcfc"
+      [disabled]="page === 0"
+    >
+      <mat-icon>code</mat-icon>
+    </button>
 
     <div class="main container mt-5">
       <div class="product-grid">
@@ -93,7 +105,6 @@
                 <button
                   mat-button
                   class="button"
-                  
                   (click)="viewProduct(product.productId)"
                 >
                   View
@@ -109,7 +120,7 @@
     <button
       mat-button
       (click)="nextPage()"
-      style=" margin-top: 450px; margin-right: 50px; color: #fffcfc;"
+      style="margin-top: 450px; margin-right: 50px; color: #fffcfc"
       [disabled]="!hasMoreProducts"
     >
       <mat-icon>code</mat-icon>

@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
     setTimeout(() => {
       this.showWelcomeMessage = false;
       this.loadProducts();
-    }, 3000);
+    }, 2000);
     this.loadProducts();
   }
 
