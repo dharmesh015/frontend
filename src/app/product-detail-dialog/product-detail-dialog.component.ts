@@ -1,12 +1,12 @@
 
-import { Component, Inject } from '@angular/core';
+import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Product } from '../_model/product.model';
 import { ProductService } from '../_service/product.service';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Router } from '@angular/router';  // Import Router
+import { ActivatedRoute, Router } from '@angular/router';  // Import Router
 
 @Component({
   selector: 'app-product-detail-dialog',
@@ -14,98 +14,101 @@ import { Router } from '@angular/router';  // Import Router
   templateUrl: './product-detail-dialog.component.html',
   styleUrls: ['./product-detail-dialog.component.css']
 })
-export class ProductDetailDialogComponent {
-  product: Product;
-
+export class ProductDetailDialogComponent implements OnInit {
+  showWelcomeMessage = true;
+  products: Product[] = [];
+  screenWidth: number;
+  page: number = 0;
+  size: number = 4; 
+  sortBy: string = 'productName';
+  sortDir: string = 'asc';
+  totalProducts: number = 0; 
+  hasMoreProducts: boolean = true; 
+  messages = [
+    'FREE SHIPPING on all orders over $50!',
+    'NEW ARRIVALS! Check out our latest products',
+    'Use code WELCOME15 for 15% off your first order',
+  ];
+  currentIndex = 0;
+i: any;
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: Product,
-    private dialog: MatDialog,
     private productService: ProductService,
-    public dialogRef: MatDialogRef<ProductDetailDialogComponent>,
-    private router: Router  
+    private dialog: MatDialog,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
-    
-    this.product = { ...data };
+    // Get initial screen size
+    this.screenWidth = window.innerWidth;
+    setInterval(() => {
+      this.currentIndex = (this.currentIndex + 1) % this.messages.length;
+    }, 4000);
   }
 
-  close(): void {
-    this.dialogRef.close();
+  // Listen for window resize events
+  @HostListener('window:resize', ['$event'])
+  onResize(event:any) {
+    this.screenWidth = window.innerWidth;
   }
 
-  deleteProduct(productId: number): void {
-    this.productService.deleteProduct(productId).subscribe(
-      (response: any) => {
-        this.dialogRef.close();
-       
-      },
-      (error: any) => {
-        Swal.fire({
-          title: "Error",
-          text: "There was an error deleting the product. Please try again.",
-          icon: "error",
-          confirmButtonText: "OK"
+  ngOnInit(): void {
+    this.route.fragment.subscribe(fragment => {
+      if (fragment) {
+        const element = document.getElementById(fragment);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+    setTimeout(() => {
+      this.showWelcomeMessage = false;
+      this.loadProducts();
+    }, 2000);
+    this.loadProducts();
+  }
+
+  viewProduct(productId: number) {
+    this.router.navigate(['/ProductViewDetails', productId]);
+  }
+  
+  loadProducts(): void {
+    this.productService.getAllProductsPageWise(this.page, this.size, this.sortBy, this.sortDir).subscribe(
+      (data) => {
+        console.log(data.content);
+        this.products = data.content.map((product:any) => {
+          // Map over the product images to set the base64 URL
+          product.productImages = product.productImages.map((image: { type: any; picByte: any; }) => {
+            return {
+              ...image,
+              url: `data:${image.type};base64,${image.picByte}`, // Set the base64 URL
+            };
+          });
+          return product;
         });
-
+        this.totalProducts = data.totalElements;
+        this.hasMoreProducts = this.products.length === this.size;
+        console.log(data);
+        return this.products;
+      },
+      (error) => {
+        Swal.fire('Error', 'Failed to load products. Please try again later.', 'error');
+        console.error('Error fetching products', error);
       }
     );
   }
-
-  product2: Product = {
-    productId: 0,
-    productName: "",
-    productDescription: "",
-    productDiscountedPrice: 0,
-    productActualPrice: 0,
-    productImages: []
-  };
-
-  submitProduct(productForm: NgForm) {
-    
-    if (productForm.invalid) {
-      Swal.fire({
-        title: "No data Provided",
-        text: "Please give data for the product.",
-        icon: "warning", 
-        confirmButtonText: "OK" 
-      });
-      return;
+  
+    nextPage(): void {
+      if (this.hasMoreProducts) {
+        this.page++;
+        this.loadProducts();
+      }
     }
-
-    console.log(this.product);
-    const productFormData = this.prepareFormData(this.product);
-    console.log("here")
-    console.log(productFormData);
-
-    this.productService.updateProduct(productFormData).subscribe(
-      (response: Product) => {
-        productForm.reset();
-        this.product.productImages = [];
-        Swal.fire({
-          title: "Product updated",
-          text: "The product has been successfully updated.",
-          icon: "success",
-          confirmButtonText: "OK"
-        });
-        
-        window.location.reload();
-      },
-      (error: HttpErrorResponse) => {
-        Swal.fire({
-          title: "Error",
-          text: "An error occurred while adding the product. Please try again.",
-          icon: "error",
-          confirmButtonText: "OK"
-        });
-
-       
+  
+    previousPage(): void {
+      if (this.page > 0) {
+        this.page--;
+        this.loadProducts();
       }
-    );
-  }
-
-  prepareFormData(product: Product): FormData {
-    const formData = new FormData();
-    formData.append('product', new Blob([JSON.stringify(product)], { type: 'application/json' }));
-
-    return formData;
-  }
+    }
+  
+   
 }

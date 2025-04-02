@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registartion', component: RegistrationComponent },
   { path: 'forbidden', component: ForbiddenComponent },
-  { path: 'About', component: AboutComponent },
+  // { path: 'About', component: AboutComponent },
   {
     path: 'Showproduct',
     component: ProductListComponent,
@@ -50,18 +50,21 @@ const routes: Routes = [
     data: { roles: ['Admin'] },
   },
   {path:"Profilepage",component:ProfilepageComponent},
+  {path:'productlist',component:ProductDetailDialogComponent},
   {path:'editproduct/:id', component:EditproductComponent},
   { path: 'ProductViewDetails/:id', component: ProductViewDetailsComponent },
   { path: 'buyProduct/:issingleProducrCheckout/:productId', component: BuyProductComponent,canActivate: [AuthGuard],
     data: { roles: ['User'] }},
-  { path: '**', component: ForbiddenComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', component: ForbiddenComponent }
 
   // {path:'buyProduct/:issingleProducrCheckout/:productId',component:BuyProductComponent},
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  // imports: [RouterModule.forRoot(routes)],
+  // exports: [RouterModule],
+  imports: [RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' })],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}

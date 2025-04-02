@@ -9,6 +9,7 @@ import { ProductService } from '../_service/product.service';
 import { Console } from 'node:console';
 import Swal from 'sweetalert2';
 import { Product } from '../_model/product.model';
+import { UserAuthServiceService } from '../_service/user-auth-service.service';
 
 @Component({
   selector: 'app-add-new-product',
@@ -24,17 +25,19 @@ export class AddNewProductComponent implements OnInit {
     productDescription: "",
     productDiscountedPrice: 0,
     productActualPrice: 0,
+    sellername:"",
     productImages: []
   };
-
+  //  username:any;
   constructor(
     private productService: ProductService,
     private sanitizer: DomSanitizer,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private authservice:UserAuthServiceService
   ) {}
 
   ngOnInit(): void {
-
+    this.product.sellername=this.authservice.getUser().userName;
     const productData = this.activatedRoute.snapshot.data['product'];
     if (productData) {
       this.product = productData;

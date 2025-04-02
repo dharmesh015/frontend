@@ -3,14 +3,26 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Product } from '../_model/product.model';
 import { ProductService } from '../_service/product.service';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   standalone:false,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('messageAnimation', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateX(100%)' }),
+        animate('0.5s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
+      ]),
+      transition(':leave', [
+        animate('0.5s ease-in', style({ opacity: 0, transform: 'translateX(-100%)' })),
+      ]),
+    ]),
+  ]
 })
 export class HomeComponent implements OnInit {
   showWelcomeMessage = true;
@@ -22,14 +34,24 @@ export class HomeComponent implements OnInit {
   sortDir: string = 'asc';
   totalProducts: number = 0; 
   hasMoreProducts: boolean = true; 
-
+  messages = [
+    'FREE SHIPPING on all orders over $50!',
+    'NEW ARRIVALS! Check out our latest products',
+    'Use code WELCOME15 for 15% off your first order',
+  ];
+  currentIndex = 0;
+i: any;
   constructor(
     private productService: ProductService,
     private dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     // Get initial screen size
     this.screenWidth = window.innerWidth;
+    setInterval(() => {
+      this.currentIndex = (this.currentIndex + 1) % this.messages.length;
+    }, 4000);
   }
 
   // Listen for window resize events
@@ -39,6 +61,14 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.fragment.subscribe(fragment => {
+      if (fragment) {
+        const element = document.getElementById(fragment);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
     setTimeout(() => {
       this.showWelcomeMessage = false;
       this.loadProducts();
