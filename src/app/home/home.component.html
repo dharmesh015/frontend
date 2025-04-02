@@ -3,12 +3,9 @@
     <div class="row gx-lg-5 align-items-center mb-5">
       <div class="hero">
         <svg viewBox="0 0 500 150" xmlns="http://www.w3.org/2000/svg">
-          <!-- Light gray background -->
           <rect width="500" height="150" fill="#eee" />
 
-          <!-- Simple, modern shopping cart symbol -->
           <g transform="translate(60, 75)">
-            <!-- Cart body -->
             <path
               d="M0,0 H20 L35,45 H85 L100,15 H45 L40,0"
               fill="none"
@@ -16,10 +13,10 @@
               stroke-width="5"
               stroke-linejoin="round"
             />
-            <!-- Cart wheels -->
+
             <circle cx="45" cy="55" r="7" fill="#3b82f6" />
             <circle cx="85" cy="55" r="7" fill="#3b82f6" />
-            <!-- Fast motion lines -->
+
             <path
               d="M95,15 L110,15 M90,25 L105,25 M85,35 L100,35"
               stroke="#3b82f6"
@@ -28,7 +25,6 @@
             />
           </g>
 
-          <!-- Company name in clean, professional font -->
           <text
             x="200"
             y="80"
@@ -41,7 +37,6 @@
             QuickCart
           </text>
 
-          <!-- Tagline -->
           <text
             x="202"
             y="105"
@@ -54,7 +49,6 @@
             E-Commerce Platform
           </text>
 
-          <!-- Simple underline accent -->
           <path
             d="M200,85 L400,85"
             stroke="#06b6d4"
@@ -65,7 +59,8 @@
       </div>
     </div>
   </div>
-  <!-- Product Grid Section -->
+ 
+
   <div class="productlist">
     <button
       mat-button
@@ -97,7 +92,7 @@
                   {{ product.productDescription }}
                 </p>
               </div>
-              <!-- Price & Button Row -->
+
               <div class="action-row">
                 <span class="product-price">
                   Price: {{ product.productActualPrice }}
@@ -114,8 +109,6 @@
           </mat-card>
         </div>
       </div>
-
-      <!-- Pagination Buttons -->
     </div>
     <button
       mat-button

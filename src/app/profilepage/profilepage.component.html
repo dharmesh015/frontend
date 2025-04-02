@@ -191,7 +191,7 @@
               <div class="pagination-controls d-flex justify-content-between mt-3">
                 <button mat-button (click)="previousPage()" [disabled]="page === 0">Previous</button>
                 <span>Page {{ page + 1 }}</span>
-                <button mat-button (click)="nextPage()" [disabled]="!hasMoreProducts">Next</button>
+                <button mat-button (click)="nextPage()" [disabled]="!hasOrderDetails || !hasMoreProducts">Next</button>
               </div>
               
               </div>

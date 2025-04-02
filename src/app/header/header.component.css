@@ -17,11 +17,7 @@
     padding: 8px 16px;
   }
   
-  .btn-custom-login:hover, .btn-custom-logout:hover {
-    /* color: rgb(0, 0, 0); */
-    /* background-color: #ece2c6cb; */
-    /* transform: translateY(-2px); */
-  }
+ 
   
   /* Make navbar links more noticeable */
   .nav-link {
@@ -37,8 +33,15 @@
   }
   .icon{
     display: flex;
-   gap: 3px;
+      gap: 3px;
+      border: 2px solid red;
+   /* padding: 5px; */
+   /* border: 4px red dotted; */
   }
+.icondiv{
+ border: 3px white dotted;
+ /* padding: 2px; */
+}
 
 
 /* Background image for the navbar */

@@ -38,6 +38,7 @@ import { ProductViewDetailsComponent } from './product-view-details/product-view
 import { BuyProductComponent } from './buy-product/buy-product.component';
 import { EditproductComponent } from './editproduct/editproduct.component';
 import { ProfilepageComponent } from './profilepage/profilepage.component';
+import { AboutComponent } from './about/about.component';
 // import{mat-form-field}
 
 
@@ -60,7 +61,8 @@ import { ProfilepageComponent } from './profilepage/profilepage.component';
     ProductViewDetailsComponent,
     BuyProductComponent,
     EditproductComponent,
-    ProfilepageComponent
+    ProfilepageComponent,
+    AboutComponent
     
   ],
   imports: [

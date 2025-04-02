@@ -31,6 +31,7 @@ export class ProfilepageComponent implements OnInit {
   selectedFile: File | null = null;
   profileImageUrl: SafeUrl | string = '';
   imageLoading: boolean = false;
+  hasOrderDetails: boolean = false;
 
   constructor(
     private router: Router,
@@ -45,6 +46,7 @@ export class ProfilepageComponent implements OnInit {
     this.userData = this.userAuth.getUser();
     if(!this.userAuth.isAdmin()){
       this.loadProducts();
+      
     }
     this.loadProfileImage();
     console.log(this.userData.userName);
@@ -73,9 +75,14 @@ export class ProfilepageComponent implements OnInit {
             date: order.orderDate
           };
         });
-        console.log(this.OrderDetails);
-      },
-      (error: any) => {
+
+        // Check if there are any order details
+        this.hasOrderDetails = this.OrderDetails.length > 0;
+
+      // Check if there are more products to load
+      this.hasMoreProducts = data.content.length === this.size; // Assuming size is the number of items per page
+      console.log(this.OrderDetails);
+      }, (error: any) => {
         Swal.fire('Error', 'Failed to load products. Please try again later.', 'error');
         console.error('Error fetching products', error);
       }
@@ -83,7 +90,7 @@ export class ProfilepageComponent implements OnInit {
   }
   
   nextPage(): void {
-    if (this.hasMoreProducts) {
+    if (this.hasMoreProducts ) {
       this.page++;
       this.loadProducts();
     }

@@ -16,6 +16,7 @@ import { BuyProductComponent } from './buy-product/buy-product.component';
 import { ProductDetailDialogComponent } from './product-detail-dialog/product-detail-dialog.component';
 import { EditproductComponent } from './editproduct/editproduct.component';
 import { ProfilepageComponent } from './profilepage/profilepage.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
   // import { AppRoutingModule } from './app-routing.module';
@@ -35,6 +36,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registartion', component: RegistrationComponent },
   { path: 'forbidden', component: ForbiddenComponent },
+  { path: 'About', component: AboutComponent },
   {
     path: 'Showproduct',
     component: ProductListComponent,
