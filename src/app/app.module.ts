@@ -40,6 +40,7 @@ import { EditproductComponent } from './editproduct/editproduct.component';
 import { ProfilepageComponent } from './profilepage/profilepage.component';
 import { AboutComponent } from './about/about.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 // import { ForgatePasswordComponent } from './forgate-password/forgate-password.component';
 // import{mat-form-field}
 
@@ -66,6 +67,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     ProfilepageComponent,
     AboutComponent,
     ForgotPasswordComponent,
+    ResetPasswordComponent,
    
     
   ],

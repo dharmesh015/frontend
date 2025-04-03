@@ -18,6 +18,7 @@ import { EditproductComponent } from './editproduct/editproduct.component';
 import { ProfilepageComponent } from './profilepage/profilepage.component';
 import { AboutComponent } from './about/about.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 const routes: Routes = [
   // import { AppRoutingModule } from './app-routing.module';
@@ -53,8 +54,10 @@ const routes: Routes = [
   {path:"Profilepage",component:ProfilepageComponent},
   {path:'productlist',component:ProductDetailDialogComponent},
   {path:'editproduct/:id', component:EditproductComponent},
+  // {path:'resetpassword',component:ResetPasswordComponent},
+  { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'ProductViewDetails/:id', component: ProductViewDetailsComponent },
-  {path:'forgotPassword',component:ForgotPasswordComponent},
+  {path:'forgot-password',component:ForgotPasswordComponent},
   { path: 'buyProduct/:issingleProducrCheckout/:productId', component: BuyProductComponent,canActivate: [AuthGuard],
     data: { roles: ['User'] }},
     { path: '', redirectTo: '/home', pathMatch: 'full' },
