@@ -1,81 +1,70 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#"> QC </a>
- 
 
-    <button class="navbar-toggler bg-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+<nav class="custom-navbar">
+  <div class="navbar-container">
+    <div class="navbar-brand" style="margin-left:-70px; ">
+      <a href="#" class="brand-link">QC</a>
+    </div>
+    <!-- Brand logo section -->
+    
+    <!-- Mobile toggle button -->
+    <button class="navbar-toggler" (click)="isMenuOpen = !isMenuOpen">
+      <span class="toggler-icon"></span>
+      <span class="toggler-icon"></span>
+      <span class="toggler-icon"></span>
+    </button>
+    
+    <!-- Navigation links -->
+    <div class="navbar-menu" [ngClass]="{'is-open': isMenuOpen}">
+      <div class="navbar-links">
+        <a routerLink="/home" routerLinkActive="active" class="nav-link">
+          <span class="nav-link-bg"></span>
+          <mat-icon>home</mat-icon>
+          <span>Home</span>
+        </a>
+        
+        <a *ngIf="roleMatchs(['Admin'])" routerLink="/admin" routerLinkActive="active" class="nav-link">
+          <span class="nav-link-bg"></span>
+          <mat-icon>perm_identity</mat-icon>
+          <span>Admin</span>
+        </a>
+        
+        <a routerLink="/productlist" routerLinkActive="active" class="nav-link">
+          <span class="nav-link-bg"></span>
+          <mat-icon>shopping_cart</mat-icon>
+          <span>Products</span>
+        </a>
+        
+        <!-- <a routerLink="/Contact" routerLinkActive="active" class="nav-link">
+          <span class="nav-link-bg"></span>
+          <mat-icon>contact_support</mat-icon>
+          <span>Contact</span>
+        </a> -->
+        
+        
+        <a [routerLink]="'/home'" [fragment]="'about'" routerLinkActive="active" class="nav-link">
+          <span class="nav-link-bg"></span>
+          <mat-icon>info</mat-icon>
+          <span>About Us</span>
+        </a>
+        <a *ngIf="isLoggedIn()" routerLink="/Profilepage" routerLinkActive="active" class="nav-link">
+          <span class="nav-link-bg"></span>
+          <mat-icon>account_circle</mat-icon>
+          <span>Profile</span>
+        </a>
+      </div>
+      
+      <!-- Auth buttons -->
+      <div class="navbar-auth">
+        <button *ngIf="!isLoggedIn()" routerLink="/login" class="auth-button login-btn">
+          <mat-icon>login</mat-icon>
+          <span>Login</span>
         </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a
-            class="nav-link px-3 py-3 fw-bold text-light"
-            routerLink="/home"
-            style="display: flex; align-items: center; gap: 5px"
-            ><mat-icon>home</mat-icon> Home</a
-          >
-        </li>
-        <li class="nav-item" *ngIf="roleMatchs(['Admin'])">
-          <a
-            class="nav-link px-3 py-3 fw-bold text-light"
-            routerLink="/admin"
-            style="display: flex; align-items: center; gap: 5px"
-            ><mat-icon>perm_identity</mat-icon>Admin
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-3 py-3 fw-bold text-light" routerLink="/productlist"  style="display: flex; align-items: center; gap: 5px">
-            <mat-icon>info</mat-icon> All Product
-          </a>
-        </li>
-
-        <li class="nav-item">
-          <a
-            class="nav-link px-3 py-3 fw-bold text-light"
-            routerLink="/Contact"
-            style="display: flex; align-items: center; gap: 5px"
-            ><mat-icon>contact_support</mat-icon>Contact
-          </a>
-        </li>
-        <li class="nav-item" *ngIf="isLoggedIn()">
-          <a
-            class="nav-link px-3 py-3 fw-bold text-light"
-            routerLink="/Profilepage"
-            style="display: flex; align-items: center; gap: 5px"
-          >
-            <mat-icon>account_circle</mat-icon>Profile
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link px-3 py-3 fw-bold text-light" routerLink="/home" fragment="about" style="display: flex; align-items: center; gap: 5px">
-            <mat-icon>info</mat-icon> About Us
-          </a>
-        </li>
-      </ul>
-
-      <div class="d-flex auth-buttons">
-        <button
-          *ngIf="!isLoggedIn()"
-          class="btn btn-custom-login"
-          type="button"
-          routerLink="/login"
-        >
-          Login
+        
+        <button *ngIf="isLoggedIn()" (click)="logout()" class="auth-button logout-btn">
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
         </button>
-
-        <button
-          *ngIf="isLoggedIn()"
-          class="btn btn-custom-logout"
-          type="button"
-          (click)="logout()"
-        >
-          Logout</button
-        >>
       </div>
     </div>
   </div>
 </nav>
-<!-- 
- -->

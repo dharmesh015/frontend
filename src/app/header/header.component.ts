@@ -12,6 +12,7 @@ import { UserService } from '../_service/user.service';
 })
 
 export class HeaderComponent {
+  isMenuOpen = false;
   constructor(
     private userathservice: UserAuthServiceService,
     private userservice: UserService,

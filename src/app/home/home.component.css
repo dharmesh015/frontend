@@ -10,9 +10,9 @@
   text-align: center;
 }
 .productlist{
-  /* border: 4px salmon solid; */
+  border: 4px salmon solid;
   display: flex;
-  /* margin-bottom: 20px; */
+  margin-bottom: 40px;
 
 }
 

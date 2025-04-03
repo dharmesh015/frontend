@@ -74,6 +74,19 @@ getOrderDetails(username: string, page: number, size: number, sortBy: string, so
   return this.httpClient.get(`${this.baseUrl}/getorderdetails/${username}`, { params });
 }
 
+getproductdetails(username: string, page: number, size: number, sortBy: string, sortDir: string): Observable<any> {
+  console.log("user name -"+username);
+  // Set up HTTP request parameters
+  const params = new HttpParams()
+    .set('page', page.toString())
+    .set('size', size.toString())
+    .set('sortBy', sortBy)
+    .set('sortDir', sortDir);
+   
+  // Make the GET request
+  return this.httpClient.get(`${this.baseUrl}/getproduct/${username}`, { params });
+}
+
 uploadUserImage(userName: string, imageFile: File): Observable<any> {
   console.log("here service")
   const formData = new FormData();
