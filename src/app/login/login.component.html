@@ -1,100 +1,3 @@
-<!-- 
-  
-  <section class="background-radial-gradient overflow-hidden" *ngIf="isloggin()">
- 
-
-  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
-    <div class="row gx-lg-5 align-items-center mb-5">
-      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
-        <h1 class="my-5 display-5 fw-bold ls-tight" style="color: hsl(218, 81%, 95%)">
-          Welcome Back! <br />
-          <span style="color: hsl(218, 81%, 75%)">Login to your account</span>
-        </h1>
-        <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
-          Please enter your credentials to access your account. If you don't have an account, you can register.
-        </p>
-      </div>
-
-      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
-        <div id="radius-shape-1" class="position-absolute rounded-circle shadow-5-strong"></div>
-        <div id="radius-shape-2" class="position-absolute shadow-5-strong"></div>
-
-        <div class="card bg-glass">
-          <div class="card-body px-4 py-5 px-md-5">
-           
-           
-              <form class="form" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-                
-             
-                <div class="form-outline mb-4">
-                  <input
-                    type="text"
-                    id="form3Example3 username"
-                    class="form-control username"
-                    placeholder="Enter User Name"
-                    #username="ngModel"
-                    ngModel
-                    name="username"
-                    required
-                  />
-                  <label class="form-label" for="form3Example3">User  Name</label>
-                  <div *ngIf="username.invalid && username.touched" class="error">
-                    <div *ngIf="username.errors?.['required']">User  Name is required</div>
-                  </div>
-                </div>
-            
-            
-                <div class="form-outline mb-4">
-                  <input
-                    type="text"
-                    id="form3Example4 username"
-                    class="form-control"
-                    placeholder="Enter Password"
-                    #password="ngModel"
-                    ngModel
-                    name="password"
-                    required
-                    
-                  />
-                  <label class="form-label" for="form3Example4">Password</label>
-                  <div *ngIf="password.invalid && password.touched" class="error">
-                    <div *ngIf="password.errors?.['required']">Password is required</div>
-                    <div *ngIf="password.errors?.['minlength']">Password must be at least 7 characters long</div>
-                  </div>
-                </div>
-            
-             
-                <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn  btn-floating mx-1 submit" [disabled]="loginForm.invalid">
-                  Sign Up
-                </button>
-                
-                <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn  btn-floating mx-1 submit" routerLink="/registartion" routerLinkActive="active">
-                  
-                   Register
-                  
-              </button>
-            
-               
-                <div class="text-center">
-                  <p>or sign up with:</p>
-                  <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1 submit">
-                    <i class="fab fa-google"></i>
-                  </button>
-                  <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1 submit">
-                    <i class="fab fa-twitter"></i>
-                  </button>
-                  <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-link btn-floating mx-1 submit">
-                    <i class="fab fa-github"></i>
-                  </button>
-                </div>
-              </form>
-           
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> -->
 
 <!-- Section: Design Block -->
 <section class="section" *ngIf="isloggin()" style="background-color: hsl(0, 0%, 96%); padding-bottom: 200px; padding-top: 70px;" >
@@ -161,11 +64,11 @@
                     name="password"
                     required
                   />
+                  <div style="display: flex; justify-content: space-between;">
                   <label class="form-label" for="form3Example4">Password</label>
                   <div
                     *ngIf="password.invalid && password.touched"
-                    class="error"
-                  >
+                    class="error">
                     <div *ngIf="password.errors?.['required']">
                       Password is required
                     </div>
@@ -173,8 +76,9 @@
                       Password must be at least 7 characters long
                     </div>
                   </div>
+                  <a routerLink="/forgotPassword" >Forgot Password</a>
+                  </div>
                 </div>
-
                 <button
                   type="submit"
                   data-mdb-button-init

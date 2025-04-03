@@ -63,6 +63,9 @@ public register(data:Registrationuser){
       return this.httpclient.get<Registrationuser>("http://localhost:9090/getdata/"+token);
     }
 
+    sendEmail(email: string): Observable<any> {
+      return this.httpclient.get('http://localhost:9090/sendEmail/'+email );
+    }
 
     
 }

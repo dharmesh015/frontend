@@ -6,8 +6,10 @@
     margin: 5px;
     padding: 5px;
     border-radius: 50px;
+    justify-items: center;
     /* width: 50%; */
   }
+  
   
   .label {
     display: block;
