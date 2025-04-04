@@ -1,0 +1,32 @@
+.container {
+    padding: 20px;
+     padding: 16px;
+     max-width: 1200px;
+     /* height: 80vh; */
+     margin: 0 auto;
+     /* height: 700px; */
+   }
+   
+   @media (max-width: 600px) {
+     .container {
+       padding: 8px;
+     }
+   }
+ 
+   .nav{
+     /* background-color:rgb(199, 217, 221);
+     b */
+     background-color:#5980c1;
+   }
+ 
+   .nav {
+     padding: 8px; /* Optional: Add padding to the toolbar */
+   }
+   
+   button {
+     margin-right: 16px; /* Add margin to the right of each button */
+   }
+   
+   button:last-child {
+     margin-right: 0; /* Remove margin from the last button */
+   }

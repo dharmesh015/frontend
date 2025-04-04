@@ -19,6 +19,7 @@ import { ProfilepageComponent } from './profilepage/profilepage.component';
 import { AboutComponent } from './about/about.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { SellerComponent } from './seller/seller.component';
 
 const routes: Routes = [
   // import { AppRoutingModule } from './app-routing.module';
@@ -35,6 +36,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['Admin'] },
   },
+  {
+    path: 'seller',
+    component: SellerComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['Seller'] },
+  },
   { path: 'login', component: LoginComponent },
   { path: 'registartion', component: RegistrationComponent },
   { path: 'forbidden', component: ForbiddenComponent },
@@ -43,13 +50,13 @@ const routes: Routes = [
     path: 'Showproduct',
     component: ProductListComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['Admin'] },
+    data: { roles: ['Seller'] },
   },
   {
     path: 'AddNewProduct',
     component: AddNewProductComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['Admin'] },
+    data: { roles: ['Seller'] },
   },
   {path:"Profilepage",component:ProfilepageComponent},
   {path:'productlist',component:ProductDetailDialogComponent},

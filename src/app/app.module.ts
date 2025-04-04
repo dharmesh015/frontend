@@ -41,6 +41,8 @@ import { ProfilepageComponent } from './profilepage/profilepage.component';
 import { AboutComponent } from './about/about.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { SellerComponent } from './seller/seller.component';
+import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.component';
 // import { ForgatePasswordComponent } from './forgate-password/forgate-password.component';
 // import{mat-form-field}
 
@@ -68,6 +70,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
     AboutComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    SellerComponent,
+    AddUserDialogComponent,
    
     
   ],

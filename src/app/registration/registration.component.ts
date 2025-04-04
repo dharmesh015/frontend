@@ -32,6 +32,8 @@ export class RegistrationComponent {
     
     if (form.valid) {
       // Populate the user object with form data
+      
+
       this.userData.userName = form.value.username;
       this.userData.userLastName = form.value.Lastname;
       this.userData.userFirstName = form.value.userFirstName;

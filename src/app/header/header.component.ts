@@ -46,6 +46,11 @@ export class HeaderComponent {
   }
 
 
+  public isSeller(){
+    this.userathservice.isSeller();
+ }
+
+
   public Profilepage(){
     this.router.navigate(['/Profilepage'])
   }

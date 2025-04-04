@@ -32,6 +32,8 @@ export class ProfilepageComponent implements OnInit {
   profileImageUrl: SafeUrl | string = '';
   imageLoading: boolean = false;
   hasOrderDetails: boolean = false;
+  presentdetails:boolean=false;
+  buttonflag:boolean=true;
 
   constructor(
     private router: Router,
@@ -44,19 +46,25 @@ export class ProfilepageComponent implements OnInit {
 
   ngOnInit(): void {
     this.userData = this.userAuth.getUser();
-    if(!this.userAuth.isAdmin()){
-      this.loadProducts();
+    // if(!this.userAuth.isAdmin()){
+    //   this.loadProducts();
       
-    }
+    // }
     this.loadProfileImage();
     console.log(this.userData.userName);
   }
 
-  isadmin() {
-    return this.userAuth.isAdmin();
+  isSeller() {
+    return this.userAuth.isSeller();
   }
 
   loadProducts(): void {
+    this.buttonflag
+    if( this.buttonflag){
+      this.buttonflag=false;
+    }else{
+      this.buttonflag=true;
+    }
     this.productService.getOrderDetails(this.userData.userName, this.page, this.size, this.sortBy, this.sortDir).subscribe(
       (data: any) => {
         console.log(data.content);
@@ -79,12 +87,18 @@ export class ProfilepageComponent implements OnInit {
         // Check if there are any order details
         this.hasOrderDetails = this.OrderDetails.length > 0;
 
+        if(this.OrderDetails.length > 0){
+
+          this.presentdetails=true;
+        }
+    
       // Check if there are more products to load
       this.hasMoreProducts = data.content.length === this.size; // Assuming size is the number of items per page
       console.log(this.OrderDetails);
       }, (error: any) => {
-        Swal.fire('Error', 'Failed to load products. Please try again later.', 'error');
+        Swal.fire('no order. Please try again later.', 'error');
         console.error('Error fetching products', error);
+        this.router.navigate(['/Profilepage'])
       }
     );
   }

@@ -22,10 +22,10 @@
           <span>Home</span>
         </a>
         
-        <a *ngIf="roleMatchs(['Admin'])" routerLink="/admin" routerLinkActive="active" class="nav-link">
+        <a *ngIf="roleMatchs(['Seller'])" routerLink="/seller" routerLinkActive="active" class="nav-link">
           <span class="nav-link-bg"></span>
           <mat-icon>perm_identity</mat-icon>
-          <span>Admin</span>
+          <span>Seller DashBoard</span>
         </a>
         
         <a routerLink="/productlist" routerLinkActive="active" class="nav-link">

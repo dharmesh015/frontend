@@ -30,3 +30,16 @@
   button:last-child {
     margin-right: 0; /* Remove margin from the last button */
   }
+
+  .form-group {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+  }
+  
+  .form-group > div {
+    margin-right: 15px; /* Space between the two input groups */
+  }
+  
+  .form-control {
+    width: 200px; /* Set a fixed width for the inputs */
+  }
