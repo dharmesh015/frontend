@@ -6,6 +6,7 @@ import { userdata } from '../modul/userdata';
 import Swal from 'sweetalert2';
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UpdateUserDialogComponent } from '../update-user-dialog/update-user-dialog.component';
 // import { Router } from 'express';
 
 @Component({
@@ -57,14 +58,28 @@ export class AdminComponent implements OnInit {
     }
   }
 
-  editUser (userId: number): void {
-    this.router.navigate(['/edit-user', userId]);
-  }
+  //  (): void {
+  //   this.router.navigate(['/edit-user', username]);
+  // }
+  
+  editUser(username:string): void {
+    const editdialog = this.dialog.open(UpdateUserDialogComponent, {
+      data: { userName: username },
+      width: '500px',
+      disableClose: true,
+    });
+
+
+    editdialog.afterClosed().subscribe(result => {
+    if (result) {
+      this.loadUsers();
+    }
+  });}
 
   deleteUser (name: string, role:string): void {
     // alert(role);
     console.log(name)
-    if(role==="User " || role ==="Seller"){
+    if(role==="User" || role ==="Seller"){
       Swal.fire({
         title: 'Are you sure?',
         text: 'You won\'t be able to revert this!',

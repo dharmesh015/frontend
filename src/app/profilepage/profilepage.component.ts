@@ -1,74 +1,106 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Registrationuser } from '../modul/registrationuser';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserService } from '../_service/user.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import Swal from 'sweetalert2';
 import { UserAuthServiceService } from '../_service/user-auth-service.service';
-import { Product } from '../_model/product.model';
 import { ProductService } from '../_service/product.service';
 import { MyOrderDetails } from '../_model/order.model';
-import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-profilepage',
   standalone: false,
   templateUrl: './profilepage.component.html',
-  styleUrl: './profilepage.component.css'
+  styleUrls: ['./profilepage.component.css']
 })
 export class ProfilepageComponent implements OnInit {
-
-  userData: Registrationuser = new Registrationuser("","","","","","");
-  email!:any;
+  userData: Registrationuser = new Registrationuser("", "", "", "", "", "");
   OrderDetails: MyOrderDetails[] = [];
-  products: Product[] = [];
   page: number = 0;
   size: number = 2; 
   sortBy: string = 'productName';
   sortDir: string = 'asc';
-  totalProducts: number = 0; 
   hasMoreProducts: boolean = true; 
   selectedFile: File | null = null;
   profileImageUrl: SafeUrl | string = '';
   imageLoading: boolean = false;
   hasOrderDetails: boolean = false;
-  presentdetails:boolean=false;
-  buttonflag:boolean=true;
+  currentView: string = 'updateProfile';  // Default view
+  form: FormGroup;
 
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private userService: UserService,
     private sanitizer: DomSanitizer,
     private userAuth: UserAuthServiceService,
-    private productService: ProductService
-  ) {}
+    private productService: ProductService,
+    private fb: FormBuilder // Inject FormBuilder
+  ) {
+    // Initialize the form
+    this.form = this.fb.group({
+      userFirstName: ['', Validators.required],
+      Lastname: ['', Validators.required],
+      mobileNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
+      Email: ['', [Validators.required, Validators.email]]
+    });
+  }
 
   ngOnInit(): void {
-    this.userData = this.userAuth.getUser();
-    // if(!this.userAuth.isAdmin()){
-    //   this.loadProducts();
-      
-    // }
+    this.userData = this.userAuth.getUser ();
     this.loadProfileImage();
-    console.log(this.userData.userName);
+    this.populateForm(); // Populate the form with user data
+  }
+
+  populateForm() {
+    this.form.patchValue({
+      userFirstName: this.userData.userFirstName,
+      Lastname: this.userData.userLastName,
+      mobileNumber: this.userData.mobileNumber,
+      Email: this.userData.email
+    });
+  }
+
+  onSubmit() {
+    if (this.form.invalid) {
+      // Mark all fields as touched to show validation messages
+      Object.keys(this.form.controls).forEach(field => {
+        const control = this.form.controls[field];
+        control.markAsTouched({ onlySelf: true });
+      });
+      return; // Prevent form submission
+    }
+
+    // Populate userData with form values
+    this.userData.userFirstName = this.form.value.userFirstName;
+    this.userData.userLastName = this.form.value.Lastname;
+    this.userData.email = this.form.value.Email;
+    this.userData.mobileNumber = this.form.value.mobileNumber;
+
+    // Call the update method from UserService
+    this.userService.update(this.userData).subscribe(
+      (response) => {
+        Swal.fire('Success', 'User  details updated successfully', 'success');
+      },
+      (error) => {
+        console.error("Update failed", error);
+        Swal.fire('Error', 'Failed to update user details', 'error');
+      }
+    );
   }
 
   isSeller() {
     return this.userAuth.isSeller();
   }
 
+  isadmin() {
+    return this.userAuth.isAdmin();
+  }
+
   loadProducts(): void {
-    this.buttonflag
-    if( this.buttonflag){
-      this.buttonflag=false;
-    }else{
-      this.buttonflag=true;
-    }
     this.productService.getOrderDetails(this.userData.userName, this.page, this.size, this.sortBy, this.sortDir).subscribe(
       (data: any) => {
-        console.log(data.content);
-        
         this.OrderDetails = data.content.map((order: any) => {
           return {
             orderId: order.orderId,
@@ -86,25 +118,19 @@ export class ProfilepageComponent implements OnInit {
 
         // Check if there are any order details
         this.hasOrderDetails = this.OrderDetails.length > 0;
-
-        if(this.OrderDetails.length > 0){
-
-          this.presentdetails=true;
-        }
-    
-      // Check if there are more products to load
-      this.hasMoreProducts = data.content.length === this.size; // Assuming size is the number of items per page
-      console.log(this.OrderDetails);
-      }, (error: any) => {
-        Swal.fire('no order. Please try again later.', 'error');
+        this.hasMoreProducts = data.content.length === this.size; // Assuming size is the number of items per page
+      },
+      (error: any) => {
+        this.toggleView("updateProfile");
+        Swal.fire('No order. Please try again later.', 'error');
         console.error('Error fetching products', error);
-        this.router.navigate(['/Profilepage'])
+        this.router.navigate(['/Profilepage']);
       }
     );
   }
-  
+
   nextPage(): void {
-    if (this.hasMoreProducts ) {
+    if (this.hasMoreProducts) {
       this.page++;
       this.loadProducts();
     }
@@ -166,7 +192,6 @@ export class ProfilepageComponent implements OnInit {
     }
 
     this.imageLoading = true;
-    
     this.productService.getUserImage(this.userData.userName)
       .subscribe(
         (imageBlob: Blob) => {
@@ -181,5 +206,12 @@ export class ProfilepageComponent implements OnInit {
           this.imageLoading = false;
         }
       );
+  }
+
+  toggleView(view: string) {
+    if (view === "orderHistory") {
+      this.loadProducts();
+    }
+    this.currentView = view;
   }
 }

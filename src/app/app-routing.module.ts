@@ -58,19 +58,21 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['Seller'] },
   },
-  {path:"Profilepage",component:ProfilepageComponent},
-  {path:'productlist',component:ProductDetailDialogComponent},
-  {path:'editproduct/:id', component:EditproductComponent},
+  { path: 'Profilepage', component: ProfilepageComponent },
+  { path: 'productlist', component: ProductDetailDialogComponent },
+  { path: 'editproduct/:id', component: EditproductComponent },
   // {path:'resetpassword',component:ResetPasswordComponent},
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'ProductViewDetails/:id', component: ProductViewDetailsComponent },
-  {path:'forgot-password',component:ForgotPasswordComponent},
-  { path: 'buyProduct/:issingleProducrCheckout/:productId', component: BuyProductComponent,canActivate: [AuthGuard],
-    data: { roles: ['User'] }},
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
-  { path: '**', component: ForbiddenComponent }
-
-  // {path:'buyProduct/:issingleProducrCheckout/:productId',component:BuyProductComponent},
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  {
+    path: 'buyProduct/:issingleProducrCheckout/:productId',
+    component: BuyProductComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['User'] },
+  },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', component: ForbiddenComponent },
 ];
 
 @NgModule({
@@ -78,12 +80,12 @@ const routes: Routes = [
   // exports: [RouterModule],
   imports: [
     RouterModule.forRoot(routes, {
-      scrollPositionRestoration: "enabled",
-      anchorScrolling: "enabled",
-      onSameUrlNavigation: "reload",
+      scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
+      onSameUrlNavigation: 'reload',
       scrollOffset: [0, 50],
     }),
   ],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

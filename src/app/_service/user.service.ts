@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Requestuser } from '../modul/requestuser';
 import { UserAuthServiceService } from './user-auth-service.service';
 import { Registrationuser } from '../modul/registrationuser';
@@ -62,17 +62,22 @@ export class UserService {
     );
   }
   sendEmail(email: string): Observable<string> {
-    return this.httpclient.post<string>(this.apiUrl + '/send-email', {
-      email: email,
-      responseType: 'text',
-    });
+    return this.httpclient
+      .post(
+        this.apiUrl + '/send-email',
+        { email: email },
+        { responseType: 'text' }
+      )
+      .pipe(map((response) => response as string));
   }
 
   resetPassword(email: string, newPassword: string): Observable<any> {
     console.log(email, newPassword);
-    return this.httpclient.get(
-      `${this.apiUrl}/reset-password/${email}/${newPassword}`
-    );
+    return this.httpclient
+      .get(`${this.apiUrl}/reset-password/${email}/${newPassword}`, {
+        responseType: 'text',
+      })
+      .pipe(map((response) => response as string));
   }
 
   validateResetToken(token: string): Observable<any> {
@@ -84,14 +89,28 @@ export class UserService {
     return this.httpclient.get<userdata[]>(`${this.apiUrl}/admin/getAlluser`);
   }
 
-
   getAllUsersPageWise(page: number, size: number): Observable<any> {
-    return this.httpclient.get(`${this.apiUrl}/getAllUsersPageWise?page=${page}&size=${size}`);
+    return this.httpclient.get(
+      `${this.apiUrl}/getAllUsersPageWise?page=${page}&size=${size}`
+    );
   }
- 
-  deleteUser(name: String): any {
-    console.log("service" + name);
-    return this.httpclient.delete(`${this.apiUrl}/deleteUser/${name}`);
-}
 
+  deleteUser(name: String): any {
+    console.log('service' + name);
+    return this.httpclient.delete(`${this.apiUrl}/deleteUser/${name}`);
+  }
+
+  public update(data: Registrationuser) {
+    console.log('Sending Data: ' + JSON.stringify(data));
+    return this.httpclient.put(this.apiUrl + '/updateUser', data, { responseType: 'text' }
+    )
+    .pipe(map((response) => response as string));
+  }
+  
+  // 
+  getUserByName( name: String): Observable<Registrationuser> {
+    return this.httpclient.get<Registrationuser>(
+      `${this.apiUrl}/getuser/${name}`
+    );
+  }
 }

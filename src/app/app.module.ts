@@ -43,6 +43,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SellerComponent } from './seller/seller.component';
 import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.component';
+import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dialog.component';
 // import { ForgatePasswordComponent } from './forgate-password/forgate-password.component';
 // import{mat-form-field}
 
@@ -72,6 +73,7 @@ import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.compon
     ResetPasswordComponent,
     SellerComponent,
     AddUserDialogComponent,
+    UpdateUserDialogComponent,
    
     
   ],

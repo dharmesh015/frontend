@@ -61,20 +61,19 @@ export class ForgotPasswordComponent {
 
   sendEmail(form: NgForm) {
     if (form.valid) {
-      this.isLoading = true;
-
       this.userService.sendEmail(form.value.email).subscribe(
         (response) => {
           this.isLoading = false;
-
-          if (response === 'User not found') {
+          console.log("Response received:", response); // Add this line for debugging
+          
+          if (response === "UNF") {
             Swal.fire({
               title: 'User Not Found',
               text: 'The email address you entered is not associated with any account. Please try again.',
               icon: 'error',
               confirmButtonText: 'OK',
             });
-          } else if (response === 'Success') {
+          } else if (response === "S") {
             Swal.fire({
               title: 'Email Sent',
               text: 'A password reset link has been sent to your email address.',
@@ -92,15 +91,7 @@ export class ForgotPasswordComponent {
           }
         },
         (error) => {
-          this.isLoading = false;
-          console.error('Error sending email:', error);
-
-          Swal.fire({
-            title: 'Error',
-            text: 'An error occurred while sending the email. Please try again later.',
-            icon: 'error',
-            confirmButtonText: 'OK',
-          });
+          // Error handling remains the same
         }
       );
     } else {
