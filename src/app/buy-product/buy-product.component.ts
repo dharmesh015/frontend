@@ -1,104 +1,163 @@
+
+
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../_model/product.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from '../_service/product.service';
-import { NgForOfContext } from '@angular/common';
 import { NgForm } from '@angular/forms';
 import { OrderDetails } from '../_model/order-details.model';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-buy-product',
-  standalone: false,
+  standalone:false,
   templateUrl: './buy-product.component.html',
-  styleUrl: './buy-product.component.css'
+  styleUrls: ['./buy-product.component.css']
 })
 export class BuyProductComponent implements OnInit {
 
-  productDetail: Product[] = [];
-issingleProducrCheckout!: boolean;
-productId!: number;
-// orderDetails!: Product;
-mainImageIndex: number = 0; // Track which image is currently shown as the main image
-orderDetails: OrderDetails={
-  fullName : '',
-  fullAddress: '',
-  contactNumber : '',
-  alternateContactNumber : '',
-  orderProductQuantityList : []
-}
-constructor(
-  private route: ActivatedRoute,
-  private productService: ProductService
-) { }
-// id:productId,issingleProducrCheckout:tru
-
-ngOnInit(): void {
-  this.route.params.subscribe(params => {
-    this.issingleProducrCheckout=params['issingleProducrCheckout']// Convert string to number
-    this.productId = +params['productId']; 
-    this.getProductDetails(this.issingleProducrCheckout,this.productId);
-  });
-}
-
-getProductDetails(issingleProducrCheckout:boolean,productId: number): void {
-  console.log(productId);
-  this.productService.getProductDetails(issingleProducrCheckout,productId).subscribe(
-    (data: Product[]) => {
-      this.productDetail = data;
-
-      this.productDetail.forEach(x => this.orderDetails.orderProductQuantityList.push( {productId: x.productId, quantity: 1
-      }))
-    console.log(this.orderDetails);
-    console.log(this.productDetail);
+  productDetails: Product[] = [];
+  isSingleProductCheckout: boolean = false;
+  productId: number = 0;
+  mainImageIndex: number = 0; // Track which image is currently shown as the main image
   
-    },
-    (error:any) => {
-      console.error('Error fetching product details:', error);
+  orderDetails: OrderDetails = {
+    fullName: '',
+    fullAddress: '',
+    contactNumber: '',
+    alternateContactNumber: '',
+    orderProductQuantityList: []
+  };
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private productService: ProductService
+  ) { }
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.isSingleProductCheckout = params['issingleProducrCheckout'] === 'true';
+      this.productId = +params['productId']; 
+      this.getProductDetails(this.isSingleProductCheckout, this.productId);
+    });
+  }
+
+  getProductDetails(isSingleProductCheckout: boolean, productId: number): void {
+    console.log('Getting product details:', isSingleProductCheckout, productId);
+    this.productService.getProductDetails(isSingleProductCheckout, productId).subscribe(
+      (data: Product[]) => {
+        this.productDetails = data;
+        
+        // Clear previous order product list
+        this.orderDetails.orderProductQuantityList = [];
+        
+        // Add each product to order list with quantity 1
+        this.productDetails.forEach(product => {
+          this.orderDetails.orderProductQuantityList.push({
+            productId: product.productId,
+            quantity: 1
+          });
+        });
+        
+        console.log('Order details:', this.orderDetails);
+        console.log('Product details:', this.productDetails);
+      },
+      (error: any) => {
+        console.error('Error fetching product details:', error);
+        Swal.fire({
+          title: "Error",
+          text: "Failed to load checkout details",
+          icon: "error",
+          confirmButtonText: "OK"
+        });
+      }
+    );
+  }
+
+  // New method to change the main image
+  changeMainImage(index: number): void {
+    this.mainImageIndex = index;
+  }
+
+  placeOrder(orderForm: NgForm): void {
+    if (orderForm.invalid) {
+      Swal.fire({
+        title: "Error",
+        text: "Please fill all required fields",
+        icon: "error",
+        confirmButtonText: "OK"
+      });
+      return;
     }
-  );
-}
-  
-
-// New method to change the main image
-changeMainImage(index: number): void {
-  this.mainImageIndex = index;
-}
-
-placeOrder(orderdata:NgForm){
-  // console.log(orderDetails.value);
-  console.log(this.orderDetails);
-  this.orderDetails.fullName=orderdata.value.fullName;
-  this.orderDetails.fullAddress=orderdata.value.fullAddress;
-  this.orderDetails.contactNumber=orderdata.value.contactNumber;
-  this.orderDetails.alternateContactNumber=orderdata.value.alternateContactNumber;
-
-
-  console.log("place order method");
-  console.log(this.orderDetails);
-  this.productService.placeOrder(this.orderDetails).subscribe(
     
-     (response) => {
-           
-            Swal.fire({
-              title: "place order",
-              text: "The order has been place .",
-              icon: "success",
-              confirmButtonText: "OK"
-            });
-            // window.location.reload();
-            orderdata.reset();
-          },
-          (error) => {
-            Swal.fire({
-              title: "Error",
-              text: "An error occurred while adding the product. Please try again.",
-              icon: "error",
-              confirmButtonText: "OK"
-            });
-          }
-  );
+    // Update order details from form
+    this.orderDetails.fullName = orderForm.value.fullName;
+    this.orderDetails.fullAddress = orderForm.value.fullAddress;
+    this.orderDetails.contactNumber = orderForm.value.contactNumber;
+    this.orderDetails.alternateContactNumber = orderForm.value.alternateContactNumber;
 
-}
+    console.log("Placing order:", this.orderDetails);
+    
+    this.productService.placeOrder(this.orderDetails, this.isSingleProductCheckout).subscribe(
+      (response) => {
+        Swal.fire({
+          title: "Order Placed",
+          text: "Your order has been placed successfully.",
+          icon: "success",
+          confirmButtonText: "OK"
+        }).then(() => {
+          this.router.navigate(['/orderHistory']);
+        });
+        orderForm.reset();
+      },
+      (error) => {
+        Swal.fire({
+          title: "Error",
+          text: "An error occurred while placing your order. Please try again.",
+          icon: "error",
+          confirmButtonText: "OK"
+        });
+      }
+    );
+  }
 
+  getQuantityForProduct(productId: number): number {
+    const filteredProduct = this.orderDetails.orderProductQuantityList.filter(
+      (productQuantity) => productQuantity.productId === productId
+    );
+    return filteredProduct.length > 0 ? filteredProduct[0].quantity : 0;
+  }
+
+  getCalculatedTotal(productId: number, productDiscountedPrice: number): number {
+    const filteredProduct = this.orderDetails.orderProductQuantityList.filter(
+      (productQuantity) => productQuantity.productId === productId
+    );
+    return filteredProduct.length > 0 ? filteredProduct[0].quantity * productDiscountedPrice : 0;
+  }
+
+  onQuantityChanged(q: number, productId: number): void {
+    const filteredProduct = this.orderDetails.orderProductQuantityList.filter(
+      (orderProduct) => orderProduct.productId === productId
+    );
+    
+    if (filteredProduct.length > 0) {
+      filteredProduct[0].quantity = q;
+    }
+  }
+
+  getCalculatedGrandTotal(): number {
+    let grandTotal = 0;
+    
+    this.orderDetails.orderProductQuantityList.forEach(
+      (productQuantity) => {
+        const product = this.productDetails.find(p => p.productId === productQuantity.productId);
+        if (product) {
+          grandTotal += product.productDiscountedPrice * productQuantity.quantity;
+        }
+      }
+    );
+    
+    return grandTotal;
+  }
 }

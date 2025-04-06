@@ -22,8 +22,8 @@
           </div>
           
           <!-- Action Buttons -->
-          <div class="d-flex my-4">
-            <button mat-raised-button color="primary" class="me-3" (click)="addToCart(product.productId)">
+          <div class="d-flex my-4" *ngIf="roleMatchs(['User'])">
+            <button mat-raised-button color="primary" class="me-3"  (click)="addToCart(product.productId)">
               <mat-icon>shopping_cart</mat-icon> Add to Cart
             </button>
             <button mat-raised-button color="accent" (click)="buyNow(product.productId)">

@@ -20,6 +20,7 @@ import { AboutComponent } from './about/about.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SellerComponent } from './seller/seller.component';
+import { CartComponent } from './cart/cart.component';
 
 const routes: Routes = [
   // import { AppRoutingModule } from './app-routing.module';
@@ -61,16 +62,13 @@ const routes: Routes = [
   { path: 'Profilepage', component: ProfilepageComponent },
   { path: 'productlist', component: ProductDetailDialogComponent },
   { path: 'editproduct/:id', component: EditproductComponent },
-  // {path:'resetpassword',component:ResetPasswordComponent},
+  {path:'showcart',component:CartComponent,canActivate: [AuthGuard] , data: { roles: ['User'] }},
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'ProductViewDetails/:id', component: ProductViewDetailsComponent },
+
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  {
-    path: 'buyProduct/:issingleProducrCheckout/:productId',
-    component: BuyProductComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ['User'] },
-  },
+
+  { path: 'buyProduct', component: BuyProductComponent, canActivate: [AuthGuard] , data: { roles: ['User'] },},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: ForbiddenComponent },
 ];

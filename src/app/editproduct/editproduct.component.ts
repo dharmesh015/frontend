@@ -96,7 +96,7 @@ export class EditproductComponent implements OnInit {
           confirmButtonText: 'OK',
         });
         
-        this.router.navigate(['/admin'])
+        this.router.navigate(['/seller'])
         // window.location.reload();
       },
       (error: any) => {

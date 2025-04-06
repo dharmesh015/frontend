@@ -17,7 +17,7 @@
 
       <ng-container matColumnDef="productDescription">
         <th mat-header-cell *matHeaderCellDef (click)="sortProducts('productDescription')"> Description </th>
-        <td mat-cell *matCellDef="let product"> {{ product.productDescription }} </td>
+        <td mat-cell *matCellDef="let product"> {{ product.productDescription |slice:0:50 }} </td>
       </ng-container>
 
       <ng-container matColumnDef="productActualPrice">
@@ -33,11 +33,11 @@
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> Actions </th>
         <td mat-cell *matCellDef="let product">
-          <button mat-button color="primary" (click)="editProduct(product.productId)">Update</button>
-          <button mat-button color="warn" (click)="deleteProduct(product.productId)">Delete</button>
+          <button mat-button color="primary" (click)="editProduct(product.productId)"><i class="fa-solid fa-pen-to-square"></i></button>
+            <button mat-button color="warn" (click)="deleteProduct(product.productId)"><i class="fa-solid fa-trash"></i></button>
+          
         </td>
       </ng-container>
-
       <tr mat-header-row *matHeaderRowDef="['productName', 'productDescription', 'productActualPrice', 'productDiscountedPrice', 'actions']"></tr>
       <tr mat-row *matRowDef="let row; columns: ['productName', 'productDescription', 'productActualPrice', 'productDiscountedPrice', 'actions'];"></tr>
     </table>

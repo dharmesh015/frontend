@@ -13,21 +13,21 @@ import { MyOrderDetails } from '../_model/order.model';
   selector: 'app-profilepage',
   standalone: false,
   templateUrl: './profilepage.component.html',
-  styleUrls: ['./profilepage.component.css']
+  styleUrls: ['./profilepage.component.css'],
 })
 export class ProfilepageComponent implements OnInit {
-  userData: Registrationuser = new Registrationuser("", "", "", "", "", "");
+  userData: Registrationuser = new Registrationuser('', '', '', '', '', '');
   OrderDetails: MyOrderDetails[] = [];
   page: number = 0;
-  size: number = 2; 
+  size: number = 2;
   sortBy: string = 'productName';
   sortDir: string = 'asc';
-  hasMoreProducts: boolean = true; 
+  hasMoreProducts: boolean = false;
   selectedFile: File | null = null;
   profileImageUrl: SafeUrl | string = '';
   imageLoading: boolean = false;
   hasOrderDetails: boolean = false;
-  currentView: string = 'updateProfile';  // Default view
+  currentView: string = 'updateProfile'; // Default view
   form: FormGroup;
 
   constructor(
@@ -42,13 +42,16 @@ export class ProfilepageComponent implements OnInit {
     this.form = this.fb.group({
       userFirstName: ['', Validators.required],
       Lastname: ['', Validators.required],
-      mobileNumber: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
-      Email: ['', [Validators.required, Validators.email]]
+      mobileNumber: [
+        '',
+        [Validators.required, Validators.pattern('^[0-9]{10}$')],
+      ],
+      Email: ['', [Validators.required, Validators.email]],
     });
   }
 
   ngOnInit(): void {
-    this.userData = this.userAuth.getUser ();
+    this.userData = this.userAuth.getUser();
     this.loadProfileImage();
     this.populateForm(); // Populate the form with user data
   }
@@ -58,14 +61,14 @@ export class ProfilepageComponent implements OnInit {
       userFirstName: this.userData.userFirstName,
       Lastname: this.userData.userLastName,
       mobileNumber: this.userData.mobileNumber,
-      Email: this.userData.email
+      Email: this.userData.email,
     });
   }
 
   onSubmit() {
     if (this.form.invalid) {
       // Mark all fields as touched to show validation messages
-      Object.keys(this.form.controls).forEach(field => {
+      Object.keys(this.form.controls).forEach((field) => {
         const control = this.form.controls[field];
         control.markAsTouched({ onlySelf: true });
       });
@@ -84,12 +87,12 @@ export class ProfilepageComponent implements OnInit {
         Swal.fire('Success', 'User  details updated successfully', 'success');
       },
       (error) => {
-        console.error("Update failed", error);
+        console.error('Update failed', error);
         Swal.fire('Error', 'Failed to update user details', 'error');
       }
     );
   }
-
+ 
   isSeller() {
     return this.userAuth.isSeller();
   }
@@ -99,34 +102,39 @@ export class ProfilepageComponent implements OnInit {
   }
 
   loadProducts(): void {
-    this.productService.getOrderDetails(this.userData.userName, this.page, this.size, this.sortBy, this.sortDir).subscribe(
-      (data: any) => {
-        this.OrderDetails = data.content.map((order: any) => {
-          return {
-            orderId: order.orderId,
-            orderFullName: order.orderFullName,
-            orderFullOrder: order.orderFullOrder,
-            orderContactNumber: order.orderContactNumber,
-            orderAlternateContactNumber: order.orderAlternateContactNumber,
-            orderStatus: order.orderStatus,
-            orderAmount: order.orderAmount,
-            product: order.product,
-            user: order.user,
-            date: order.orderDate
-          };
-        });
+    this.productService
+      .getOrderDetails(
+        this.userData.userName,
+        this.page,
+        this.size,
+        this.sortBy,
+        this.sortDir
+      )
+      .subscribe(
+        (data: any) => {
+          this.OrderDetails = data.content.map((order: any) => {
+            return {
+              orderId: order.orderId,
+              orderFullName: order.orderFullName,
+              orderContactNumber: order.orderContactNumber,
+              orderStatus: order.orderStatus,
+              orderAmount: order.orderAmount,
+              date: order.orderDate,
+            };
+          });
 
-        // Check if there are any order details
-        this.hasOrderDetails = this.OrderDetails.length > 0;
-        this.hasMoreProducts = data.content.length === this.size; // Assuming size is the number of items per page
-      },
-      (error: any) => {
-        this.toggleView("updateProfile");
-        Swal.fire('No order. Please try again later.', 'error');
-        console.error('Error fetching products', error);
-        this.router.navigate(['/Profilepage']);
-      }
-    );
+          // Check if there are any order details
+          this.hasOrderDetails = this.OrderDetails.length > 0;
+          this.hasMoreProducts =
+            (this.page + 1) * this.size < data.totalElements; // Assuming size is the number of items per page
+        },
+        (error: any) => {
+          this.toggleView('updateProfile');
+          // Swal.fire('No order. Please try again later.', 'error');
+          // console.error('Error fetching products', error);
+          this.router.navigate(['/Profilepage']);
+        }
+      );
   }
 
   nextPage(): void {
@@ -151,12 +159,14 @@ export class ProfilepageComponent implements OnInit {
 
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
-    
+
     // Show preview of selected image (optional)
     if (this.selectedFile) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.profileImageUrl = this.sanitizer.bypassSecurityTrustUrl(e.target.result);
+        this.profileImageUrl = this.sanitizer.bypassSecurityTrustUrl(
+          e.target.result
+        );
       };
       reader.readAsDataURL(this.selectedFile);
     }
@@ -169,8 +179,9 @@ export class ProfilepageComponent implements OnInit {
     }
 
     this.imageLoading = true;
-    
-    this.productService.uploadUserImage(this.userData.userName, this.selectedFile)
+
+    this.productService
+      .uploadUserImage(this.userData.userName, this.selectedFile)
       .subscribe(
         (response) => {
           console.log('Image uploaded successfully', response);
@@ -192,24 +203,23 @@ export class ProfilepageComponent implements OnInit {
     }
 
     this.imageLoading = true;
-    this.productService.getUserImage(this.userData.userName)
-      .subscribe(
-        (imageBlob: Blob) => {
-          const objectUrl = URL.createObjectURL(imageBlob);
-          this.profileImageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
-          this.imageLoading = false;
-        },
-        (error) => {
-          console.error('Error loading profile image', error);
-          // Set a default image if user doesn't have one yet
-          this.profileImageUrl = 'assets/default-avatar.jpg';
-          this.imageLoading = false;
-        }
-      );
+    this.productService.getUserImage(this.userData.userName).subscribe(
+      (imageBlob: Blob) => {
+        const objectUrl = URL.createObjectURL(imageBlob);
+        this.profileImageUrl = this.sanitizer.bypassSecurityTrustUrl(objectUrl);
+        this.imageLoading = false;
+      },
+      (error) => {
+        console.error('Error loading profile image', error);
+        // Set a default image if user doesn't have one yet
+        this.profileImageUrl = 'assets/default-avatar.jpg';
+        this.imageLoading = false;
+      }
+    );
   }
 
   toggleView(view: string) {
-    if (view === "orderHistory") {
+    if (view === 'orderHistory') {
       this.loadProducts();
     }
     this.currentView = view;

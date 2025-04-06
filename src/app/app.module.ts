@@ -44,8 +44,8 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { SellerComponent } from './seller/seller.component';
 import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.component';
 import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dialog.component';
-// import { ForgatePasswordComponent } from './forgate-password/forgate-password.component';
-// import{mat-form-field}
+import { CartDetailsComponent } from './cart-details/cart-details.component';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -74,6 +74,8 @@ import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dial
     SellerComponent,
     AddUserDialogComponent,
     UpdateUserDialogComponent,
+    CartDetailsComponent,
+    
    
     
   ],
@@ -93,7 +95,8 @@ import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dial
     DragDirective,
     MatDialogModule,
     MatCardModule,
-    MatTableModule
+    MatTableModule,
+    CommonModule
     
     
     

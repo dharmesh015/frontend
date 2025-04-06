@@ -95,5 +95,10 @@ export class UserAuthServiceService {
     const roles: any[] = this.getRoles();
     return roles.length > 0 && roles[0].roleName === 'Seller';
   }
+
+  public isUser(): boolean {
+    const roles: any[] = this.getRoles();
+    return roles.length > 0 && roles[0].roleName === 'User';
+  }
   
 }

@@ -95,7 +95,7 @@ i: any;
       }
     );
   }
-  
+ 
     nextPage(): void {
       if (this.hasMoreProducts) {
         this.page++;

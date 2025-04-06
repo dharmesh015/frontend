@@ -3,21 +3,46 @@
     <div class="col-lg-4">
       <div class="card mb-4 shadow-sm">
         <div class="card-body text-center">
-          <div *ngIf="imageLoading" class="spinner-border text-primary" role="status">
+          <div
+            *ngIf="imageLoading"
+            class="spinner-border text-primary"
+            role="status"
+          >
             <span class="visually-hidden">Loading...</span>
           </div>
 
-          <img *ngIf="!imageLoading" [src]="profileImageUrl || 'assets/default-avatar.jpg'" alt="Profile Image" class="rounded-circle img-fluid" style="width: 150px; height: 150px; object-fit: cover" />
+          <img
+            *ngIf="!imageLoading"
+            [src]="profileImageUrl || 'assets/default-avatar.jpg'"
+            alt="Profile Image"
+            class="rounded-circle img-fluid"
+            style="width: 150px; height: 150px; object-fit: cover"
+          />
 
           <h5 class="my-3">{{ userData.userName }}</h5>
 
           <div class="d-flex justify-content-center mb-2">
             <div class="file-upload">
-              <input type="file" accept="image/*" (change)="onFileSelected($event)" class="d-none" #fileInput />
-              <button type="button" class="btn btn-outline-primary me-2" (click)="fileInput.click()">
+              <input
+                type="file"
+                accept="image/*"
+                (change)="onFileSelected($event)"
+                class="d-none"
+                #fileInput
+              />
+              <button
+                type="button"
+                class="btn btn-outline-primary me-2"
+                (click)="fileInput.click()"
+              >
                 <i class="fas fa-image me-1"></i> Select Image
               </button>
-              <button type="button" class="btn btn-primary" [disabled]="!selectedFile || imageLoading" (click)="uploadImage()">
+              <button
+                type="button"
+                class="btn btn-primary"
+                [disabled]="!selectedFile || imageLoading"
+                (click)="uploadImage()"
+              >
                 <i class="fas fa-upload me-1"></i>
                 <span *ngIf="!imageLoading">Upload</span>
                 <span *ngIf="imageLoading">Uploading...</span>
@@ -30,19 +55,27 @@
       <div class="card mb-4 shadow-sm">
         <div class="card-body p-0">
           <ul class="list-group list-group-flush rounded-3">
-            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center p-3"
+            >
               <i class="fab fa-github fa-lg text-body"></i>
               <p class="mb-0">mdbootstrap</p>
             </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center p-3"
+            >
               <i class="fab fa-twitter fa-lg" style="color: #55acee"></i>
               <p class="mb-0">mdbootstrap</p>
             </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center p-3"
+            >
               <i class="fab fa-instagram fa-lg" style="color: #ac2bac"></i>
               <p class="mb-0">mdbootstrap</p>
             </li>
-            <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center p-3"
+            >
               <i class="fab fa-facebook-f fa-lg" style="color: #3b5998"></i>
               <p class="mb-0">mdbootstrap</p>
             </li>
@@ -59,7 +92,9 @@
               <p class="mb-0">Full Name</p>
             </div>
             <div class="col-sm-9">
-              <p class="text-muted mb-0">{{ userData.userFirstName + " " + userData.userLastName }}</p>
+              <p class="text-muted mb-0">
+                {{ userData.userFirstName + " " + userData.userLastName }}
+              </p>
             </div>
           </div>
           <hr />
@@ -94,49 +129,247 @@
 
       <div class="user-dashboard">
         <div>
-          <button (click)="toggleView('orderHistory')" *ngIf="!isSeller() && !isadmin()">Get Order History</button>
-          <button (click)="toggleView('getreview')" *ngIf="isSeller() && !isadmin()">Get Review</button>
+          <button
+            (click)="toggleView('orderHistory')"
+            *ngIf="!isSeller() && !isadmin()"
+          >
+            Get Order History
+          </button>
+          <button
+            (click)="toggleView('getreview')"
+            *ngIf="isSeller() && !isadmin()"
+          >
+            Get Review
+          </button>
           <button (click)="toggleView('updateProfile')">Update Profile</button>
         </div>
         <hr />
 
-        <div *ngIf="currentView === 'updateProfile'" class="card mb-4 shadow-sm p-4">
+        <div
+          *ngIf="currentView === 'getreview'"
+          class="card mb-4 shadow-sm p-4"
+        >
+        review ***
+        </div>
+        <div
+          *ngIf="currentView === 'orderHistory'"
+          class="card mb-4 shadow-sm p-4"
+        >
+          <div class="container mt-4">
+            <h1 class="text-center">Order History</h1>
+
+           
+            <div class="table-responsive">
+              <table
+                mat-table
+                [dataSource]="OrderDetails"
+                class="table table-striped table-bordered"
+              >
+                <ng-container matColumnDef="orderId">
+                  <th mat-header-cell *matHeaderCellDef>Order ID</th>
+                  <td mat-cell *matCellDef="let order">{{ order.orderId }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="orderFullName">
+                  <th mat-header-cell *matHeaderCellDef>Customer Name</th>
+                  <td mat-cell *matCellDef="let order">
+                    {{ order.orderFullName }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="orderContactNumber">
+                  <th mat-header-cell *matHeaderCellDef>Contact Number</th>
+                  <td mat-cell *matCellDef="let order">
+                    {{ order.orderContactNumber }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="orderAmount">
+                  <th mat-header-cell *matHeaderCellDef>Total Amount</th>
+                  <td mat-cell *matCellDef="let order">
+                    {{ order.orderAmount | currency }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="orderStatus">
+                  <th mat-header-cell *matHeaderCellDef>Status</th>
+                  <td mat-cell *matCellDef="let order">
+                    {{ order.orderStatus }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="date">
+                  <th mat-header-cell *matHeaderCellDef>Order Date</th>
+                  <td mat-cell *matCellDef="let order">
+                    {{ order.date | date : "short" }}
+                  </td>
+                </ng-container>
+
+                <ng-container matColumnDef="actions">
+                  <th mat-header-cell *matHeaderCellDef>Actions</th>
+                  <td mat-cell *matCellDef="let order">
+                    <!-- <button mat-button color="primary" (click)="viewOrderDetails(order.orderId)">View</button> -->
+                    <!-- <button mat-button color="warn" (click)="cancelOrder(order.orderId)">Cancel</button> -->
+                  </td>
+                </ng-container>
+
+                <tr
+                  mat-header-row
+                  *matHeaderRowDef="[
+                    'orderId',
+                    'orderFullName',
+                    'orderContactNumber',
+                    'orderAmount',
+                    'orderStatus',
+                    'date',
+                    'actions'
+                  ]"
+                ></tr>
+                <tr
+                  mat-row
+                  *matRowDef="
+                    let row;
+                    columns: [
+                      'orderId',
+                      'orderFullName',
+                      'orderContactNumber',
+                      'orderAmount',
+                      'orderStatus',
+                      'date',
+                      'actions'
+                    ]
+                  "
+                ></tr>
+              </table>
+            </div>
+
+            <div
+              class="pagination-controls d-flex justify-content-between mt-3"
+            >
+              <button
+                mat-button
+                (click)="previousPage()"
+                [disabled]="page === 0"
+              >
+                Previous
+              </button>
+              <span>Page {{ page + 1 }}</span>
+              <button
+                mat-button
+                (click)="nextPage()"
+                [disabled]="!hasMoreProducts"
+  
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="currentView === 'updateProfile'"
+          class="card mb-4 shadow-sm p-4"
+        >
           <form [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="d-flex justify-content-between gap-4">
               <div class="form-outline mb-3" style="width: 100%">
                 <label class="form-label" for="form3Example2">First Name</label>
-                <input type="text" id="form3Example2" class="form-control" placeholder="First Name" formControlName="userFirstName" />
-                <div *ngIf="form.get('userFirstName')?.invalid && form.get('userFirstName')?.touched" class="error">
-                  <div *ngIf="form.get('userFirstName')?.errors?.['required']">First Name is required</div>
+                <input
+                  type="text"
+                  id="form3Example2"
+                  class="form-control"
+                  placeholder="First Name"
+                  formControlName="userFirstName"
+                />
+                <div
+                  *ngIf="
+                    form.get('userFirstName')?.invalid &&
+                    form.get('userFirstName')?.touched
+                  "
+                  class="error"
+                >
+                  <div *ngIf="form.get('userFirstName')?.errors?.['required']">
+                    First Name is required
+                  </div>
                 </div>
               </div>
               <div class="form-outline mb-3" style="width: 100%">
                 <label class="form-label" for="form3Example1">Last Name</label>
-                <input type="text" id="form3Example1" class="form-control" placeholder="Last Name" formControlName="Lastname" />
-                <div *ngIf="form.get('Lastname')?.invalid && form.get('Lastname')?.touched" class="error">
-                  <div *ngIf="form.get('Lastname')?.errors?.['required']">Last Name is required</div>
+                <input
+                  type="text"
+                  id="form3Example1"
+                  class="form-control"
+                  placeholder="Last Name"
+                  formControlName="Lastname"
+                />
+                <div
+                  *ngIf="
+                    form.get('Lastname')?.invalid &&
+                    form.get('Lastname')?.touched
+                  "
+                  class="error"
+                >
+                  <div *ngIf="form.get('Lastname')?.errors?.['required']">
+                    Last Name is required
+                  </div>
                 </div>
               </div>
             </div>
             <div class="d-flex justify-content-between gap-4">
               <div class="form-outline mb-3" style="width: 100%">
-                <label class="form-label" for="form3Example3">Mobile Number</label>
-                <input type="tel" id="form3Example3" class="form-control" placeholder="Mobile Number" formControlName="mobileNumber" />
-                <div *ngIf="form.get('mobileNumber')?.invalid && form.get('mobileNumber')?.touched" class="error">
-                  <div *ngIf="form.get('mobileNumber')?.errors?.['required']">Mobile Number is required</div>
-                  <div *ngIf="form.get('mobileNumber')?.errors?.['pattern']">Enter a valid 10-digit mobile number</div>
+                <label class="form-label" for="form3Example3"
+                  >Mobile Number</label
+                >
+                <input
+                  type="tel"
+                  id="form3Example3"
+                  class="form-control"
+                  placeholder="Mobile Number"
+                  formControlName="mobileNumber"
+                />
+                <div
+                  *ngIf="
+                    form.get('mobileNumber')?.invalid &&
+                    form.get('mobileNumber')?.touched
+                  "
+                  class="error"
+                >
+                  <div *ngIf="form.get('mobileNumber')?.errors?.['required']">
+                    Mobile Number is required
+                  </div>
+                  <div *ngIf="form.get('mobileNumber')?.errors?.['pattern']">
+                    Enter a valid 10-digit mobile number
+                  </div>
                 </div>
               </div>
               <div class="form-outline mb-3" style="width: 100%">
                 <label class="form-label" for="form3Example2">Email</label>
-                <input type="text" id="form3Example2" class="form-control" placeholder="Email" formControlName="Email" />
-                <div *ngIf="form.get('Email')?.invalid && form.get('Email')?.touched" class="error">
-                  <div *ngIf="form.get('Email')?.errors?.['required']">Email is required</div>
-                  <div *ngIf="form.get('Email')?.errors?.['pattern']">Enter a valid email</div>
+                <input
+                  type="text"
+                  id="form3Example2"
+                  class="form-control"
+                  placeholder="Email"
+                  formControlName="Email"
+                />
+                <div
+                  *ngIf="
+                    form.get('Email')?.invalid && form.get('Email')?.touched
+                  "
+                  class="error"
+                >
+                  <div *ngIf="form.get('Email')?.errors?.['required']">
+                    Email is required
+                  </div>
+                  <div *ngIf="form.get('Email')?.errors?.['pattern']">
+                    Enter a valid email
+                  </div>
                 </div>
               </div>
             </div>
-            <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+            <button
+              type="submit"
+              class="btn btn-primary"
+              [disabled]="form.invalid"
+            >
               <i class="fas fa-upload me-1"></i>
               Upload
             </button>

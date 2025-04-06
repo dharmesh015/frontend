@@ -92,7 +92,7 @@ export class AddNewProductComponent implements OnInit {
       return; 
     }
     const productFormData = this.prepareFormData(this.product);
-    
+    console.log("add")
     this.productService.addProduct(productFormData).subscribe(
       (response: Product) => {
         productForm.reset();

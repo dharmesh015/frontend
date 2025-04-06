@@ -34,11 +34,11 @@
           <span>Products</span>
         </a>
         
-        <!-- <a routerLink="/Contact" routerLinkActive="active" class="nav-link">
+        <a *ngIf="roleMatchs(['User'])" routerLink="/showcart" routerLinkActive="active" class="nav-link">
           <span class="nav-link-bg"></span>
           <mat-icon>contact_support</mat-icon>
-          <span>Contact</span>
-        </a> -->
+          <span>showcart</span>
+        </a>
         
         
         <a [routerLink]="'/home'" [fragment]="'about'" routerLinkActive="active" class="nav-link">

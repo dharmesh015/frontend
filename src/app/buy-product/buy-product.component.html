@@ -1,72 +1,121 @@
+
 <div class="container mt-5">
-    <div class="card p-3">
-        <div class="row g-4">
-            <!-- Order Form Column -->
-            <div class="col-12 col-md-6">
-                <h4 class="mb-3">Order Details</h4>
-                <form #orderForm="ngForm" (ngSubmit)="placeOrder(orderForm)">
-                    <mat-form-field appearance="outline" class="w-100 mb-2">
-                        <mat-label>Full Name</mat-label>
-                        <input matInput 
-                        placeholder="Full Name"
-                        [(ngModel)]="orderDetails.fullName"
-                        name="fullName">
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="w-100 mb-2">
-                        <mat-label>Full address</mat-label>
-                        <input matInput 
-                        placeholder="Full address"
-                        [(ngModel)]="orderDetails.fullAddress"
-                        name="fullAddress">
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="w-100 mb-2">
-                        <mat-label>Contact number</mat-label>
-                        <input matInput 
-                        placeholder="Contact number"
-                        [(ngModel)]="orderDetails.contactNumber"
-                        name="contactNumber">
-                    </mat-form-field>
-
-                    <mat-form-field appearance="outline" class="w-100 mb-3">
-                        <mat-label>Alternate contact number</mat-label>
-                        <input matInput 
-                        placeholder="Alternate contact number"
-                        [(ngModel)]="orderDetails.alternateContactNumber"
-                        name="alternateContactNumber">
-                    </mat-form-field>
-
-                    <div class="d-flex justify-content-end">
-                        <button type="submit" mat-stroked-button color="primary">Place Order</button>
-                    </div>
-                </form>
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h3>Checkout</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <!-- Product Information -->
+          <div class="col-md-8">
+            <h4>Order Summary</h4>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let product of productDetails">
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <img 
+                          *ngIf="product.productImages && product.productImages.length > 0" 
+                          [src]="product.productImages[0].url" 
+                          alt="{{product.productName}}" 
+                          class="img-thumbnail mr-3" 
+                          style="max-width: 80px;">
+                        <div>
+                          <h5>{{product.productName}}</h5>
+                          <p class="mb-0">{{product.productDescription}}...</p>
+                        </div>
+                      </div>
+                    </td>
+                    <td>{{product.productDiscountedPrice | currency}}</td>
+                    <td>
+                      <div class="input-group">
+                        <button class="btn btn-outline-secondary" type="button" 
+                          (click)="onQuantityChanged(getQuantityForProduct(product.productId) - 1, product.productId)"
+                          [disabled]="getQuantityForProduct(product.productId) <= 1">-</button>
+                        <input type="number" class="form-control text-center" min="1" 
+                          [value]="getQuantityForProduct(product.productId)"
+                          (change)="onQuantityChanged($any($event.target).value, product.productId)">
+                        <button class="btn btn-outline-secondary" type="button" 
+                          (click)="onQuantityChanged(getQuantityForProduct(product.productId) + 1, product.productId)">+</button>
+                      </div>
+                    </td>
+                    <td>{{getCalculatedTotal(product.productId, product.productDiscountedPrice) | currency}}</td>
+                  </tr>
+                </tbody>
+                <tfoot>
+                  <tr>
+                    <td colspan="3" class="text-right"><strong>Grand Total:</strong></td>
+                    <td><strong>{{getCalculatedGrandTotal() | currency}}</strong></td>
+                  </tr>
+                </tfoot>
+              </table>
             </div>
-
-            <!-- Order Summary Column -->
-            <div class="col-12 col-md-6">
-                <h4 class="mb-3">Order Summary</h4>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead class="thead">
-                            <tr>
-                                <th>Name</th>
-                                <th>Amount</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
-                            </tr>
-                        </thead>
-                        <tbody class="tbody">
-                            <tr *ngFor="let product of productDetail">
-                                <td>{{product.productName}}</td>
-                                <td>{{product.productDiscountedPrice}}</td>
-                                <td>1</td>
-                                <td>{{product.productDiscountedPrice}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+          </div>
+          
+          <!-- Shipping Information Form -->
+          <div class="col-md-4">
+            <h4>Shipping Information</h4>
+            <form #orderForm="ngForm" (ngSubmit)="placeOrder(orderForm)">
+              <div class="form-group mb-3">
+                <label for="fullName">Full Name*</label>
+                <input 
+                  type="text" 
+                  id="fullName" 
+                  name="fullName" 
+                  class="form-control" 
+                  [(ngModel)]="orderDetails.fullName" 
+                  required>
+              </div>
+              
+              <div class="form-group mb-3">
+                <label for="fullAddress">Full Address*</label>
+                <textarea 
+                  id="fullAddress" 
+                  name="fullAddress" 
+                  class="form-control" 
+                  rows="3" 
+                  [(ngModel)]="orderDetails.fullAddress" 
+                  required></textarea>
+              </div>
+              
+              <div class="form-group mb-3">
+                <label for="contactNumber">Contact Number*</label>
+                <input 
+                  type="text" 
+                  id="contactNumber" 
+                  name="contactNumber" 
+                  class="form-control" 
+                  [(ngModel)]="orderDetails.contactNumber" 
+                  required>
+              </div>
+              
+              <div class="form-group mb-3">
+                <label for="alternateContactNumber">Alternate Contact Number</label>
+                <input 
+                  type="text" 
+                  id="alternateContactNumber" 
+                  name="alternateContactNumber" 
+                  class="form-control" 
+                  [(ngModel)]="orderDetails.alternateContactNumber">
+              </div>
+              
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-lg" [disabled]="orderForm.invalid">
+                  Place Order
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-</div>
+  </div>
