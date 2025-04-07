@@ -35,7 +35,7 @@ export class ProductListComponent implements OnInit {
 
   loadProducts(): void {
     this.productService.getAllProductsPageWise(this.page, this.size, this.sortBy, this.sortDir).subscribe( (data) => {
-      console.log(data.content);
+      // console.log(data.content);
       this.products = data.content; 
       this.totalProducts = data.totalElements; 
       this.hasMoreProducts = this.products.length === this.size; 

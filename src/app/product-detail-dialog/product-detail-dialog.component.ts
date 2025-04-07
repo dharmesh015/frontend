@@ -19,7 +19,7 @@ export class ProductDetailDialogComponent implements OnInit {
   products: Product[] = [];
   screenWidth: number;
   page: number = 0;
-  size: number = 4; 
+  size: number = 8; 
   sortBy: string = 'productName';
   sortDir: string = 'asc';
   totalProducts: number = 0; 
@@ -30,6 +30,7 @@ export class ProductDetailDialogComponent implements OnInit {
     'Use code WELCOME15 for 15% off your first order',
   ];
   currentIndex = 0;
+
 i: any;
   constructor(
     private productService: ProductService,
@@ -43,6 +44,7 @@ i: any;
       this.currentIndex = (this.currentIndex + 1) % this.messages.length;
     }, 4000);
   }
+ 
 
   // Listen for window resize events
   @HostListener('window:resize', ['$event'])

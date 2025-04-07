@@ -107,7 +107,7 @@ export class BuyProductComponent implements OnInit {
           icon: "success",
           confirmButtonText: "OK"
         }).then(() => {
-          this.router.navigate(['/orderHistory']);
+          this.router.navigate(['/productlist']);
         });
         orderForm.reset();
       },

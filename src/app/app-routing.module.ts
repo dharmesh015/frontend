@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { UserComponent } from './user/user.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from './login/login.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
@@ -25,12 +24,7 @@ import { CartComponent } from './cart/cart.component';
 const routes: Routes = [
   // import { AppRoutingModule } from './app-routing.module';
   { path: 'home', component: HomeComponent },
-  {
-    path: 'user',
-    component: UserComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ['User'] },
-  },
+ 
   {
     path: 'admin',
     component: AdminComponent,
@@ -46,7 +40,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registartion', component: RegistrationComponent },
   { path: 'forbidden', component: ForbiddenComponent },
-  // { path: 'About', component: AboutComponent },
+
   {
     path: 'Showproduct',
     component: ProductListComponent,
@@ -62,19 +56,28 @@ const routes: Routes = [
   { path: 'Profilepage', component: ProfilepageComponent },
   { path: 'productlist', component: ProductDetailDialogComponent },
   { path: 'editproduct/:id', component: EditproductComponent },
-  {path:'showcart',component:CartComponent,canActivate: [AuthGuard] , data: { roles: ['User'] }},
+  {
+    path: 'showcart',
+    component: CartComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['User'] },
+  },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'ProductViewDetails/:id', component: ProductViewDetailsComponent },
 
   { path: 'forgot-password', component: ForgotPasswordComponent },
 
-  { path: 'buyProduct', component: BuyProductComponent, canActivate: [AuthGuard] , data: { roles: ['User'] },},
+  {
+    path: 'buyProduct',
+    component: BuyProductComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['User'] },
+  },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: ForbiddenComponent },
 ];
 
 @NgModule({
-  // imports: [RouterModule.forRoot(routes)],
   // exports: [RouterModule],
   imports: [
     RouterModule.forRoot(routes, {

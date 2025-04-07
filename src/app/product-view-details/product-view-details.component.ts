@@ -16,10 +16,10 @@ import { UserService } from '../_service/user.service';
 })
 export class ProductViewDetailsComponent implements OnInit {
 
-  // isuser!: boolean;
+
   product!: Product;
   productId!: number;
-  mainImageIndex: number = 0; // Track which image is currently shown as the main image
+  mainImageIndex: number = 0; 
 
 
   constructor(
@@ -31,9 +31,9 @@ export class ProductViewDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.isuser();
+
     this.route.params.subscribe(params => {
-      this.productId = +params['id']; // Convert string to number
+      this.productId = +params['id']; 
       this.getProductDetails(this.productId);
     });
   }
@@ -41,7 +41,6 @@ export class ProductViewDetailsComponent implements OnInit {
     this.productService.getProductById(id).subscribe(
       (data: Product) => {
         this.product = data;
-        // Transform images like in home component
         if (this.product.productImages) {
           this.product.productImages = this.product.productImages.map((image) => {
             return {
@@ -63,7 +62,7 @@ export class ProductViewDetailsComponent implements OnInit {
     );
   }
 
-  // New method to change the main image
+
   changeMainImage(index: number): void {
     this.mainImageIndex = index;
   }

@@ -28,10 +28,7 @@ export class ProductService {
       product
     );
   }
-  // updateProduct(productId: number, productData: FormData): Observable<Product> {
-  //   console.log("update service"+productData);
-  //   return this.httpClient.put<Product>(`${this.baseUrl}/updateProduct/${productId}`, productData);
-  // }
+ 
   getAllProducts(): Observable<Product[]> {
     console.log('in service');
     return this.httpClient.get<Product[]>(
@@ -46,29 +43,14 @@ export class ProductService {
     );
   }
 
-  
-  // getProductById(id: number): Observable<Product> {
-  //   return this.httpClient.get<Product>(`${this.baseUrl}/getProductById/${id}`);
-  // }
 public getProductById(id: number): Observable<Product> {
   return this.httpClient.get<Product>(`${this.baseUrl}/getProductById/${id}`);
 }
-//   getProductDetails(isSingeProductCheckout: boolean, productId: number) {
-//     console.log(productId);
-//     return this.httpClient.get<Product[]>(
-//       `${this.baseUrl}/getProductDetails/${isSingeProductCheckout}/${productId}`
-//     );
-//   }
+
 public getProductDetails(isSingleProductCheckout: boolean, productId: number): Observable<Product[]> {
   return this.httpClient.get<Product[]>(`${this.baseUrl}/getProductDetails/${isSingleProductCheckout}/${productId}`);
 }
 
-//   public placeOrder(orderDetails: OrderDetails,issingleProducrCheckout:boolean) {
-//     console.log(orderDetails);
-//     return this.httpClient.post(
-//       `http://localhost:9090/placeOrder/${issingleProducrCheckout}`,{ orderDetails}
-//     );
-//   }
 public placeOrder(orderDetails: OrderDetails, isSingleProductCheckout: boolean): Observable<any> {
   return this.httpClient.post(`${this.baseUrl}/placeOrder/${isSingleProductCheckout}`, orderDetails);
 }
@@ -141,17 +123,12 @@ public placeOrder(orderDetails: OrderDetails, isSingleProductCheckout: boolean):
     });
   }
 
-//   public addToCart(productId:number) {
-//     return this.httpClient.get('http://localhost:9090/addToCart/' + productId);
-//   }
 public addToCart(productId: number): Observable<Cart> {
   console.log("add cart service")
   return this.httpClient.get<Cart>(`${this.baseUrl}/addToCart/${productId}`);
 }
 
-//   public getCartDetails(): Observable<any[]>{
-//     return this.httpClient.get<any[]>('http://localhost:9090/getCartDetails');
-//   }
+  
 public getCartDetails(): Observable<Cart[]> {
   return this.httpClient.get<Cart[]>(`${this.baseUrl}/getCartDetails`);
 }
@@ -161,44 +138,3 @@ public deleteCartItem(cartId: number): Observable<any> {
 }
 
 }
-// // }
-// import { Injectable } from '@angular/core';
-// import { HttpClient } from '@angular/common/http';
-// import { Observable } from 'rxjs';
-// import { Product } from '../_model/product.model';
-// import { OrderDetails } from '../_model/order-details.model';
-// import { Cart } from '../modul/cart';
-// // import { Cart } from '../_model/cart.model';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
-// export class ProductService {
-//   private baseUrl = 'http://localhost:9090'; // Adjust based on your backend URL
-
-//   constructor(private httpClient: HttpClient) { }
-
-//   public getProductDetails(isSingleProductCheckout: boolean, productId: number): Observable<Product[]> {
-//     return this.httpClient.get<Product[]>(`${this.baseUrl}/getProductDetails/${isSingleProductCheckout}/${productId}`);
-//   }
-
-//   public getProductById(id: number): Observable<Product> {
-//     return this.httpClient.get<Product>(`${this.baseUrl}/getProductById/${id}`);
-//   }
-
-//   public addToCart(productId: number): Observable<Cart> {
-//     return this.httpClient.get<Cart>(`${this.baseUrl}/addToCart/${productId}`);
-//   }
-
-//   public getCartDetails(): Observable<Cart[]> {
-//     return this.httpClient.get<Cart[]>(`${this.baseUrl}/getCartDetails`);
-//   }
-
-//   public deleteCartItem(cartId: number): Observable<any> {
-//     return this.httpClient.delete(`${this.baseUrl}/deleteCartItem/${cartId}`);
-//   }
-
-//   public placeOrder(orderDetails: OrderDetails, isSingleProductCheckout: boolean): Observable<any> {
-//     return this.httpClient.post(`${this.baseUrl}/placeOrder/${isSingleProductCheckout}`, orderDetails);
-//   }
-// }

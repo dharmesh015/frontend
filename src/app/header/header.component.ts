@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { UserAuthServiceService } from '../_service/user-auth-service.service';
 import { Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -13,6 +13,7 @@ import { UserService } from '../_service/user.service';
 
 export class HeaderComponent {
   isMenuOpen = false;
+
   constructor(
     private userathservice: UserAuthServiceService,
     private userservice: UserService,
@@ -20,19 +21,14 @@ export class HeaderComponent {
     private cdRef: ChangeDetectorRef,
     
   ) {}
-
-  // isLoggedInv: boolean = false;
-
+ 
 
   public logout() {
-    // localStorage.removeItem('token');
-    // localStorage.removeItem('role');
     this.userathservice.clear();
     this.router.navigate(['/home']);
     // this.cdRef.detectChanges();
   }
   public isLoggedIn():boolean {
-    // console.log(this.userathservice.isLoggedIn())
     return this.userathservice.isLoggedIn();
   }
 
@@ -44,6 +40,11 @@ export class HeaderComponent {
   public isAdmin(){
      this.userathservice.isAdmin();
   }
+
+  public isUser(){
+    this.userathservice.isUser();
+ }
+
 
 
   public isSeller(){

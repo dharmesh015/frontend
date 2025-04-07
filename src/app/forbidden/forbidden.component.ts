@@ -1,4 +1,5 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 declare var lottie: any;
 @Component({
   selector: 'app-forbidden',
@@ -7,7 +8,14 @@ declare var lottie: any;
   styleUrl: './forbidden.component.css'
 })
 export class ForbiddenComponent implements AfterViewInit {
+
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
   ngAfterViewInit() {
+
+    if (isPlatformBrowser(this.platformId)) {
+      // Safe to access document here
+      // const element = document.getElementById('someElementId');
     const container = document.querySelector('.lottie-animation') as HTMLElement;
     if (container) {
       lottie.loadAnimation({
@@ -21,4 +29,5 @@ export class ForbiddenComponent implements AfterViewInit {
       console.error("Lottie container not found!");
     }
   }
+}
 }

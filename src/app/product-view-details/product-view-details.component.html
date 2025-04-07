@@ -4,7 +4,7 @@
       <!-- First div - showing the selected main image -->
       <div class="col-md-6" *ngIf="product.productImages && product.productImages.length > 0">
         <div class="main-image-container">
-          <img [src]="product.productImages[mainImageIndex]?.url" class="w-100 img-fluid main-image" alt="{{product.productName}}">
+          <img [src]="product.productImages[mainImageIndex].url" class="w-100 img-fluid main-image" alt="{{product.productName}}">
         </div>
       </div>
   

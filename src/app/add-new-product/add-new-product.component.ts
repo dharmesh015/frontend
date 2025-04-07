@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-// import { Product } from '../_model/product.model';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -7,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FileHandel } from '../_model/file-handel.model';
 import { ProductService } from '../_service/product.service';
 import { Console } from 'node:console';
+import { isPlatformBrowser } from '@angular/common';
 import Swal from 'sweetalert2';
 import { Product } from '../_model/product.model';
 import { UserAuthServiceService } from '../_service/user-auth-service.service';
@@ -33,7 +33,8 @@ export class AddNewProductComponent implements OnInit {
     private productService: ProductService,
     private sanitizer: DomSanitizer,
     private activatedRoute: ActivatedRoute,
-    private authservice:UserAuthServiceService
+    private authservice:UserAuthServiceService,
+    @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   ngOnInit(): void {
@@ -103,7 +104,7 @@ export class AddNewProductComponent implements OnInit {
           icon: "success",
           confirmButtonText: "OK"
         });
-        // window.location.reload();
+
       },
       (error: HttpErrorResponse) => {
         Swal.fire({
@@ -126,19 +127,25 @@ export class AddNewProductComponent implements OnInit {
 
     return formData;
   }
-
   onFileSelected(event: any) {
     if (event.target.files) {
       const files = event.target.files;
       for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        const fileHandel: FileHandel = {
-          file: file,
-          url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file)),
-          type: '',
-          picByte: ''
-        };
-        this.product.productImages.push(fileHandel);
+        
+        // Check if running in the browser
+        if (isPlatformBrowser(this.platformId)) {
+          const fileHandel: FileHandel = {
+            file: file,
+            url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file)),
+            type: '',
+            picByte: ''
+          };
+          this.product.productImages.push(fileHandel);
+        } else {
+          // Fallback if not in the browser environment
+          console.log('Cannot create object URL as window is not defined.');
+        }
       }
     }
   }
@@ -147,21 +154,20 @@ export class AddNewProductComponent implements OnInit {
     this.product.productImages.splice(i, 1);
   }
 
-  fileDropped(event: DragEvent) {
-    event.preventDefault();
-    const files = event.dataTransfer?.files;
-    if (files) {
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        const fileHandel: FileHandel = {
-          file: file,
-          url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file)),
-          type: '',
-          picByte: ''
-        };
-        this.product.productImages.push(fileHandel);
-      }
-    }
-  }
-  
+  // fileDropped(event: DragEvent) {
+  //   event.preventDefault();
+  //   const files = event.dataTransfer?.files;
+  //   if (files) {
+  //     for (let i = 0; i < files.length; i++) {
+  //       const file = files[i];
+  //       const fileHandel: FileHandel = {
+  //         file: file,
+  //         url: this.sanitizer.bypassSecurityTrustUrl(window.URL.createObjectURL(file)),
+  //         type: '',
+  //         picByte: ''
+  //       };
+  //       this.product.productImages.push(fileHandel);
+  //     }
+  //   }
+  // }
 }

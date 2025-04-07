@@ -56,8 +56,8 @@
       <!-- Auth buttons -->
       <div class="navbar-auth">
         <button *ngIf="!isLoggedIn()" routerLink="/login" class="auth-button login-btn">
-          <mat-icon>login</mat-icon>
-          <span>Login</span>
+          <mat-icon *ngIf="!isLoggedIn()">login</mat-icon>
+          <span *ngIf="!isLoggedIn()">Login</span>
         </button>
         
         <button *ngIf="isLoggedIn()" (click)="logout()" class="auth-button logout-btn">

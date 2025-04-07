@@ -1,7 +1,7 @@
-
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { Registrationuser } from '../modul/registrationuser';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,48 +16,26 @@ export class UserAuthServiceService {
 
   public setRoles(roles: any[]): void {
     if (this.isBrowser()) {
-      localStorage.setItem('roles', JSON.stringify(roles));
+      sessionStorage.setItem('roles', JSON.stringify(roles)); // Changed to sessionStorage
     }
   }
 
-  public setName(name:any){
-    if (this.isBrowser()) {
-      localStorage.setItem('name', name);
-    }
-  }
-
-  public setEmail(email:any){
-    if (this.isBrowser()) {
-      localStorage.setItem('email', email
-      );
-    }
-  }
   public setUser (user: any) {
     // Convert the user object to a JSON string before storing it
-    localStorage.setItem("user", JSON.stringify(user));
+    sessionStorage.setItem("user", JSON.stringify(user)); // Changed to sessionStorage
   }
   
   public getUser () {
-    // Retrieve the user string from localStorage
-    const data = localStorage.getItem("user");
+    // Retrieve the user string from sessionStorage
+    const data = sessionStorage.getItem("user"); // Changed to sessionStorage
     
     // If data is not null, parse it back to an object, otherwise return null
     return data ? JSON.parse(data) : null;
   }
 
-
-  
-  public getemail() {
-    if (this.isBrowser()) {
-      const roles = localStorage.getItem('email');
-      // return roles ? JSON.parse(roles) : [];
-      return roles;
-    }
-    return null;
-  }
   public getRoles(): any[] {
     if (this.isBrowser()) {
-      const roles = localStorage.getItem('roles');
+      const roles = sessionStorage.getItem('roles'); // Changed to sessionStorage
       return roles ? JSON.parse(roles) : [];
     }
     return [];
@@ -65,32 +43,36 @@ export class UserAuthServiceService {
 
   public setToken(jwtToken: string): void {
     if (this.isBrowser()) {
-      localStorage.setItem('jwtToken', jwtToken);
+      sessionStorage.setItem('jwtToken', jwtToken); // Changed to sessionStorage
     }
   }
 
   public getToken(): string | null {
     if (this.isBrowser()) {
-      return localStorage.getItem('jwtToken');
+      return sessionStorage.getItem('jwtToken'); // Changed to sessionStorage
     }
     return null;
   }
 
   public clear(): void {
     if (this.isBrowser()) {
-      localStorage.removeItem('jwtToken');
-      localStorage.removeItem('roles');
+      sessionStorage.removeItem('jwtToken'); // Changed to sessionStorage
+      sessionStorage.removeItem('roles'); // Changed to sessionStorage
+      sessionStorage.removeItem('email'); // Changed to sessionStorage
+      sessionStorage.removeItem('name'); // Changed to sessionStorage
+      sessionStorage.removeItem('user'); // Changed to sessionStorage
     }
   }
 
   public isLoggedIn(): boolean {
-    return !!this.getRoles().length && !!this.getToken();
+    return !!this.getToken() && this.getRoles().length > 0;
   }
 
   public isAdmin(): boolean {
     const roles: any[] = this.getRoles();
     return roles.length > 0 && roles[0].roleName === 'Admin';
   }
+
   public isSeller(): boolean {
     const roles: any[] = this.getRoles();
     return roles.length > 0 && roles[0].roleName === 'Seller';
@@ -98,7 +80,6 @@ export class UserAuthServiceService {
 
   public isUser(): boolean {
     const roles: any[] = this.getRoles();
-    return roles.length > 0 && roles[0].roleName === 'User';
+    return roles.length > 0 && roles[0].roleName === 'User ';
   }
-  
 }
