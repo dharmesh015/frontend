@@ -1,6 +1,6 @@
-<!-- Carousel HTML Structure -->
+<!-- Carousel HTML Structure
 <div id="introCarousel" class="carousel slide carousel-fade shadow-2-strong" >
-  <!-- Carousel indicators -->
+
   <div class="carousel-indicators">
     <button
       type="button"
@@ -24,9 +24,9 @@
     ></button>
   </div>
 
-  <!-- Carousel items -->
+
   <div class="carousel-inner">
-    <!-- First slide -->
+
     <div class="carousel-item active">
       <div
         class="mask"
@@ -44,7 +44,7 @@
         </div>
       </div>
     </div>
-    <!-- Second slide -->
+
     <div class="carousel-item">
       <div
         class="mask"
@@ -62,7 +62,7 @@
         </div>
       </div>
     </div>
-    <!-- Third slide -->
+
     <div class="carousel-item">
       <div
         class="mask"
@@ -82,7 +82,7 @@
     </div>
   </div>
 
-  <!-- Controls -->
+
   <button
     class="carousel-control-prev"
     type="button"
@@ -161,4 +161,134 @@
     <mat-icon>code</mat-icon>
   </button>
 </div>
-<div></div>
+<div></div> -->
+<!-- Carousel HTML Structure -->
+<div id="introCarousel" class="carousel slide carousel-fade shadow-2-strong">
+  <!-- Carousel indicators -->
+  <div class="carousel-indicators">
+    <button
+      type="button"
+      data-bs-target="#introCarousel"
+      data-bs-slide-to="0"
+      class="active"
+      aria-current="true"
+      aria-label="Slide 1"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#introCarousel"
+      data-bs-slide-to="1"
+      aria-label="Slide 2"
+    ></button>
+    <button
+      type="button"
+      data-bs-target="#introCarousel"
+      data-bs-slide-to="2"
+      aria-label="Slide 3"
+    ></button>
+  </div>
+
+  <!-- Carousel items -->
+  <div class="carousel-inner">
+    <!-- First slide -->
+    <div class="carousel-item active">
+      <video class="d-block w-100" autoplay loop muted>
+        <source src="https://cdn-icons-mp4.flaticon.com/512/11614/11614847.mp4" type="video/mp4" >
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <!-- Second slide -->
+    <div class="carousel-item">
+      <video class="d-block w-100" autoplay loop muted>
+        <source src="https://cdn-icons-mp4.flaticon.com/512/11614/11614847.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <!-- Third slide -->
+    <div class="carousel-item">
+      <video class="d-block w-100" autoplay loop muted>
+        <source src="https://cdn-icons-mp4.flaticon.com/512/15576/15576195.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <button
+    class="carousel-control-prev"
+    type="button"
+    data-bs-target="#introCarousel"
+    data-bs-slide="prev"
+  >
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button
+    class="carousel-control-next"
+    type="button"
+    data-bs-target="#introCarousel"
+    data-bs-slide="next"
+  >
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<div class="productlist">
+  <button
+    mat-button
+    (click)="previousPage()"
+    style="margin-top: 450px; margin-left: 60px; color: #000000"
+    [disabled]="page === 0"
+  >
+    <mat-icon>code</mat-icon>
+  </button>
+
+  <div class="main container mt-5">
+    <div class="product-grid">
+      <div *ngFor="let product of products" class="product-card-container">
+        <mat-card class="product-card">
+          <mat-card-content>
+            <div class="image-container">
+              <img
+                *ngIf="
+                  product.productImages && product.productImages.length > 0
+                "
+                [src]="product.productImages[0].url"
+                alt="{{ product.productName }}"
+                class="product-image"
+              />
+            </div>
+            <mat-card-title>{{ product.productName }}</mat-card-title>
+            <div class="description">
+              <p class="product-description">
+                {{ product.productDescription }}
+              </p>
+            </div>
+
+            <div class="action-row">
+              <span class="product-price">
+                Price: {{ product.productActualPrice }}
+              </span>
+              <button
+                mat-button
+                class="button"
+                (click)="viewProduct(product.productId)"
+              >
+                View
+              </button>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <button
+    mat-button
+    (click)="nextPage()"
+    style="margin-top: 450px; margin-right: 50px; color: #fffcfc"
+    [disabled]="!hasMoreProducts"
+  >
+    <mat-icon>code</mat-icon>
+  </button>
+</div>
