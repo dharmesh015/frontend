@@ -7,7 +7,7 @@
     padding: 5px;
     border-radius: 50px;
     justify-items: center;
-    /* width: 50%; */
+   
   }
   
   
@@ -15,9 +15,7 @@
     display: block;
     font-weight: bold;
   }
-  /* .myclass{
-    margin-left: 500px;
-  } */
+  
   .background-radial-gradient {
     background-color: hsl(0, 0%, 96%)
 }
@@ -27,35 +25,32 @@
 .bg-glass {
     background-color: hsla(0, 0%, 100%, 0.9) !important;
     backdrop-filter: saturate(200%) blur(25px);
-/* }
-.bg-body-tertiary:hover {
-    transform: scale(1.05); /* Slightly enlarge the card */
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
 } 
 
-/* Style for the input fields */
+
 .form-control {
-    transition: border-color 0.3s ease; /* Smooth transition for border color */
+    transition: border-color 0.3s ease; 
 }
 
 .form-control:focus {
-    border-color: rgb(53, 119, 206); /* Change border color on focus */
-    box-shadow: 0 0 5px rgba(53, 119, 206, 0.5); /* Add shadow on focus */
+    border-color: rgb(53, 119, 206); 
+    box-shadow: 0 0 5px rgba(53, 119, 206, 0.5); 
 }
 
 /* Style for the labels */
 .form-label {
-    transition: color 0.3s ease; /* Smooth transition for label color */
+    transition: color 0.3s ease; 
 }
 
 .form-control:focus + .form-label {
-    color: rgb(53, 119, 206); /* Change label color on input focus */
+    color: rgb(53, 119, 206); 
 }
 
-/* Error message styling */
+
 
 .submit{
-    /* background-color:  
-     */
+    
      background-color:#5980c1;
   }

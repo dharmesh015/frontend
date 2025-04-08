@@ -12,8 +12,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  // Array to hold the list of products
-  // products: Product[] = [];
+
   products: Product[] = [];
   page: number = 0;
   size: number = 5; 
@@ -22,20 +21,17 @@ export class ProductListComponent implements OnInit {
   totalProducts: number = 0; 
   hasMoreProducts: boolean = true; 
 
-  // Injecting necessary services
   constructor(
     private productService: ProductService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    // Load the list of products when the component initializes
     this.loadProducts();
   }
 
   loadProducts(): void {
     this.productService.getAllProductsPageWise(this.page, this.size, this.sortBy, this.sortDir).subscribe( (data) => {
-      // console.log(data.content);
       this.products = data.content; 
       this.totalProducts = data.totalElements; 
       this.hasMoreProducts = this.products.length === this.size; 
@@ -63,16 +59,13 @@ export class ProductListComponent implements OnInit {
 
   sortProducts(sortBy: string): void {
     this.sortBy = sortBy;
-    this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc'; // Toggle sort direction
+    this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc'; 
     this.loadProducts();
   }
-
-  // Method to redirect the user to the edit product page
   editProduct(id: number): void {
     this.router.navigate(['/editproduct', id]);
   }
 
-  // Method to delete a product with a confirmation dialog
   deleteProduct(productId: number): void {
     Swal.fire({
       title: 'Are you sure?',
@@ -83,11 +76,10 @@ export class ProductListComponent implements OnInit {
       cancelButtonText: 'No, cancel!'
     }).then((result) => {
       if (result.isConfirmed) {
-        // Call the delete service and handle success/failure
         this.productService.deleteProduct(productId).subscribe(
           () => {
             Swal.fire('Deleted!', 'Your product has been deleted.', 'success');
-            this.loadProducts(); // Refresh the product list after deletion
+            this.loadProducts(); 
           },
           (error: any) => {
             Swal.fire('Error!', 'There was an error deleting the product.', 'error');

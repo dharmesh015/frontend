@@ -38,13 +38,12 @@ import { ProductViewDetailsComponent } from './product-view-details/product-view
 import { BuyProductComponent } from './buy-product/buy-product.component';
 import { EditproductComponent } from './editproduct/editproduct.component';
 import { ProfilepageComponent } from './profilepage/profilepage.component';
-import { AboutComponent } from './about/about.component';
+
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SellerComponent } from './seller/seller.component';
 import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.component';
 import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dialog.component';
-import { CartDetailsComponent } from './cart-details/cart-details.component';
 import { CommonModule } from '@angular/common';
 
 
@@ -61,20 +60,17 @@ import { CommonModule } from '@angular/common';
     RegistrationComponent,
     FooterComponent,
     AddNewProductComponent,
-  
     ProductListComponent,
     ProductDetailDialogComponent,
     ProductViewDetailsComponent,
     BuyProductComponent,
     EditproductComponent,
     ProfilepageComponent,
-    AboutComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
     SellerComponent,
     AddUserDialogComponent,
-    UpdateUserDialogComponent,
-    CartDetailsComponent,
+    UpdateUserDialogComponent
     
    
     
@@ -97,13 +93,7 @@ import { CommonModule } from '@angular/common';
     MatCardModule,
     MatTableModule,
     CommonModule
-    
-    
-    
-
-
-  
-    
+ 
   ],
   providers: [
     provideClientHydration(withEventReplay()),

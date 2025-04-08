@@ -11,5 +11,6 @@ export interface MyOrderDetails {
     orderAmount : number;
     product : Product;
     user : Registrationuser;
-    date: string; // Add this field
+    date: string; 
+    // product:Product
 }

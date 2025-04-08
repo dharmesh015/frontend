@@ -48,8 +48,15 @@ export class BuyProductComponent implements OnInit {
     this.productService.getProductDetails(isSingleProductCheckout, productId).subscribe(
       (data: Product[]) => {
         this.productDetails = data;
-        
-        // Clear previous order product list
+        this.productDetails.map((product:any) => {
+          product.productImages = product.productImages.map((image: { type: any; picByte: any; }) => {
+            return {
+              ...image,
+              url: `data:${image.type};base64,${image.picByte}`,
+            };
+          });
+          return product;
+        });
         this.orderDetails.orderProductQuantityList = [];
         
         // Add each product to order list with quantity 1

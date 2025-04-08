@@ -14,8 +14,6 @@
   margin: 0 auto;
   padding: 0.5rem 1rem;
 }
-
-/* Brand styling */
 .navbar-brand {
   padding: 0.5rem 1rem 0.5rem 0;
 }
@@ -37,8 +35,6 @@
   left: 0;
   right: 0;
 }
-
-/* Mobile toggler */
 .navbar-toggler {
   display: none;
   background: transparent;
@@ -57,23 +53,17 @@
  
   transition: transform 0.3s ease;
 }
-
-/* Main menu container */
 .navbar-menu {
   display: flex;
   align-items: center;
   flex-grow: 1;
   justify-content: space-between;
 }
-
-/* Link container */
 .navbar-links {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
 }
-
-/* Navigation link styling */
 .nav-link {
   display: flex;
   align-items: center;
@@ -120,8 +110,6 @@
 .nav-link.active {
   font-weight: 600;
 }
-
-/* Auth buttons */
 .navbar-auth {
   display: flex;
   gap: 0.75rem;
@@ -154,8 +142,6 @@
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
-
-/* Responsive styles */
 @media (max-width: 991px) {
   .navbar-toggler {
     display: flex;

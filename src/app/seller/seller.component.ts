@@ -1,27 +1,53 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, HostListener, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-seller',
   standalone: false,
   templateUrl: './seller.component.html',
-  styleUrl: './seller.component.css'
+  styleUrls: ['./seller.component.css'] // Corrected from styleUrl to styleUrls
 })
-export class SellerComponent {
-  showProductList: boolean = true; // Default to showing product list
+export class SellerComponent implements OnInit {
+  showProductList = true;
+  isSidebarOpen = true;
+  screenWidth: number;
 
-  constructor(private router:Router){}
-
-  showProducts() {
-    this.showProductList = true; // Show product list
+  constructor() {
+    this.screenWidth = window.innerWidth;
+    this.updateSidebarState();
   }
 
-  addProduct() {
-    this.showProductList = false; // Show add product form
+  ngOnInit(): void {
+    // Initial setup
   }
 
-  homepage(){
-    this.router.navigate(['/home'])
+  // Listen for window resize events
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.screenWidth = window.innerWidth;
+    this.updateSidebarState();
+  }
+
+  private updateSidebarState(): void {
+    this.isSidebarOpen = this.screenWidth >= 768; // Open sidebar if width is 768 or more
+  }
+
+  showProducts(): void {
+    this.showProductList = true;
+    this.checkSidebarState();
+  }
+
+  addProduct(): void {
+    this.showProductList = false;
+    this.checkSidebarState();
+  }
+
+  toggleSidebar(): void {
+    this.isSidebarOpen = !this.isSidebarOpen;
+  }
+
+  private checkSidebarState(): void {
+    if (this.screenWidth < 768) {
+      this.isSidebarOpen = false; // Close sidebar on small screens
+    }
   }
 }
-

@@ -4,6 +4,6 @@ export interface FileHandel {
  
     file: File,
     url: SafeUrl,
-    type: string; // Add the type property
+    type: string; 
     picByte: string;
 }

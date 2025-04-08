@@ -5,8 +5,7 @@ import { Product } from '../_model/product.model';
 import { ProductService } from '../_service/product.service';
 import Swal from 'sweetalert2';
 import { NgForm } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
-import { ActivatedRoute, Router } from '@angular/router';  // Import Router
+import { ActivatedRoute, Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-product-detail-dialog',
@@ -24,12 +23,7 @@ export class ProductDetailDialogComponent implements OnInit {
   sortDir: string = 'asc';
   totalProducts: number = 0; 
   hasMoreProducts: boolean = true; 
-  messages = [
-    'FREE SHIPPING on all orders over $50!',
-    'NEW ARRIVALS! Check out our latest products',
-    'Use code WELCOME15 for 15% off your first order',
-  ];
-  currentIndex = 0;
+
 
 i: any;
   constructor(
@@ -38,15 +32,9 @@ i: any;
     private router: Router,
     private route: ActivatedRoute
   ) {
-    // Get initial screen size
     this.screenWidth = window.innerWidth;
-    setInterval(() => {
-      this.currentIndex = (this.currentIndex + 1) % this.messages.length;
-    }, 4000);
+    
   }
- 
-
-  // Listen for window resize events
   @HostListener('window:resize', ['$event'])
   onResize(event:any) {
     this.screenWidth = window.innerWidth;
@@ -77,11 +65,10 @@ i: any;
       (data) => {
         console.log(data.content);
         this.products = data.content.map((product:any) => {
-          // Map over the product images to set the base64 URL
           product.productImages = product.productImages.map((image: { type: any; picByte: any; }) => {
             return {
               ...image,
-              url: `data:${image.type};base64,${image.picByte}`, // Set the base64 URL
+              url: `data:${image.type};base64,${image.picByte}`,
             };
           });
           return product;

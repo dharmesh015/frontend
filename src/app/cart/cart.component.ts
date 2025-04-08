@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductService } from '../_service/product.service';
@@ -12,17 +11,19 @@ import Swal from 'sweetalert2';
   standalone: true,
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
-  imports: [MatTableModule, MatButtonModule, CommonModule]
+  imports: [MatTableModule, MatButtonModule, CommonModule],
 })
 export class CartComponent implements OnInit {
-
-  displayedColumns: string[] = ['Name', 'Description', 'Price', 'Discounted Price', 'Action'];
+  displayedColumns: string[] = [
+    'Name',
+    'Description',
+    'Price',
+    'Discounted Price',
+    'Action',
+  ];
   cartDetails: any[] = [];
 
-  constructor(
-    private productService: ProductService,
-    private router: Router
-  ) { }
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
     this.getCartDetails();
@@ -33,19 +34,20 @@ export class CartComponent implements OnInit {
       (resp: any) => {
         console.log('Item deleted:', resp);
         Swal.fire({
-          title: "Success",
-          text: "Item removed from cart",
-          icon: "success",
-          confirmButtonText: "OK"
+          title: 'Success',
+          text: 'Item removed from cart',
+          icon: 'success',
+          confirmButtonText: 'OK',
         });
         this.getCartDetails();
-      }, (error: any) => {
+      },
+      (error: any) => {
         console.log('Error deleting item:', error);
         Swal.fire({
-          title: "Error",
-          text: "Failed to remove item from cart",
-          icon: "error",
-          confirmButtonText: "OK"
+          title: 'Error',
+          text: 'Failed to remove item from cart',
+          icon: 'error',
+          confirmButtonText: 'OK',
         });
       }
     );
@@ -60,19 +62,46 @@ export class CartComponent implements OnInit {
       (error: any) => {
         console.log('Error fetching cart:', error);
         Swal.fire({
-          title: "Error",
-          text: "Failed to load cart items",
-          icon: "error",
-          confirmButtonText: "OK"
+          title: 'Error',
+          text: 'Failed to load cart items',
+          icon: 'error',
+          confirmButtonText: 'OK',
         });
       }
     );
   }
 
   checkout() {
-    this.router.navigate(['/buyProduct', {
-      issingleProducrCheckout: false,
-      productId: 0
-    }]);
+    this.router.navigate([
+      '/buyProduct',
+      {
+        issingleProducrCheckout: false,
+        productId: 0,
+      },
+    ]);
+  }
+  
+  gotoproduct() {
+    this.router.navigate([
+      '/productlist'
+    ]);
+  }
+  // Calculate subtotal
+  getSubtotal() {
+    return this.cartDetails.reduce((acc, item) => {
+      return acc + item.product.productActualPrice; // Assuming productActualPrice is the price before discount
+    }, 0);
+  }
+
+  // Calculate total discount
+  getDiscount() {
+    return this.cartDetails.reduce((acc, item) => {
+      return acc + (item.product.productActualPrice - item.product.productDiscountedPrice);
+    }, 0);
+  }
+
+  // Calculate total
+  getTotal() {
+    return this.getSubtotal() - this.getDiscount();
   }
 }

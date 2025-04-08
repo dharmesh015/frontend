@@ -11,46 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './forgot-password.component.css',
 })
 export class ForgotPasswordComponent {
-  //   constructor(private userservice: UserService) {}
-
-  //   sendEmail(form: NgForm) {
-  //     if (form.valid) {
-  //       this.userservice.sendEmail(form.value.email).subscribe(
-  //         response => {
-  //           if (response === 'User  not found') {
-  //             Swal.fire({
-  //               title: 'User  Not Found',
-  //               text: 'The email address you entered is not associated with any account. Please try again.',
-  //               icon: 'error',
-  //               confirmButtonText: 'OK',
-  //             });
-  //           } else {
-  //             Swal.fire({
-  //               title: 'Success',
-  //               text: 'A password reset link has been sent to your email address.',
-  //               icon: 'success',
-  //               confirmButtonText: 'OK',
-  //             });
-  //           }
-  //         },
-  //         error => {
-  //           Swal.fire({
-  //             title: 'Error',
-  //             text: 'An error occurred while sending the email. Please try again later.',
-  //             icon: 'error',
-  //             confirmButtonText: 'OK',
-  //           });
-  //         }
-  //       );
-  //     } else {
-  //       Swal.fire({
-  //         title: 'Invalid Input',
-  //         text: 'Please enter a valid email address.',
-  //         icon: 'warning',
-  //         confirmButtonText: 'OK',
-  //       });
-  //     }
-  //   }
+ 
   isLoading = false;
   token: string = '';
   constructor(
@@ -64,7 +25,7 @@ export class ForgotPasswordComponent {
       this.userService.sendEmail(form.value.email).subscribe(
         (response) => {
           this.isLoading = false;
-          console.log("Response received:", response); // Add this line for debugging
+          console.log("Response received:", response);
           
           if (response === "UNF") {
             Swal.fire({
@@ -91,7 +52,7 @@ export class ForgotPasswordComponent {
           }
         },
         (error) => {
-          // Error handling remains the same
+          
         }
       );
     } else {
@@ -104,22 +65,4 @@ export class ForgotPasswordComponent {
     }
   }
 
-  // ngOnInit(): void {
-  //   // Get token from URL query parameters
-  //   this.acrouter.queryParams.subscribe(params => {
-  //     this.token = params['token'];
-
-  //     if (!this.token) {
-  //       // If no token is provided, redirect to forgot password page
-  //       Swal.fire({
-  //         title: 'Invalid Reset Link',
-  //         text: 'The password reset link is invalid or has expired.',
-  //         icon: 'error',
-  //         confirmButtonText: 'OK'
-  //       }).then(() => {
-  //         this.router.navigate(['/forgot-password']);
-  //       });
-  //     }
-  //   });
-  // }
 }

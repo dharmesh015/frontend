@@ -1,7 +1,6 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import { UserAuthServiceService } from '../_service/user-auth-service.service';
 import { Router } from '@angular/router';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { UserService } from '../_service/user.service';
 
 @Component({
@@ -26,7 +25,6 @@ export class HeaderComponent {
   public logout() {
     this.userathservice.clear();
     this.router.navigate(['/home']);
-    // this.cdRef.detectChanges();
   }
   public isLoggedIn():boolean {
     return this.userathservice.isLoggedIn();

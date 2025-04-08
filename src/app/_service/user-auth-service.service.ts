@@ -16,26 +16,24 @@ export class UserAuthServiceService {
 
   public setRoles(roles: any[]): void {
     if (this.isBrowser()) {
-      sessionStorage.setItem('roles', JSON.stringify(roles)); // Changed to sessionStorage
+      sessionStorage.setItem('roles', JSON.stringify(roles)); 
     }
   }
 
   public setUser (user: any) {
-    // Convert the user object to a JSON string before storing it
-    sessionStorage.setItem("user", JSON.stringify(user)); // Changed to sessionStorage
+    sessionStorage.setItem("user", JSON.stringify(user)); 
   }
   
   public getUser () {
-    // Retrieve the user string from sessionStorage
-    const data = sessionStorage.getItem("user"); // Changed to sessionStorage
-    
-    // If data is not null, parse it back to an object, otherwise return null
+
+    const data = sessionStorage.getItem("user"); 
+
     return data ? JSON.parse(data) : null;
   }
 
   public getRoles(): any[] {
     if (this.isBrowser()) {
-      const roles = sessionStorage.getItem('roles'); // Changed to sessionStorage
+      const roles = sessionStorage.getItem('roles'); 
       return roles ? JSON.parse(roles) : [];
     }
     return [];
@@ -43,24 +41,24 @@ export class UserAuthServiceService {
 
   public setToken(jwtToken: string): void {
     if (this.isBrowser()) {
-      sessionStorage.setItem('jwtToken', jwtToken); // Changed to sessionStorage
+      sessionStorage.setItem('jwtToken', jwtToken); 
     }
   }
 
   public getToken(): string | null {
     if (this.isBrowser()) {
-      return sessionStorage.getItem('jwtToken'); // Changed to sessionStorage
+      return sessionStorage.getItem('jwtToken'); 
     }
     return null;
   }
 
   public clear(): void {
     if (this.isBrowser()) {
-      sessionStorage.removeItem('jwtToken'); // Changed to sessionStorage
-      sessionStorage.removeItem('roles'); // Changed to sessionStorage
-      sessionStorage.removeItem('email'); // Changed to sessionStorage
-      sessionStorage.removeItem('name'); // Changed to sessionStorage
-      sessionStorage.removeItem('user'); // Changed to sessionStorage
+      sessionStorage.removeItem('jwtToken'); 
+      sessionStorage.removeItem('roles'); 
+      sessionStorage.removeItem('email');
+      sessionStorage.removeItem('name'); 
+      sessionStorage.removeItem('user'); 
     }
   }
 

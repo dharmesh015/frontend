@@ -39,7 +39,6 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Get token from URL query parameters
     this.acroute.queryParams.subscribe((params) => {
       this.token = params['token'];
 
@@ -48,7 +47,6 @@ export class ResetPasswordComponent implements OnInit {
         return;
       }
 
-      // Validate token before showing the form
       this.validateToken();
     });
   }
@@ -80,8 +78,6 @@ export class ResetPasswordComponent implements OnInit {
     }
 
     this.isLoading = true;
-
-    // Send token along with new password
     this.userservice
       .resetPassword(this.token, this.resetForm.get('password')?.value)
       .subscribe(

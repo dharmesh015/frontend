@@ -27,7 +27,7 @@ export class ProfilepageComponent implements OnInit {
   profileImageUrl: SafeUrl | string = '';
   imageLoading: boolean = false;
   hasOrderDetails: boolean = false;
-  currentView: string = 'updateProfile'; // Default view
+  currentView: string = 'updateProfile';
   form: FormGroup;
 
   constructor(
@@ -36,9 +36,9 @@ export class ProfilepageComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private userAuth: UserAuthServiceService,
     private productService: ProductService,
-    private fb: FormBuilder // Inject FormBuilder
+    private fb: FormBuilder 
   ) {
-    // Initialize the form
+  
     this.form = this.fb.group({
       userFirstName: ['', Validators.required],
       Lastname: ['', Validators.required],
@@ -53,7 +53,7 @@ export class ProfilepageComponent implements OnInit {
   ngOnInit(): void {
     this.userData = this.userAuth.getUser();
     this.loadProfileImage();
-    this.populateForm(); // Populate the form with user data
+    this.populateForm(); 
   }
 
   populateForm() {
@@ -67,21 +67,21 @@ export class ProfilepageComponent implements OnInit {
 
   onSubmit() {
     if (this.form.invalid) {
-      // Mark all fields as touched to show validation messages
+     
       Object.keys(this.form.controls).forEach((field) => {
         const control = this.form.controls[field];
         control.markAsTouched({ onlySelf: true });
       });
-      return; // Prevent form submission
+      return; 
     }
 
-    // Populate userData with form values
+  
     this.userData.userFirstName = this.form.value.userFirstName;
     this.userData.userLastName = this.form.value.Lastname;
     this.userData.email = this.form.value.Email;
     this.userData.mobileNumber = this.form.value.mobileNumber;
 
-    // Call the update method from UserService
+   
     this.userService.update(this.userData).subscribe(
       (response) => {
         Swal.fire('Success', 'User  details updated successfully', 'success');
@@ -114,24 +114,30 @@ export class ProfilepageComponent implements OnInit {
         (data: any) => {
           this.OrderDetails = data.content.map((order: any) => {
             return {
-              orderId: order.orderId,
+              // orderId: order.orderId,
               orderFullName: order.orderFullName,
               orderContactNumber: order.orderContactNumber,
               orderStatus: order.orderStatus,
               orderAmount: order.orderAmount,
               date: order.orderDate,
+              product:order.product.productName
             };
           });
 
-          // Check if there are any order details
+          
           this.hasOrderDetails = this.OrderDetails.length > 0;
           this.hasMoreProducts =
-            (this.page + 1) * this.size < data.totalElements; // Assuming size is the number of items per page
+            (this.page + 1) * this.size < data.totalElements; 
+            console.log(this.OrderDetails)
         },
         (error: any) => {
           this.toggleView('updateProfile');
-          // Swal.fire('No order. Please try again later.', 'error');
-          // console.error('Error fetching products', error);
+          Swal.fire({
+            title: 'No Order History',
+            text: 'You have not placed any orders yet.',
+            icon: 'info', 
+          });
+          
           this.router.navigate(['/Profilepage']);
         }
       );
@@ -160,7 +166,6 @@ export class ProfilepageComponent implements OnInit {
   onFileSelected(event: any): void {
     this.selectedFile = event.target.files[0];
 
-    // Show preview of selected image (optional)
     if (this.selectedFile) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
@@ -211,7 +216,6 @@ export class ProfilepageComponent implements OnInit {
       },
       (error) => {
         console.error('Error loading profile image', error);
-        // Set a default image if user doesn't have one yet
         this.profileImageUrl = 'assets/default-avatar.jpg';
         this.imageLoading = false;
       }

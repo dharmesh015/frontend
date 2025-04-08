@@ -10,12 +10,10 @@ import { AddNewProductComponent } from './add-new-product/add-new-product.compon
 // import { ProductDisplayComponent } from './product-display-component/product-display-component.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductViewDetailsComponent } from './product-view-details/product-view-details.component';
-import { ProductResolveServiceService } from './_service/product-resolve-service.service';
 import { BuyProductComponent } from './buy-product/buy-product.component';
 import { ProductDetailDialogComponent } from './product-detail-dialog/product-detail-dialog.component';
 import { EditproductComponent } from './editproduct/editproduct.component';
 import { ProfilepageComponent } from './profilepage/profilepage.component';
-import { AboutComponent } from './about/about.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SellerComponent } from './seller/seller.component';
@@ -38,7 +36,7 @@ const routes: Routes = [
     data: { roles: ['Seller'] },
   },
   { path: 'login', component: LoginComponent },
-  { path: 'registartion', component: RegistrationComponent },
+  { path: 'registration', component: RegistrationComponent },
   { path: 'forbidden', component: ForbiddenComponent },
 
   {

@@ -14,8 +14,6 @@ export class ForbiddenComponent implements AfterViewInit {
   ngAfterViewInit() {
 
     if (isPlatformBrowser(this.platformId)) {
-      // Safe to access document here
-      // const element = document.getElementById('someElementId');
     const container = document.querySelector('.lottie-animation') as HTMLElement;
     if (container) {
       lottie.loadAnimation({

@@ -1,45 +1,63 @@
+<div class="container mt-5" *ngIf="product">
+  <div class="row">
+    <div
+      class="col-md-6"
+      *ngIf="product.productImages && product.productImages.length > 0"
+    >
+      <div class="main-image-container">
+        <img  
+          [src]="product.productImages[mainImageIndex].url"
+          class="w-100 img-fluid main-image"
+          alt="{{ product.productName }}"
+        />
+      </div>
+    </div>
 
-  <div class="container mt-5" *ngIf="product">
-    <div class="row">
-      <!-- First div - showing the selected main image -->
-      <div class="col-md-6" *ngIf="product.productImages && product.productImages.length > 0">
-        <div class="main-image-container">
-          <img [src]="product.productImages[mainImageIndex].url" class="w-100 img-fluid main-image" alt="{{product.productName}}">
+    <div class="col-md-6">
+      <div class="product-info mt-3">
+        <h2>{{ product.productName }}</h2>
+        <p class="my-3">{{ product.productDescription }}</p>
+
+        <div class="d-flex align-items-center my-3">
+          <h4 class="me-3">Price: {{ product.productActualPrice }}</h4>
+        </div>
+
+        <div class="d-flex my-4" *ngIf="roleMatchs(['User'])">
+          <button
+            mat-raised-button
+            color="primary"
+            class="me-3"
+            (click)="addToCart(product.productId)"
+          >
+            <mat-icon>shopping_cart</mat-icon> Add to Cart
+          </button>
+          <button
+            mat-raised-button
+            color="accent"
+            (click)="buyNow(product.productId)"
+          >
+            <mat-icon>flash_on</mat-icon> Buy Now
+          </button>
         </div>
       </div>
-  
-      <!-- Second div - showing all images as thumbnails -->
-      <div class="col-md-6">
-       
-        
-        <!-- Product Details below the secondary images -->
-        <div class="product-info mt-3">
-          <h2>{{product.productName}}</h2>
-          <p class="my-3">{{product.productDescription}}</p>
-          
-          <div class="d-flex align-items-center my-3">
-            <h4 class="me-3">Price: {{product.productActualPrice}}</h4>
-          </div>
-          
-          <!-- Action Buttons -->
-          <div class="d-flex my-4" *ngIf="roleMatchs(['User'])">
-            <button mat-raised-button color="primary" class="me-3"  (click)="addToCart(product.productId)">
-              <mat-icon>shopping_cart</mat-icon> Add to Cart
-            </button>
-            <button mat-raised-button color="accent" (click)="buyNow(product.productId)">
-              <mat-icon>flash_on</mat-icon> Buy Now
-            </button>
+      <div class="row secondary-images">
+        <div
+          class="col-4 mb-3"
+          *ngFor="let image of product.productImages; let i = index"
+        >
+          <div
+            class="thumbnail-container"
+            [ngClass]="{ 'active-thumbnail': i === mainImageIndex }"
+            (click)="changeMainImage(i)"
+          >
+            <img
+              [src]="image.url"
+              class="w-100 img-fluid thumbnail-image"
+              alt="{{ product.productName }} - view {{ i + 1 }}"
+            />
           </div>
         </div>
-        <div class="row secondary-images">
-            <div class="col-4 mb-3" *ngFor="let image of product.productImages; let i = index">
-              <div class="thumbnail-container" 
-                   [ngClass]="{'active-thumbnail': i === mainImageIndex}"
-                   (click)="changeMainImage(i)">
-                <img [src]="image.url" class="w-100 img-fluid thumbnail-image" alt="{{product.productName}} - view {{i+1}}">
-              </div>
-            </div>
-          </div>
       </div>
     </div>
   </div>
+</div>

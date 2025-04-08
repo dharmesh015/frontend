@@ -1,5 +1,3 @@
-
-
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../_model/product.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,28 +10,24 @@ import { UserService } from '../_service/user.service';
   selector: 'app-product-view-details',
   standalone: false,
   templateUrl: './product-view-details.component.html',
-  styleUrls: ['./product-view-details.component.css']
+  styleUrls: ['./product-view-details.component.css'],
 })
 export class ProductViewDetailsComponent implements OnInit {
-
-
   product!: Product;
   productId!: number;
-  mainImageIndex: number = 0; 
-
+  mainImageIndex: number = 0;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private productService: ProductService,
-    private authserice:UserAuthServiceService,
-    private   userService:UserService
-  ) { }
+    private authserice: UserAuthServiceService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
-
-    this.route.params.subscribe(params => {
-      this.productId = +params['id']; 
+    this.route.params.subscribe((params) => {
+      this.productId = +params['id'];
       this.getProductDetails(this.productId);
     });
   }
@@ -42,26 +36,27 @@ export class ProductViewDetailsComponent implements OnInit {
       (data: Product) => {
         this.product = data;
         if (this.product.productImages) {
-          this.product.productImages = this.product.productImages.map((image) => {
-            return {
-              ...image,
-              url: `data:${image.type};base64,${image.picByte}`,
-            };
-          });
+          this.product.productImages = this.product.productImages.map(
+            (image) => {
+              return {
+                ...image,
+                url: `data:${image.type};base64,${image.picByte}`,
+              };
+            }
+          );
         }
       },
       (error: any) => {
         console.error('Error fetching product details:', error);
         Swal.fire({
-          title: "Error",
-          text: "Failed to load product details",
-          icon: "error",
-          confirmButtonText: "OK"
+          title: 'Error',
+          text: 'Failed to load product details',
+          icon: 'error',
+          confirmButtonText: 'OK',
         });
       }
     );
   }
-
 
   changeMainImage(index: number): void {
     this.mainImageIndex = index;
@@ -72,36 +67,38 @@ export class ProductViewDetailsComponent implements OnInit {
   }
 
   addToCart(productId: number): void {
-    console.log("add to cart")
+    console.log('add to cart');
     this.productService.addToCart(productId).subscribe(
       (response) => {
         console.log('Product added to cart:', response);
         Swal.fire({
-          title: "Success",
-          text: "Product added to cart",
-          icon: "success",
-          confirmButtonText: "OK"
+          title: 'Success',
+          text: 'Product added to cart',
+          icon: 'success',
+          confirmButtonText: 'OK',
         });
-         this.router.navigate(['/showcart'])
-      }, (error) => {
+        this.router.navigate(['/showcart']);
+      },
+      (error) => {
         console.log('Error adding to cart:', error);
         Swal.fire({
-          title: "Error",
-          text: "Failed to add product to cart",
-          icon: "error",
-          confirmButtonText: "OK"
+          title: 'Error',
+          text: 'Failed to add product to cart',
+          icon: 'error',
+          confirmButtonText: 'OK',
         });
       }
     );
   }
 
   buyNow(productId: number): void {
-    console.log("buy called");
-    this.router.navigate(['/buyProduct', {
-      issingleProducrCheckout: true,
-      productId: productId
-    }]);
+    console.log('buy called');
+    this.router.navigate([
+      '/buyProduct',
+      {
+        issingleProducrCheckout: true,
+        productId: productId,
+      },
+    ]);
   }
-
- 
 }

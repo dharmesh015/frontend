@@ -47,8 +47,8 @@ public getProductById(id: number): Observable<Product> {
   return this.httpClient.get<Product>(`${this.baseUrl}/getProductById/${id}`);
 }
 
-public getProductDetails(isSingleProductCheckout: boolean, productId: number): Observable<Product[]> {
-  return this.httpClient.get<Product[]>(`${this.baseUrl}/getProductDetails/${isSingleProductCheckout}/${productId}`);
+public getProductDetails(isSingleProductCheckout: boolean, productId: number): Observable<any> {
+  return this.httpClient.get(`${this.baseUrl}/getProductDetails/${isSingleProductCheckout}/${productId}`);
 }
 
 public placeOrder(orderDetails: OrderDetails, isSingleProductCheckout: boolean): Observable<any> {

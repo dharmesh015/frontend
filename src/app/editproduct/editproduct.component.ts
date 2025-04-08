@@ -1,14 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { Product } from '../_model/product.model';
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogRef,
-} from '@angular/material/dialog';
 import { ProductService } from '../_service/product.service';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
-// import { FileHandel } from '../_model/file-handel.model';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FileHandel } from '../_model/file-handel.model';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -22,7 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class EditproductComponent implements OnInit {
   product!: Product;
   productId!: number;
-  mainImageIndex: number = 0; // Track which image is currently shown as the main image
+  mainImageIndex: number = 0;
 
   constructor(
     private router: Router,
@@ -33,7 +27,7 @@ export class EditproductComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.productId = +params['id']; // Convert string to number
+      this.productId = +params['id']; 
       this.getProductDetails(this.productId);
     });
   }
@@ -97,7 +91,7 @@ export class EditproductComponent implements OnInit {
         });
         
         this.router.navigate(['/seller'])
-        // window.location.reload();
+
       },
       (error: any) => {
         Swal.fire({
@@ -116,11 +110,6 @@ export class EditproductComponent implements OnInit {
       'product',
       new Blob([JSON.stringify(product)], { type: 'application/json' })
     );
-
-    // for (let i = 0; i < product.productImages.length; i++) {
-    //   formData.append('imageFile', product.productImages[i].file, product.productImages[i].file.name);
-    // }
-
     return formData;
   }
 
@@ -169,7 +158,6 @@ export class EditproductComponent implements OnInit {
     this.productService.getProductById(id).subscribe(
       (data: Product) => {
         this.product = data;
-        // Transform images like in home component
         this.product.productImages = this.product.productImages.map((image) => {
           return {
             ...image,
