@@ -5,7 +5,7 @@
     <h1>My Products</h1>
   </div>
 
-  <div class="product-content">
+  <div class="product-content" >
     <!-- Product Table Section -->
     <div class="product-table-container">
       <table class="product-table" *ngIf="productDetails && productDetails.length > 0">
@@ -113,6 +113,6 @@
 
       
     </div>
-    <button class="buy-now-button" (click)="orderForm.valid && placeOrder(orderForm)">Check Out</button>
   </div>
+  <button class="buy-now-button" (click)="orderForm.valid && placeOrder(orderForm)">Check Out</button>
 </div>

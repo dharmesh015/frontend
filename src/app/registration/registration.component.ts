@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 import { UserService } from '../_service/user.service';
 import { Registrationuser } from '../modul/registrationuser';
+import { UserAuthServiceService } from '../_service/user-auth-service.service';
 
 @Component({
   selector: 'app-registration',
@@ -14,7 +15,9 @@ import { Registrationuser } from '../modul/registrationuser';
 export class RegistrationComponent {
   userData: Registrationuser = new Registrationuser('', '', '', '', '', '', '');
 
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router,
+    private userAuthServiceService:UserAuthServiceService
+  ) {}
 
   onSubmit(form: NgForm) {
     if (form.invalid) {
@@ -45,5 +48,9 @@ export class RegistrationComponent {
         }
       );
     }
+  }
+
+  islogin():boolean{
+    return this.userAuthServiceService.isLoggedIn()
   }
 }
