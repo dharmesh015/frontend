@@ -1,48 +1,21 @@
-<div class="container mt-5" *ngIf="product">
+<div class="main container mt-5" *ngIf="product">
   <div class="row">
+    <!-- Left side - Product Images -->
     <div
-      class="col-md-6"
+      class="col-md-4 col-sm-12"
       *ngIf="product.productImages && product.productImages.length > 0"
     >
       <div class="main-image-container">
-        <img  
+        <img
           [src]="product.productImages[mainImageIndex].url"
-          class="w-100 img-fluid main-image"
+          class="img-fluid main-image"
           alt="{{ product.productName }}"
         />
       </div>
-    </div>
 
-    <div class="col-md-6">
-      <div class="product-info mt-3">
-        <h2>{{ product.productName }}</h2>
-        <p class="my-3">{{ product.productDescription }}</p>
-
-        <div class="d-flex align-items-center my-3">
-          <h4 class="me-3">Price: {{ product.productActualPrice }}</h4>
-        </div>
-
-        <div class="d-flex my-4" *ngIf="roleMatchs(['User'])">
-          <button
-            mat-raised-button
-            color="primary"
-            class="me-3"
-            (click)="addToCart(product.productId)"
-          >
-            <mat-icon>shopping_cart</mat-icon> Add to Cart
-          </button>
-          <button
-            mat-raised-button
-            color="accent"
-            (click)="buyNow(product.productId)"
-          >
-            <mat-icon>flash_on</mat-icon> Buy Now
-          </button>
-        </div>
-      </div>
       <div class="row secondary-images">
         <div
-          class="col-4 mb-3"
+          class="col-3 mb-3"
           *ngFor="let image of product.productImages; let i = index"
         >
           <div
@@ -52,10 +25,142 @@
           >
             <img
               [src]="image.url"
-              class="w-100 img-fluid thumbnail-image"
+              class="img-fluid thumbnail-image"
               alt="{{ product.productName }} - view {{ i + 1 }}"
             />
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center Column - Offers and Product Info -->
+    <div class="col-md-4 col-sm-12">
+      <!-- Product Title and Ratings -->
+      <div class="product-info">
+        <!-- Store name -->
+        <a href="#" class="seller-link">Visit the Store</a>
+
+        <!-- Product Title -->
+        <h2>{{ product.productName }}</h2>
+
+        <!-- Ratings -->
+        <div class="rating-container">
+          <div class="stars">
+            <span>
+              <mat-icon>★</mat-icon><mat-icon>★</mat-icon><mat-icon>★</mat-icon
+              ><mat-icon>★</mat-icon><mat-icon>☆</mat-icon>
+            </span>
+          </div>
+          <span class="rating-value"></span>
+          
+        </div>
+        <div class="price-section">
+          <span class="discount-badge" *ngIf="product.productDiscountedPrice">
+            {{ product.productDiscountedPrice - product.productActualPrice }}
+          </span>
+          <span class="current-price">
+            <span class="currency-symbol">$</span>{{ product.productDiscountedPrice }}
+          </span>
+          <span class="original-price" *ngIf="product.productActualPrice">
+            <span class="mrp-text">M.R.P.: </span>${{ product.productActualPrice }}
+          </span>
+          <div class="tax-info">Inclusive of all taxes</div>
+        </div>
+      </div>
+
+      <!-- Offers Section -->
+      <div class="offers-section">
+        <div class="offers-title">Offers</div>
+        <div class="offer-cards">
+          <div class="offer-card">
+            <h5>Cashback</h5>
+            <p>Up to $20.00 cashback when using payment method X</p>
+            <a class="offer-link">1 offer ›</a>
+          </div>
+          <div class="offer-card">
+            <h5>Bank Offer</h5>
+            <p>Up to 10% discount with select credit cards</p>
+            <a class="offer-link">5 offers ›</a>
+          </div>
+          <div class="offer-card">
+            <h5>Partner Offers</h5>
+            <p>Get GST invoice and save up to 28%</p>
+            <a class="offer-link">1 offer ›</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <div class="features-section">
+        <div class="feature-item">
+          <mat-icon class="feature-icon">refresh</mat-icon>
+          <span>10 days Return & Exchange</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon class="feature-icon">payments</mat-icon>
+          <span>Cash/Pay on Delivery</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon class="feature-icon">local_shipping</mat-icon>
+          <span>Free Delivery</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon class="feature-icon">verified</mat-icon>
+          <span>Top Brand</span>
+        </div>
+        <div class="feature-item">
+          <mat-icon class="feature-icon">inventory_2</mat-icon>
+          <span>QuickCart Delivered</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column - Payment and Delivery Info -->
+    <div class="col-md-4 col-sm-12">
+      <!-- Price Section -->
+     
+
+      <!-- Delivery Info Section -->
+      <div class="delivery-section">
+        <div class="current-price">
+          <span class="currency-symbol">$</span>{{ product.productActualPrice }}
+        </div>
+
+        <div class="delivery-info">
+          <span class="delivery-price">FREE delivery</span>
+          <span class="delivery-date">Monday, {{ "14 April" }}.</span>
+        </div>
+
+        <div class="countdown">
+          Order within <strong>12 hrs 33 mins</strong>.
+        </div>
+
+        <div class="location">
+          <mat-icon class="location-icon">location_on</mat-icon>
+          Delivering to {{ "Your Location" }}
+          <a class="update-link">Update</a>
+        </div>
+
+        <div class="stock-status">In stock</div>
+
+        <div class="seller-info">
+          Ships from and sold by <span class="seller-name">{{ "Quick Cart" }}</span>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="button-container">
+          <button
+            class="add-to-cart-btn"
+            (click)="addToCart(product.productId)"
+          >
+            Add to Cart
+          </button>
+
+          <button class="buy-now-btn" (click)="buyNow(product.productId)">
+            Buy Now
+          </button>
+
+         
         </div>
       </div>
     </div>

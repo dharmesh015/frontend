@@ -16,6 +16,7 @@ export class ProductViewDetailsComponent implements OnInit {
   product!: Product;
   productId!: number;
   mainImageIndex: number = 0;
+  selectedSize!:string;
 
   constructor(
     private router: Router,
@@ -100,5 +101,9 @@ export class ProductViewDetailsComponent implements OnInit {
         productId: productId,
       },
     ]);
+  }
+
+  isuser(){
+    return this.authserice.isUser();
   }
 }

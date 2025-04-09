@@ -45,6 +45,7 @@ import { SellerComponent } from './seller/seller.component';
 import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.component';
 import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dialog.component';
 import { CommonModule } from '@angular/common';
+import { HomepageComponent } from './homepage/homepage.component';
 
 
 
@@ -70,7 +71,8 @@ import { CommonModule } from '@angular/common';
     ResetPasswordComponent,
     SellerComponent,
     AddUserDialogComponent,
-    UpdateUserDialogComponent
+    UpdateUserDialogComponent,
+    HomepageComponent
     
    
     

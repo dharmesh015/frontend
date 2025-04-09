@@ -18,6 +18,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SellerComponent } from './seller/seller.component';
 import { CartComponent } from './cart/cart.component';
+import { HomepageComponent } from './homepage/homepage.component';
 
 const routes: Routes = [
   // import { AppRoutingModule } from './app-routing.module';
@@ -71,6 +72,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['User'] },
   },
+  {path:'homepage',component:HomepageComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: ForbiddenComponent },
 ];

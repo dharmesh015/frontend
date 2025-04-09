@@ -61,10 +61,10 @@ i: any;
   }
   
   loadProducts(): void {
-    this.productService.getAllProductsPageWise(this.page, this.size, this.sortBy, this.sortDir).subscribe(
-      (data) => {
-        console.log(data.content);
-        this.products = data.content.map((product:any) => {
+    this.productService.getAllProducts().subscribe(
+      (data:Product[]) => {
+        // console.log(data.content);
+        this.products = data.map((product:any) => {
           product.productImages = product.productImages.map((image: { type: any; picByte: any; }) => {
             return {
               ...image,
@@ -73,9 +73,7 @@ i: any;
           });
           return product;
         });
-        this.totalProducts = data.totalElements;
-        this.hasMoreProducts = this.products.length === this.size;
-        console.log(data);
+       
         return this.products;
       },
       (error) => {

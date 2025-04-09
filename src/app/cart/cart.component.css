@@ -29,12 +29,13 @@
     line-height: 1.6;
     
   }
-
+  
   /* Container */
   .cart-container {
     max-width: 1100px;
     margin: 40px auto;
     padding: 0 20px;
+    margin-bottom: 200px;
   }
 
   /* Cart Header */

@@ -1,52 +1,39 @@
-
-
-  <div class="productlist">
-    <button
-      mat-button
-      (click)="previousPage()"
-      [disabled]="page === 0"
-      aria-label="Previous page"s
-    >
-      <mat-icon>chevron_left</mat-icon>
-    </button>
-
-    <div class="main container">
-      <div class="product-grid">
-        <div *ngFor="let product of products" class="product-card-container">
-          <mat-card class="product-card">
-            <mat-card-content>
-              <div class="image-container">
-                <img
-                  *ngIf="product.productImages && product.productImages.length > 0"
-                  [src]="product.productImages[0].url"
-                  alt="{{ product.productName }}"
-                  class="product-image"
-                  loading="lazy"
-                />
-              </div>
-              <mat-card-title>{{ product.productName }}</mat-card-title>
-              <div class="description">
-                <p class="product-description">{{ product.productDescription }}</p>
-              </div>
-              <div class="action-row">
-                <span class="product-price">${{ product.productActualPrice }}</span>
-                <button mat-button class="button" (click)="viewProduct(product.productId)">
-                  View
-                </button>
-              </div>
-            </mat-card-content>
-          </mat-card>
-        </div>
+<div class="main-container">
+  <div class="product-grid">
+    <!-- Product 1 -->
+    <div *ngFor="let product of products" class="product-card-container">
+      <div class="image-container">
+        <img
+          *ngIf="product.productImages && product.productImages.length > 0"
+          [src]="product.productImages[0].url"
+          alt="{{ product.productName }}"
+          class="product-image"
+        />
       </div>
-      
-    </div>
 
-    <button
-      mat-button
-      (click)="nextPage()"
-      [disabled]="!hasMoreProducts"
-      aria-label="Next page"
-    >
-      <mat-icon>chevron_right</mat-icon>
-    </button>
+      <div class="product-title">
+        {{ product.productName }}
+      </div>
+      <div class="ratings">
+        <span class="stars">{{ '★'}}</span>
+        <span class="review-count">{{ "241" }} reviews</span>
+      </div>
+      <div class="purchase-count">
+        {{ 256 }}+ bought in the past month
+      </div>
+      <div class="price-section">
+        <span class="current-price">₹{{ product.productDiscountedPrice }}</span>
+        <span class="mrp">M.R.P: ₹{{ product.productActualPrice }}</span>
+        <span class="discount">({{ (product.productActualPrice-product.productDiscountedPrice) }} off)</span>
+      </div>
+      <!-- <img src="/api/placeholder/45/20" alt="Prime" class="prime-logo" /> -->
+      <div class="delivery-info">
+        <span class="free-delivery">FREE delivery Sat, 12 Apr</span>
+      </div>
+      <div class="delivery-info">
+        Or fastest delivery <strong>Tomorrow, 11 Apr</strong>
+      </div>
+      <button class="add-to-cart" (click)="viewProduct(product.productId)">view</button>
+    </div>
   </div>
+</div>
