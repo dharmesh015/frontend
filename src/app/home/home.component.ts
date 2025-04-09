@@ -4,7 +4,6 @@ import { ProductService } from '../_service/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { animate, style, transition, trigger } from '@angular/animations';
 import { interval, Subscription } from 'rxjs';
 
 @Component({
@@ -12,24 +11,13 @@ import { interval, Subscription } from 'rxjs';
   standalone: false,
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  animations: [
-    trigger('messageAnimation', [
-      transition(':enter', [
-        style({ opacity: 0, transform: 'translateX(100%)' }),
-        animate('0.5s ease-out', style({ opacity: 1, transform: 'translateX(0)' })),
-      ]),
-      transition(':leave', [
-        animate('0.5s ease-in', style({ opacity: 0, transform: 'translateX(-100%)' })),
-      ]),
-    ]),
-  ],
 })
 export class HomeComponent implements OnInit, OnDestroy {
   showWelcomeMessage = true;
   products: Product[] = [];
   screenWidth: number;
   page: number = 0;
-  size: number = 8; 
+  size: number = 4; 
   sortBy: string = 'productName';
   sortDir: string = 'asc';
   totalProducts: number = 0; 

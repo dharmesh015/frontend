@@ -5,6 +5,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 import Swal from 'sweetalert2';
+import { Cart } from '../modul/cart';
+import { FileHandel } from '../_model/file-handel.model';
 
 @Component({
   selector: 'app-cart',
@@ -21,7 +23,7 @@ export class CartComponent implements OnInit {
     'Discounted Price',
     'Action',
   ];
-  cartDetails: any[] = [];
+  cartDetails: Cart[] = [];
 
   constructor(private productService: ProductService, private router: Router) {}
 
@@ -55,9 +57,20 @@ export class CartComponent implements OnInit {
 
   getCartDetails() {
     this.productService.getCartDetails().subscribe(
-      (response: any[]) => {
-        console.log('Cart details:', response);
+      (response: Cart[]) => {
+       
         this.cartDetails = response;
+        this.cartDetails = this.cartDetails.map((cart: any) => {
+          // Map through the product images and convert them to base64 URLs
+          cart.product.productImages = cart.product.productImages.map((image: { type: any; picByte: any; }) => {
+            return {
+              ...image,
+              url: `data:${image.type};base64,${image.picByte}`, // Create the base64 URL
+            };
+          });
+          return cart; // Return the modified cart object
+        });
+        console.log('Cart details:',  this.cartDetails);
       },
       (error: any) => {
         console.log('Error fetching cart:', error);

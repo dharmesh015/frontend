@@ -1,89 +1,103 @@
 <section class="image-slider-container">
   <div class="slider">
-    <div class="slides-container" [style.transform]="'translateX(-' + (currentSlide * 100) + '%)'">
+    <div
+      class="slides-container"
+      [style.transform]="'translateX(-' + currentSlide * 100 + '%)'"
+    >
       <div *ngFor="let slide of slides; let i = index" class="slide">
-        <img [src]="slide.url" [alt]="slide.alt" class="slide-image">
+        <img [src]="slide.url" [alt]="slide.alt" class="slide-image" />
         <div class="slide-content">
-          <h2 class="slide-title">{{slide.title}}</h2>
-          <p class="slide-subtitle">{{slide.subtitle}}</p>
+          <h2 class="slide-title">{{ slide.title }}</h2>
+          <p class="slide-subtitle">{{ slide.subtitle }}</p>
         </div>
       </div>
     </div>
-    
+
     <div class="slider-controls">
-      <button mat-icon-button class="nav-btn prev-btn" (click)="prevSlide()" aria-label="Previous slide">
+      <button
+        mat-icon-button
+        class="nav-btn prev-btn"
+        (click)="prevSlide()"
+        aria-label="Previous slide"
+      >
         <mat-icon>chevron_left</mat-icon>
       </button>
-      
+
       <div class="slider-indicators">
-        <span 
-          *ngFor="let slide of slides; let i = index" 
-          class="indicator" 
+        <span
+          *ngFor="let slide of slides; let i = index"
+          class="indicator"
           [class.active]="i === currentSlide"
-          (click)="setCurrentSlide(i)">
+          (click)="setCurrentSlide(i)"
+        >
         </span>
       </div>
-      
-      <button mat-icon-button class="nav-btn next-btn" (click)="nextSlide()" aria-label="Next slide">
+
+      <button
+        mat-icon-button
+        class="nav-btn next-btn"
+        (click)="nextSlide()"
+        aria-label="Next slide"
+      >
         <mat-icon>chevron_right</mat-icon>
       </button>
     </div>
   </div>
-</section>
-  <div class="productlist">
-    <button
+
+<div class="productlist">
+  <button
     mat-button
     (click)="previousPage()"
     [disabled]="page === 0"
-    aria-label="Previous page"s
+    aria-label="Previous page"
+    s
   >
     <mat-icon>chevron_left</mat-icon>
   </button>
 
-    <div class="main container">
-      <div class="product-grid">
-        <div *ngFor="let product of products" class="product-card-container">
-          <mat-card class="product-card">
-            <mat-card-content>
-              <div class="image-container">
-                <img
-                  *ngIf="
-                    product.productImages && product.productImages.length > 0
-                  "
-                  [src]="product.productImages[0].url"
-                  alt="{{ product.productName }}"
-                  class="product-image"
-                  loading="lazy"
-                />
+  <div class="main container">
+    <div class="product-grid">
+      <div *ngFor="let product of products" class="product-card-container">
+        <mat-card class="product-card">
+          <mat-card-content>
+            <div class="image-container">
+              <img
+                *ngIf="
+                  product.productImages && product.productImages.length > 0
+                "
+                [src]="product.productImages[0].url"
+                alt="{{ product.productName }}"
+                class="product-image"
+                loading="lazy"
+              />
+            </div>
+            <div style="padding: 10px">
+              <mat-card-title>{{ product.productName }}</mat-card-title>
+              <div class="description">
+                <p class="product-description">
+                  {{ product.productDescription }}
+                </p>
               </div>
-              <div style="padding: 10px;">
-                <mat-card-title>{{ product.productName }}</mat-card-title>
-                <div class="description">
-                  <p class="product-description">
-                    {{ product.productDescription }}
-                  </p>
-                </div>
-                <div class="action-row">
-                  <span class="product-price"
-                    >${{ product.productActualPrice }}</span
-                  >
-                  <button
-                    mat-button
-                    class="button"
-                    (click)="viewProduct(product.productId)"
-                  >
-                    View
-                  </button>
-                </div>
+              <div class="action-row">
+                <span class="product-price"
+                  >${{ product.productActualPrice }}</span
+                >
+                <button
+                  mat-button
+                  class="button"
+                  (click)="viewProduct(product.productId)"
+                >
+                  View
+                </button>
               </div>
-              
-            </mat-card-content>
-          </mat-card>
-        </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
       </div>
     </div>
+  </div>
 
-    <button
+  <button
     mat-button
     (click)="nextPage()"
     [disabled]="!hasMoreProducts"
@@ -91,4 +105,5 @@
   >
     <mat-icon>chevron_right</mat-icon>
   </button>
-  </div>
+</div>
+</section>

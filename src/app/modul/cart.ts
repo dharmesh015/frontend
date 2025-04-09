@@ -1,3 +1,7 @@
+// import { FileHandel } from "../_model/file-handel.model";
+
+import { FileHandel } from "../_model/file-handel.model";
+
 export interface Cart {
     cartId: number;
     product: {
@@ -6,7 +10,7 @@ export interface Cart {
       productDescription: string;
       productDiscountedPrice: number;
       productActualPrice: number;
-      productImages: any[];
+      productImages: FileHandel[];
     };
     user: any;
   }

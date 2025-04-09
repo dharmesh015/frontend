@@ -66,6 +66,17 @@ public placeOrder(orderDetails: OrderDetails, isSingleProductCheckout: boolean):
     );
   }
 
+  getAllProductsPageWiseByUser(
+    page: number,
+    size: number,
+    sortBy: string,
+    sortDir: string
+  ): Observable<any> {
+    return this.httpClient.get(
+      `${this.baseUrl}/getAllProductsPageWiseByUser?page=${page}&size=${size}&sortBy=${sortBy}&sortDir=${sortDir}`
+    );
+  }
+
   getOrderDetails(
     username: string,
     page: number,

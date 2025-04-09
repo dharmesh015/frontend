@@ -15,7 +15,7 @@ export class ProductListComponent implements OnInit {
 
   products: Product[] = [];
   page: number = 0;
-  size: number = 5; 
+  size: number = 4; 
   sortBy: string = 'productName';
   sortDir: string = 'asc';
   totalProducts: number = 0; 
@@ -31,7 +31,7 @@ export class ProductListComponent implements OnInit {
   }
 
   loadProducts(): void {
-    this.productService.getAllProductsPageWise(this.page, this.size, this.sortBy, this.sortDir).subscribe( (data) => {
+    this.productService.getAllProductsPageWiseByUser(this.page, this.size, this.sortBy, this.sortDir).subscribe( (data) => {
       this.products = data.content; 
       this.totalProducts = data.totalElements; 
       this.hasMoreProducts = this.products.length === this.size; 

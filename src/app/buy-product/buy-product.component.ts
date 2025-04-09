@@ -167,4 +167,6 @@ export class BuyProductComponent implements OnInit {
     
     return grandTotal;
   }
+
+
 }
