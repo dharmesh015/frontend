@@ -113,6 +113,7 @@ export class ProfilepageComponent implements OnInit {
       .subscribe(
         (data: any) => {
           this.OrderDetails = data.content.map((order: any) => {
+            console.log( this.OrderDetails)
             return {
               // orderId: order.orderId,
               orderFullName: order.orderFullName,
