@@ -55,6 +55,18 @@ public placeOrder(orderDetails: OrderDetails, isSingleProductCheckout: boolean):
   return this.httpClient.post(`${this.baseUrl}/placeOrder/${isSingleProductCheckout}`, orderDetails);
 }
 
+public placeOrderWithPayment(orderWithPayment: any, isSingleProductCheckout: boolean): Observable<any> {
+  return this.httpClient.post(
+    `${this.baseUrl}/placeOrderWithPayment/${isSingleProductCheckout}`, 
+    orderWithPayment
+  );
+}
+public createRazorpayOrder(amount: number): Observable<any> {
+  return this.httpClient.post(
+    `${this.baseUrl}/createRazorpayOrder`, 
+    { amount: amount }
+  );
+}
   getAllProductsPageWise(
     page: number,
     size: number,

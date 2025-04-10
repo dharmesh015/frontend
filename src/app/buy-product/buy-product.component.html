@@ -1,11 +1,9 @@
-
-
 <div class="product-container">
   <div class="product-header">
     <h1>My Products</h1>
   </div>
 
-  <div class="product-content" >
+  <div class="product-content">
     <!-- Product Table Section -->
     <div class="product-table-container">
       <table class="product-table" *ngIf="productDetails && productDetails.length > 0">
@@ -50,9 +48,8 @@
         </tbody>
       </table>
       <div class="summary-row total">
-       
-       <span>Total: ${{getCalculatedGrandTotal()}}</span>
-     </div>
+        <span>Total: ${{getCalculatedGrandTotal()}}</span>
+      </div>
       
       <!-- Empty state if no products -->
       <div class="empty-state" *ngIf="!productDetails || productDetails.length === 0">
@@ -63,27 +60,10 @@
 
     <!-- Order Summary and Checkout Section -->
     <div class="order-section">
-      <!-- <div class="price-summary">
-        <div *ngFor="let product of productDetails" class="summary-row">
-          <span>{{product.productName}}</span>
-          <span>${{getCalculatedTotal(product.productId, product.productDiscountedPrice)}}</span>
-        </div>
-        <div class="summary-row">
-          <span>Shipping</span>
-          <span>Free</span>
-        </div>
-        <div class="summary-row total">
-          <span>Total</span>
-          <span>${{getCalculatedGrandTotal()}}</span>
-        </div>
-      </div> -->
-
-     
       <!-- Shipping Information Form -->
       <div class="shipping-form">
         <h3>Shipping Information</h3>
         <form #orderForm="ngForm">
-         
           <div class="form-group">
             <label for="fullName">Full Name*</label>
             <input type="text" id="fullName" name="fullName" class="form-control" 
@@ -100,19 +80,22 @@
             <input type="text" id="alternateContactNumber" name="alternateContactNumber" 
                   class="form-control" [(ngModel)]="orderDetails.alternateContactNumber">
           </div>
-         
-         
+          
           <div class="form-group">
             <label for="fullAddress">Full Address*</label>
             <textarea id="fullAddress" name="fullAddress" class="form-control" 
                      rows="3" [(ngModel)]="orderDetails.fullAddress" required></textarea>
           </div>
           
+          <!-- Validate form button -->
+          <button class="validate-form-button" (click)="checkFormValidity(orderForm)">Confirm Shipping Details</button>
         </form>
       </div>
-
-      
     </div>
   </div>
-  <button class="buy-now-button" (click)="orderForm.valid && placeOrder(orderForm)">Check Out</button>
+  
+  <!-- Payment Button - disabled until form is valid -->
+  <button class="payment-button" [disabled]="!isFormFilled" (click)="processPayment()">
+    Proceed to Payment
+  </button>
 </div>
