@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { AddUserDialogComponent } from '../add-user-dialog/add-user-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { UpdateUserDialogComponent } from '../update-user-dialog/update-user-dialog.component';
+import { ChangeRoleDialogComponent } from '../change-role-dialog/change-role-dialog.component';
 
 @Component({
   selector: 'app-admin',
@@ -136,6 +137,19 @@ export class AdminComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.loadUsers();
+      }
+    });
+  }
+
+  changeUserRole(user: userdata): void {
+    const dialogRef = this.dialog.open(ChangeRoleDialogComponent, {
+      data: { userName: user.userName, currentRole:user.role[0]},
+      width: '400px',
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.loadUsers(); // Refresh the user list
       }
     });
   }

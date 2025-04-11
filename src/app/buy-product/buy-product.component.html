@@ -88,14 +88,20 @@
           </div>
           
           <!-- Validate form button -->
-          <button class="validate-form-button" (click)="checkFormValidity(orderForm)">Confirm Shipping Details</button>
+          <!-- <button class="payment-button" [disabled]="!orderForm.valid" (click)="processPayment(orderForm)">
+            Proceed to Payment
+          </button> -->
+          <button class="payment-button" [disabled]="!orderForm.valid" (click)="payment(orderForm)">
+            Proceed to Payment
+          </button>
+
+
+          <!-- <button class="validate-form-button" (click)="checkFormValidity(orderForm)" >Confirm Shipping Details</button> -->
         </form>
       </div>
     </div>
   </div>
   
   <!-- Payment Button - disabled until form is valid -->
-  <button class="payment-button" [disabled]="!isFormFilled" (click)="processPayment()">
-    Proceed to Payment
-  </button>
+  
 </div>

@@ -106,4 +106,22 @@ export class UserService {
       `${this.apiUrl}/getuser/${name}`
     );
   }
+
+  SendEmailForRole(name:string,email: string): Observable<string> {
+    console.log('Registration seller service!',);
+    return this.httpclient
+      .post(
+        this.apiUrl + '/send-email-for-role/'+name,
+        { email: email },
+        { responseType: 'text' }
+      )
+      .pipe(map((response) => response as string));
+  }
+
+  updateUserRole(userName: string, newRole: string): Observable<any> {
+    console.log("updaterole sevice"+newRole)
+    return this.httpclient.get( this.apiUrl+`/updateUserRole/${userName}/${newRole}` , {
+      responseType: 'text',
+    })
+  }
 }

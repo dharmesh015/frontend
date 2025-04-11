@@ -1,7 +1,18 @@
 <div class="main-container">
+  <!-- Search Bar -->
+  <div class="search-bar">
+    <input
+      type="text"
+      placeholder="Search for products..."
+      [(ngModel)]="searchTerm"
+      (input)="filterProducts()"
+      class="form-control"
+    />
+  </div>
+
   <div class="product-grid">
     <!-- Product 1 -->
-    <div *ngFor="let product of products" class="product-card-container">
+    <div *ngFor="let product of filteredProducts" class="product-card-container">
       <div class="image-container">
         <img
           *ngIf="product.productImages && product.productImages.length > 0"
@@ -15,7 +26,7 @@
         {{ product.productName }}
       </div>
       <div class="ratings">
-        <span class="stars">{{ '★'}}</span>
+        <span class="stars">{{ '★' }}</span>
         <span class="review-count">{{ "241" }} reviews</span>
       </div>
       <div class="purchase-count">
@@ -24,9 +35,8 @@
       <div class="price-section">
         <span class="current-price">₹{{ product.productDiscountedPrice }}</span>
         <span class="mrp">M.R.P: ₹{{ product.productActualPrice }}</span>
-        <span class="discount">({{ (product.productActualPrice-product.productDiscountedPrice) }} off)</span>
+        <span class="discount">({{ (product.productActualPrice - product.productDiscountedPrice) }} off)</span>
       </div>
-      <!-- <img src="/api/placeholder/45/20" alt="Prime" class="prime-logo" /> -->
       <div class="delivery-info">
         <span class="free-delivery">FREE delivery Sat, 12 Apr</span>
       </div>

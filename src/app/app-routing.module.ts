@@ -19,6 +19,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { SellerComponent } from './seller/seller.component';
 import { CartComponent } from './cart/cart.component';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ShowOrderComponent } from './show-order/show-order.component';
 
 const routes: Routes = [
   // import { AppRoutingModule } from './app-routing.module';
@@ -71,6 +72,12 @@ const routes: Routes = [
     component: BuyProductComponent,
     canActivate: [AuthGuard],
     data: { roles: ['User'] },
+  },
+  {
+    path: 'showorder',
+    component: ShowOrderComponent,
+    canActivate: [AuthGuard],
+    data: { roles: ['Seller'] },
   },
   {path:'homepage',component:HomepageComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },

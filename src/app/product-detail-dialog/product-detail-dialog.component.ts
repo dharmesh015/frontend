@@ -1,4 +1,3 @@
-
 import { Component, HostListener, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Product } from '../_model/product.model';
@@ -16,6 +15,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ProductDetailDialogComponent implements OnInit {
   showWelcomeMessage = true;
   products: Product[] = [];
+  filteredProducts: Product[] = []; // New property for filtered products
+  searchTerm: string = ''; // New property for search term
   screenWidth: number;
   page: number = 0;
   size: number = 8; 
@@ -24,8 +25,6 @@ export class ProductDetailDialogComponent implements OnInit {
   totalProducts: number = 0; 
   hasMoreProducts: boolean = true; 
 
-
-i: any;
   constructor(
     private productService: ProductService,
     private dialog: MatDialog,
@@ -33,10 +32,10 @@ i: any;
     private route: ActivatedRoute
   ) {
     this.screenWidth = window.innerWidth;
-    
   }
+
   @HostListener('window:resize', ['$event'])
-  onResize(event:any) {
+  onResize(event: any) {
     this.screenWidth = window.innerWidth;
   }
 
@@ -56,15 +55,14 @@ i: any;
     this.loadProducts();
   }
 
-  viewProduct(productId: number) {
-    this.router.navigate(['/ProductViewDetails', productId]);
+  viewProduct(id: number) {
+    this.router.navigate(['/ProductViewDetails', id]);
   }
-  
+
   loadProducts(): void {
     this.productService.getAllProducts().subscribe(
-      (data:Product[]) => {
-        // console.log(data.content);
-        this.products = data.map((product:any) => {
+      (data: Product[]) => {
+        this.products = data.map((product: any) => {
           product.productImages = product.productImages.map((image: { type: any; picByte: any; }) => {
             return {
               ...image,
@@ -73,8 +71,7 @@ i: any;
           });
           return product;
         });
-       
-        return this.products;
+        this.filteredProducts = this.products; // Initialize filtered products
       },
       (error) => {
         Swal.fire('Error', 'Failed to load products. Please try again later.', 'error');
@@ -82,20 +79,25 @@ i: any;
       }
     );
   }
- 
-    nextPage(): void {
-      if (this.hasMoreProducts) {
-        this.page++;
-        this.loadProducts();
-      }
+
+  filterProducts(): void {
+    const term = this.searchTerm.toLowerCase();
+    this.filteredProducts = this.products.filter(product => 
+      product.productName.toLowerCase().includes(term)
+    );
+  }
+
+  nextPage(): void {
+    if (this.hasMoreProducts) {
+      this.page++;
+      this.loadProducts();
     }
-  
-    previousPage(): void {
-      if (this.page > 0) {
-        this.page--;
-        this.loadProducts();
-      }
+  }
+
+  previousPage(): void {
+    if (this.page > 0) {
+      this.page--;
+      this.loadProducts();
     }
-  
-   
+  }
 }

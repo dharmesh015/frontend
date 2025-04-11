@@ -72,7 +72,32 @@ body {
   height: 40px;
   overflow: hidden;
 }
+.search-bar {
+  margin: 20px 0; /* Add some space above and below the search bar */
+  display: flex; /* Use flexbox for alignment */
+  justify-content: end; /* Center the search bar */
+}
 
+.search-bar input {
+  width: 100%; /* Make the input take the full width */
+  max-width: 400px; /* Set a maximum width for larger screens */
+  padding: 10px; /* Add some padding for better touch targets */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+.search-bar input:focus {
+  border-color: #007bff; /* Change border color on focus */
+  outline: none; /* Remove default outline */
+}
+
+.search-bar input::placeholder {
+  color: #aaa; /* Placeholder text color */
+  font-style: italic; /* Italicize placeholder text */
+}
 .ratings {
   display: flex;
   align-items: center;

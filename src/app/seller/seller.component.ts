@@ -4,10 +4,12 @@ import { Component, HostListener, OnInit } from '@angular/core';
   selector: 'app-seller',
   standalone: false,
   templateUrl: './seller.component.html',
-  styleUrls: ['./seller.component.css'] // Corrected from styleUrl to styleUrls
+  styleUrls: ['./seller.component.css'],
 })
 export class SellerComponent implements OnInit {
   showProductList = true;
+  addproductlist = false;
+  orderhistory = false;
   isSidebarOpen = true;
   screenWidth: number;
 
@@ -33,11 +35,22 @@ export class SellerComponent implements OnInit {
 
   showProducts(): void {
     this.showProductList = true;
+    this.addproductlist = false;
+    this.orderhistory = false;
     this.checkSidebarState();
   }
 
   addProduct(): void {
     this.showProductList = false;
+    this.addproductlist = true;
+    this.orderhistory = false;
+    this.checkSidebarState();
+  }
+
+  ordersection(): void {
+    this.showProductList = false;
+    this.addproductlist = false;
+    this.orderhistory = true;
     this.checkSidebarState();
   }
 

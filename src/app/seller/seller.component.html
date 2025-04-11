@@ -1,4 +1,3 @@
-<!-- Main Container with Sidebar and Content -->
 <div class="app-container">
   <!-- Sidebar -->
   <div class="sidebar" [ngClass]="{'open': isSidebarOpen, 'closed': !isSidebarOpen}">
@@ -10,11 +9,11 @@
         <mat-icon>view_list</mat-icon>
         <span>Show Products</span>
       </button>
-      <button mat-button class="sidebar-item" [ngClass]="{'active': !showProductList}" (click)="addProduct()">
+      <button mat-button class="sidebar-item" [ngClass]="{'active': addproductlist}" (click)="addProduct()">
         <mat-icon>add_circle</mat-icon>
         <span>Add Product</span>
       </button>
-      <button mat-button class="sidebar-item">
+      <button mat-button class="sidebar-item" [ngClass]="{'active': orderhistory}" (click)="ordersection()">
         <mat-icon>shopping_cart</mat-icon>
         <span>Orders</span>
       </button>
@@ -31,11 +30,10 @@
 
   <!-- Main Content -->
   <div class="main-content">
-    <mat-toolbar class="top-nav" mat-icon-button class="menu-toggle" >
+    <mat-toolbar class="top-nav" mat-icon-button class="menu-toggle">
       <button mat-icon-button class="menu-toggle" (click)="toggleSidebar()">
         <mat-icon>menu</mat-icon>
       </button>
-      
     </mat-toolbar>
 
     <!-- Content Container -->
@@ -44,8 +42,12 @@
         <app-product-list></app-product-list>
       </div>
       
-      <div *ngIf="!showProductList">
+      <div *ngIf="addproductlist">
         <app-add-new-product></app-add-new-product>
+      </div>
+
+      <div *ngIf="orderhistory">
+        <app-show-order></app-show-order>
       </div>
     </div>
   </div>

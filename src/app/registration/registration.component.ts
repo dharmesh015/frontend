@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { UserService } from '../_service/user.service';
 import { Registrationuser } from '../modul/registrationuser';
 import { UserAuthServiceService } from '../_service/user-auth-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registration',
@@ -15,8 +16,10 @@ import { UserAuthServiceService } from '../_service/user-auth-service.service';
 export class RegistrationComponent {
   userData: Registrationuser = new Registrationuser('', '', '', '', '', '', '');
 
-  constructor(private userService: UserService, private router: Router,
-    private userAuthServiceService:UserAuthServiceService
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private userAuthServiceService: UserAuthServiceService
   ) {}
 
   onSubmit(form: NgForm) {
@@ -41,16 +44,45 @@ export class RegistrationComponent {
       this.userService.register(this.userData).subscribe(
         (response) => {
           console.log('Registration successful!', response);
-          this.router.navigate(['/home'])
+          if (form.value.role == 'seller') { // Check for lowercase 'seller'
+            console.log('Registration for seller!');
+            this.userService
+              .SendEmailForRole(form.value.username, form.value.Email)
+              .subscribe(
+                (response: any) => {
+                  console.log('Email sent successfully!', response);
+                  Swal.fire({
+                    title: 'Email Sent',
+                    text: 'Your request send to admin for  registered as a seller.',
+                    icon: 'info',
+                  });
+                  this.router.navigate(['/home']);
+                },
+                (error: any) => {
+                  console.log('Email sending failed', error);
+                  Swal.fire({
+                    title: 'Error',
+                    text: 'There was an issue sending the email.',
+                    icon: 'error',
+                  });
+                }
+              );
+          }
+          this.router.navigate(['/home']);
         },
         (error) => {
           console.log('Registration failed', error);
+          Swal.fire({
+            title: 'Error',
+            text: 'Registration failed. Please try again.',
+            icon: 'error',
+          });
         }
       );
     }
   }
 
-  islogin():boolean{
-    return this.userAuthServiceService.isLoggedIn()
+  islogin(): boolean {
+    return this.userAuthServiceService.isLoggedIn();
   }
 }

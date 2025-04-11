@@ -69,6 +69,11 @@ export class ProductViewDetailsComponent implements OnInit {
 
   addToCart(productId: number): void {
     console.log('add to cart');
+    if (!this.authserice.isLoggedIn()) {
+      // Redirect to login page if not logged in
+      this.router.navigate(['/login']);
+    } else {
+     
     this.productService.addToCart(productId).subscribe(
       (response) => {
         console.log('Product added to cart:', response);
@@ -91,8 +96,8 @@ export class ProductViewDetailsComponent implements OnInit {
       }
     );
   }
-
-  buyNow(productId: number): void {
+  }
+  buyNow(productId:number):void {
     console.log('buy called');
     this.router.navigate([
       '/buyProduct',

@@ -190,6 +190,18 @@
                   </div>
                 </div>
               </div>
+              
+              <div class="form-outline mb-4">
+                <label class="form-label" for="roleSelect">Select Role</label>
+                <select id="roleSelect" class="form-control" #role="ngModel" ngModel name="role" required>
+                  <option value="" disabled selected>Select your role</option>
+                  <option value="user">User </option>
+                  <option value="seller">Seller</option>
+                </select>
+                <div *ngIf="role.invalid && role.touched" class="error">
+                  <div *ngIf="role.errors?.['required']">Role selection is required</div>
+                </div>
+              </div>
 
               <button
                 type="submit"

@@ -4,7 +4,7 @@ import { BrowserModule, provideClientHydration, withEventReplay } from '@angular
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AdminComponent } from './admin/admin.component';
-
+import { MatSelectModule } from '@angular/material/select';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { HeaderComponent } from './header/header.component';
@@ -46,6 +46,9 @@ import { AddUserDialogComponent } from './add-user-dialog/add-user-dialog.compon
 import { UpdateUserDialogComponent } from './update-user-dialog/update-user-dialog.component';
 import { CommonModule } from '@angular/common';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ChangeRoleDialogComponent } from './change-role-dialog/change-role-dialog.component';
+import { from } from 'rxjs';
+import { ShowOrderComponent } from './show-order/show-order.component';
 
 
 
@@ -72,7 +75,9 @@ import { HomepageComponent } from './homepage/homepage.component';
     SellerComponent,
     AddUserDialogComponent,
     UpdateUserDialogComponent,
-    HomepageComponent
+    HomepageComponent,
+    ChangeRoleDialogComponent,
+    ShowOrderComponent
     
    
     
@@ -94,7 +99,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     MatDialogModule,
     MatCardModule,
     MatTableModule,
-    CommonModule
+    CommonModule,
+    MatSelectModule
  
   ],
   providers: [
