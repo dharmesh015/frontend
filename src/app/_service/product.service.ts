@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Product } from '../_model/product.model';
 import { OrderDetails } from '../_model/order-details.model';
 import { Cart } from '../modul/cart';
@@ -58,8 +58,11 @@ public placeOrder(orderDetails: OrderDetails, isSingleProductCheckout: boolean):
 public placeOrderWithPayment(orderWithPayment: any, isSingleProductCheckout: boolean): Observable<any> {
   return this.httpClient.post(
     `${this.baseUrl}/placeOrderWithPayment/${isSingleProductCheckout}`, 
-    orderWithPayment
-  );
+    orderWithPayment,{
+            responseType: 'text',
+          })
+          .pipe(map((response) => response as string));
+  
 }
 public createRazorpayOrder(amount: number): Observable<any> {
   return this.httpClient.post(

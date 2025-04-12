@@ -326,6 +326,17 @@
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(89, 128, 193, 0.4);
   }
+
+  .error {
+    border-color: rgb(0, 0, 0);
+    border: 2px;
+    background-color: rgb(228, 135, 135);
+    margin: 5px;
+    padding: 5px;
+    border-radius: 50px;
+    justify-items: center;
+   
+  }
   
   /* Responsive Design */
   @media (max-width: 900px) {
