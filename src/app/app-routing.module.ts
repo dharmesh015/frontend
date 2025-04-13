@@ -24,7 +24,7 @@ import { ShowOrderComponent } from './show-order/show-order.component';
 const routes: Routes = [
   // import { AppRoutingModule } from './app-routing.module';
   { path: 'home', component: HomeComponent },
- 
+
   {
     path: 'admin',
     component: AdminComponent,
@@ -79,7 +79,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['Seller'] },
   },
-  {path:'homepage',component:HomepageComponent},
+  { path: 'homepage', component: HomepageComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: ForbiddenComponent },
 ];

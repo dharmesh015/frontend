@@ -64,16 +64,9 @@
               color="primary"
               *ngIf="isNewProduct"
             >
-              Add Product
+            Update Product
             </button>
-            <button
-              type="submit"
-              mat-stroked-button
-              color="primary"
-              *ngIf="!isNewProduct"
-            >
-              Update Product
-            </button>
+           
           </div>
         </form>
       </div>
@@ -83,33 +76,21 @@
 <div class="image">
     <div fxFlex="50" fxFlex.xs="100" >
     
-        <div class="dropzone" style="margin: 20px; ">
-          <div class="text-wrapper">
-            <div class="center">
-              Drop your Img or
-              <a
-                (click)="selectFile.click()"
-                style="color: blueviolet; font-weight: 800; cursor: pointer"
-                >Browse</a
-              >
-              a Img
-            </div>
-          </div>
-        </div>
+        
 
-        <input
+        <!-- <input
           multiple
           type="file"
           style="display: none"
           #selectFile
           (change)="onFileSelected($event)"
-        />
+        /> -->
      
       <div class="m-6 p-3"> 
         <div class="row">
           <div class="col-6 col-md-4 col-lg-3" *ngFor="let file of product.productImages; let i = index">
             <div class="image-container">
-              <span class="btn-remove-image" (click)="removeImages(i)">X</span>
+              <!-- <span class="btn-remove-image" (click)="removeImages(i)">X</span> -->
               <img [src]="file.url" alt="Product Image" class="product-image" />
             </div>
           </div>

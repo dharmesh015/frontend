@@ -19,12 +19,12 @@ export class ForgotPasswordComponent {
     private acrouter: ActivatedRoute,
     private router: Router
   ) {}
-
   sendEmail(form: NgForm) {
     if (form.valid) {
+      this.isLoading = true; // Set loading to true before API call
       this.userService.sendEmail(form.value.email).subscribe(
         (response) => {
-          this.isLoading = false;
+          this.isLoading = false; // Set loading to false when response is received
           console.log("Response received:", response);
           
           if (response === "UNF") {
@@ -52,7 +52,13 @@ export class ForgotPasswordComponent {
           }
         },
         (error) => {
-          
+          this.isLoading = false; // Set loading to false on error
+          Swal.fire({
+            title: 'Error',
+            text: 'An error occurred while processing your request. Please try again later.',
+            icon: 'error',
+            confirmButtonText: 'OK',
+          });
         }
       );
     } else {
@@ -63,6 +69,4 @@ export class ForgotPasswordComponent {
         confirmButtonText: 'OK',
       });
     }
-  }
-
-}
+  }}

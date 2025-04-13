@@ -22,65 +22,81 @@ export class RegistrationComponent {
     private userAuthServiceService: UserAuthServiceService
   ) {}
 
+  isLoading = false;
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
-      Object.keys(form.controls).forEach((field) => {
-        const control = form.controls[field];
-        control.markAsTouched({ onlySelf: true });
-      });
-      return;
+        Object.keys(form.controls).forEach((field) => {
+            const control = form.controls[field];
+            control.markAsTouched({ onlySelf: true });
+        });
+        return;
     }
 
     if (form.valid) {
-      this.userData.userName = form.value.username;
-      this.userData.userLastName = form.value.Lastname;
-      this.userData.userFirstName = form.value.userFirstName;
-      this.userData.email = form.value.Email;
-      this.userData.mobileNumber = form.value.mobileNumber;
-      this.userData.userPassword = form.value.Password;
-      this.userData.address = form.value.address;
-      console.log(form.value.address);
+        this.userData.userName = form.value.username;
+        this.userData.userLastName = form.value.Lastname;
+        this.userData.userFirstName = form.value.userFirstName;
+        this.userData.email = form.value.Email;
+        this.userData.mobileNumber = form.value.mobileNumber;
+        this.userData.userPassword = form.value.Password;
+        this.userData.address = form.value.address;
 
-      this.userService.register(this.userData).subscribe(
-        (response) => {
-          console.log('Registration successful!', response);
-          if (form.value.role == 'seller') { // Check for lowercase 'seller'
-            console.log('Registration for seller!');
-            this.userService
-              .SendEmailForRole(form.value.username, form.value.Email)
-              .subscribe(
-                (response: any) => {
-                  console.log('Email sent successfully!', response);
-                  Swal.fire({
-                    title: 'Email Sent',
-                    text: 'Your request send to admin for  registered as a seller.',
-                    icon: 'info',
-                  });
-                  this.router.navigate(['/home']);
-                },
-                (error: any) => {
-                  console.log('Email sending failed', error);
-                  Swal.fire({
-                    title: 'Error',
-                    text: 'There was an issue sending the email.',
-                    icon: 'error',
-                  });
+        this.userService.register(this.userData).subscribe(
+            (response) => {
+              
+                if (response === 'EmailExist') {
+                    console.log('Email already exists!', response);
+                    Swal.fire({
+                        title: 'Email Already In Use',
+                        text: 'The email address you entered is already registered. Please use a different email or log in to your account.',
+                        icon: 'warning',
+                    });
+                    return; // Exit the function if the email already exists
                 }
-              );
-          }
-          this.router.navigate(['/home']);
-        },
-        (error) => {
-          console.log('Registration failed', error);
-          Swal.fire({
-            title: 'Error',
-            text: 'Registration failed. Please try again.',
-            icon: 'error',
-          });
-        }
-      );
+
+                // Proceed with seller registration if the email is not in use
+                if (form.value.role === 'seller') {
+                    this.isLoading = true;
+                    console.log('Registration for seller!');
+
+                    this.userService.SendEmailForRole(form.value.username, form.value.Email).subscribe(
+                        (response: any) => {
+                            console.log('Email sent successfully!', response);
+                            Swal.fire({
+                                title: 'Email Sent',
+                                text: 'Your request has been sent to the admin for registration as a seller.',
+                                icon: 'info',
+                            });
+                            this.isLoading = false;
+                            this.router.navigate(['/home']);
+                        },
+                        (error: any) => {
+                            console.log('Email sending failed', error);
+                            Swal.fire({
+                                title: 'Error',
+                                text: 'There was an issue sending the email.',
+                                icon: 'error',
+                            });
+                        }
+                    );
+                } else {
+                    // If not a seller, navigate to home
+                    this.router.navigate(['/home']);
+                }
+            },
+            (error) => {
+                console.log('Registration failed', error);
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Registration failed. Please try again.',
+                    icon: 'error',
+                });
+            }
+        );
+        this.isLoading = false;
     }
-  }
+}
 
   islogin(): boolean {
     return this.userAuthServiceService.isLoggedIn();

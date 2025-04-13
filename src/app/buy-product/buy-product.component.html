@@ -1,4 +1,12 @@
 <div class="product-container">
+  <!-- Processing Order Overlay - Shows when payment is made but server response is pending -->
+  <div class="processing-overlay" *ngIf="isProcessingOrder">
+    <div class="spinner-container">
+      <div class="spinner"></div>
+      <p>Processing your order. Please wait...</p>
+    </div>
+  </div>
+
   <div class="product-header">
     <h1>My Products</h1>
   </div>
@@ -36,9 +44,10 @@
             <td class="quantity-cell">
               <div class="quantity-buttons">
                 <button class="quantity-btn" (click)="onQuantityChanged(getQuantityForProduct(product.productId) - 1, product.productId)" 
-                        [disabled]="getQuantityForProduct(product.productId) <= 1">-</button>
+                        [disabled]="getQuantityForProduct(product.productId) <= 1 || isProcessingOrder">-</button>
                 <span class="quantity-display">{{getQuantityForProduct(product.productId)}}</span>
-                <button class="quantity-btn" (click)="onQuantityChanged(getQuantityForProduct(product.productId) + 1, product.productId)">+</button>
+                <button class="quantity-btn" (click)="onQuantityChanged(getQuantityForProduct(product.productId) + 1, product.productId)"
+                        [disabled]="isProcessingOrder">+</button>
               </div>
             </td>
             <td class="total-cell">
@@ -54,7 +63,7 @@
       <!-- Empty state if no products -->
       <div class="empty-state" *ngIf="!productDetails || productDetails.length === 0">
         <p>No products in your cart.</p>
-        <button class="add-to-cart-button" [routerLink]="['/products']">Shop Now</button>
+        <button class="add-to-cart-button" [routerLink]="['/products']" [disabled]="isProcessingOrder">Shop Now</button>
       </div>
     </div>
 
@@ -67,55 +76,51 @@
             <div class="form-group">
                 <label for="fullName">Full Name*</label>
                 <input type="text" id="fullName" name="fullName" class="form-control" 
-                       [(ngModel)]="orderDetails.fullName" required>
+                       [(ngModel)]="orderDetails.fullName" required [disabled]="isProcessingOrder">
             </div>
             <div class="form-group">
                 <label for="contactNumber">Contact Number*</label>
                 <input type="text" id="contactNumber" name="contactNumber" class="form-control" 
-                       [(ngModel)]="orderDetails.contactNumber" required   #ContactNumber="ngModel" pattern="^\d{10}$" 
-                       title="Please enter a valid 10-digit contact number">
+                       [(ngModel)]="orderDetails.contactNumber" required #ContactNumber="ngModel" pattern="^\d{10}$" 
+                       title="Please enter a valid 10-digit contact number" [disabled]="isProcessingOrder">
             </div>
 
             <div *ngIf="ContactNumber.invalid && ContactNumber.touched" class="error">
               <div *ngIf="ContactNumber.errors?.['required']">
-                  Alternate Contact Number is required
+                  Contact Number is required
               </div>
               <div *ngIf="ContactNumber.errors?.['pattern']">
                   Enter a valid 10-digit contact number
               </div>
-          </div>
+            </div>
             
             <div class="form-group">
               <label for="alternateContactNumber">Alternate Contact Number</label>
               <input type="text" id="alternateContactNumber" name="alternateContactNumber" 
                      class="form-control" [(ngModel)]="orderDetails.alternateContactNumber" 
-                     #alternateContactNumber="ngModel" pattern="^\d{10}$" title="Please enter a valid 10-digit contact number">
-          </div>
+                     #alternateContactNumber="ngModel" pattern="^\d{10}$" title="Please enter a valid 10-digit contact number"
+                     [disabled]="isProcessingOrder">
+            </div>
           
-          <div *ngIf="alternateContactNumber.invalid && alternateContactNumber.touched" class="error">
-              <div *ngIf="alternateContactNumber.errors?.['required']">
-                  Alternate Contact Number is required
-              </div>
+            <div *ngIf="alternateContactNumber.invalid && alternateContactNumber.touched" class="error">
               <div *ngIf="alternateContactNumber.errors?.['pattern']">
                   Enter a valid 10-digit contact number
               </div>
-          </div>
+            </div>
             
             <div class="form-group">
                 <label for="fullAddress">Full Address*</label>
                 <textarea id="fullAddress" name="fullAddress" class="form-control" 
-                          rows="3" [(ngModel)]="orderDetails.fullAddress" required></textarea>
+                          rows="3" [(ngModel)]="orderDetails.fullAddress" required [disabled]="isProcessingOrder"></textarea>
             </div>
             
-            <!-- Validate form button -->
-            <button class="payment-button" [disabled]="!orderForm.valid" (click)="processPayment(orderForm)">
-                Proceed to Payment
+            <!-- Proceed to Payment button - disabled during processing -->
+            <button class="payment-button" [disabled]="!orderForm.valid || isProcessingOrder" (click)="processPayment(orderForm)">
+                <span *ngIf="!isProcessingOrder">Proceed to Payment</span>
+                <span *ngIf="isProcessingOrder">Processing...</span>
             </button>
         </form>
-    </div>
+      </div>
     </div>
   </div>
-  
-  <!-- Payment Button - disabled until form is valid -->
-  
 </div>

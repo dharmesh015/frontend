@@ -19,6 +19,9 @@ export class BuyProductComponent implements OnInit {
   isSingleProductCheckout: boolean = false;
   productId: number = 0;
   mainImageIndex: number = 0;
+  
+  // Add loading flag
+  isProcessingOrder: boolean = false;
 
   // Flag to check if form is filled
   isFormFilled: boolean = false;
@@ -62,18 +65,6 @@ export class BuyProductComponent implements OnInit {
     script.async = true;
     document.body.appendChild(script);
   }
-  // loadRazorpayScript(): void {
-  //   const script = document.createElement('script');
-  //   script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-  //   script.async = true;
-  //   script.onload = () => {
-  //     console.log('Razorpay script loaded successfully');
-  //   };
-  //   script.onerror = () => {
-  //     console.error('Error loading Razorpay script');
-  //   };
-  //   document.body.appendChild(script);
-  // }
 
   getProductDetails(isSingleProductCheckout: boolean, productId: number): void {
     console.log('Getting product details:', isSingleProductCheckout, productId);
@@ -151,6 +142,7 @@ export class BuyProductComponent implements OnInit {
         }
       );
   }
+  
   // Check if form is filled and valid
   checkFormValidity(orderForm: NgForm): void {
     if (orderForm.valid) {
@@ -175,9 +167,10 @@ export class BuyProductComponent implements OnInit {
   }
 
   // Initialize Razorpay payment
-  // In buy-product.component.ts
   processPayment(orderForm: NgForm): void {
     this.checkFormValidity(orderForm);
+    if (!orderForm.valid) return;
+    
     const amount = this.getCalculatedGrandTotal();
 
     // First, create an order on your backend
@@ -187,7 +180,7 @@ export class BuyProductComponent implements OnInit {
           key: 'rzp_test_52fif8pT5IMuCt', // Make sure this is your correct key
           amount: amount * 100, // Razorpay expects amount in paise
           currency: 'INR',
-          name: 'Your Store Name',
+          name: 'Quickcart',
           description: 'Product Purchase',
           order_id: orderData.id, // Use the order ID from your backend
           handler: this.paymentSuccessHandler.bind(this),
@@ -220,6 +213,9 @@ export class BuyProductComponent implements OnInit {
 
   // Handler for successful payment
   paymentSuccessHandler(response: any): void {
+    // Set processing flag to true as soon as payment succeeds
+    this.isProcessingOrder = true;
+    
     this.paymentDetails = {
       razorpayPaymentId: response.razorpay_payment_id,
       razorpayOrderId: response.razorpay_order_id,
@@ -247,6 +243,9 @@ export class BuyProductComponent implements OnInit {
       .placeOrderWithPayment(orderWithPayment, this.isSingleProductCheckout)
       .subscribe(
         (response: any) => {
+          // Set processing to false when response is received
+          this.isProcessingOrder = false;
+          
           Swal.fire({
             title: 'Order Placed',
             text: 'Your payment was successful and order has been placed.',
@@ -257,6 +256,9 @@ export class BuyProductComponent implements OnInit {
           });
         },
         (error: any) => {
+          // Set processing to false even on error
+          this.isProcessingOrder = false;
+          
           Swal.fire({
             title: 'Error',
             text: 'An error occurred while processing your order. Please contact support.',

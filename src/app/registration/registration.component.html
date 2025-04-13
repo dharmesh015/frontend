@@ -2,22 +2,471 @@
   <style>
     .background-radial-gradient {
       background-color: hsl(0, 0%, 96%);
+      min-height: 100vh;
+      padding: 3rem 0 6rem 0; /* Added extra padding at the bottom */
+      background-image: radial-gradient(
+          650px circle at 0% 0%,
+          hsla(220, 100%, 80%, 0.1) 15%,
+          hsla(220, 100%, 80%, 0.05) 35%,
+          transparent 100%
+        ),
+        radial-gradient(
+          1250px circle at 100% 100%,
+          hsla(220, 100%, 80%, 0.1) 15%,
+          hsla(220, 100%, 80%, 0.05) 35%,
+          transparent 100%
+        );
     }
+
     .bg-glass {
       background-color: hsla(0, 0%, 100%, 0.9) !important;
       backdrop-filter: saturate(200%) blur(25px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+      margin-top: -20px;
+      overflow: hidden;
+    }
+
+    .form-scrollable {
+      height: 300px;
+      overflow-y: auto;
+      padding-right: 10px;
+    }
+
+    /* Custom scrollbar */
+    .form-scrollable::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .form-scrollable::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    .form-scrollable::-webkit-scrollbar-thumb {
+      background: #5980c1;
+      border-radius: 10px;
+    }
+
+    .form-scrollable::-webkit-scrollbar-thumb:hover {
+      background: #406cb1;
+    }
+
+    .brand-logo {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #163a79;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .brand-logo span {
+      color: #333;
+    }
+
+    .submit {
+      background-color: #5980c1;
+      color: white;
+      padding: 10px 25px;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .submit:hover {
+      background-color: #406cb1;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(89, 128, 193, 0.4);
+    }
+
+    .card-header {
+      background: linear-gradient(to right, #5980c1, #7a9bd3);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 15px 15px 0 0;
+      text-align: center;
+    }
+
+    .error {
+      border-color: rgb(0, 0, 0);
+      border: 2px;
+      background-color: rgb(228, 135, 135);
+      margin: 5px;
+      padding: 5px;
+      border-radius: 50px;
+      justify-items: center;
+      font-size: 0.85rem;
+    }
+
+    .label {
+      display: block;
+      font-weight: bold;
+    }
+
+    .form-control {
+      transition: border-color 0.3s ease;
+      border-radius: 10px;
+    }
+
+    .form-control:focus {
+      border-color: #5980c1;
+      box-shadow: 0 0 8px rgba(89, 128, 193, 0.5);
+    }
+
+    .form-label {
+      transition: color 0.3s ease;
+      font-weight: 500;
+      margin-left: 5px;
+    }
+
+    .form-control:focus + .form-label {
+      color: #5980c1;
+      font-weight: 600;
+    }
+
+    /* Animation for the form inputs */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .form-outline {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+
+    .form-outline:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+    .form-outline:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    .form-outline:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+    .form-outline:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+    .form-outline:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+    .form-outline:nth-child(6) {
+      animation-delay: 0.6s;
+    }
+    .form-outline:nth-child(7) {
+      animation-delay: 0.7s;
+    }
+    .form-outline:nth-child(8) {
+      animation-delay: 0.8s;
+    }
+
+    /* New styles for the left side enhancement */
+    .intro-section {
+      position: relative;
+    }
+
+    .trolley-container {
+      position: relative;
+      max-width: 350px;
+      height: 270px;
+      margin: 2rem auto;
+    }
+
+    .feature-list {
+      list-style: none;
+      padding-left: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .feature-item {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      color: #445577;
+      animation: slideIn 0.5s ease-out forwards;
+      opacity: 0;
+    }
+
+    .feature-item:nth-child(1) {
+      animation-delay: 0.3s;
+    }
+    .feature-item:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+    .feature-item:nth-child(3) {
+      animation-delay: 0.7s;
+    }
+    .feature-item:nth-child(4) {
+      animation-delay: 0.9s;
+    }
+
+    .feature-item:before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 5px;
+      width: 18px;
+      height: 18px;
+      background-color: #5980c1;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .intro-badge {
+      display: inline-block;
+      background-color: rgba(89, 128, 193, 0.15);
+      color: #163a79;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      margin-bottom: 1rem;
+      animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    @keyframes trolleyMove {
+      0% {
+        transform: translateX(-100px) rotate(0deg);
+      }
+      60% {
+        transform: translateX(10px) rotate(0deg);
+      }
+      70% {
+        transform: translateX(5px) rotate(0deg);
+      }
+      100% {
+        transform: translateX(0) rotate(0deg);
+      }
+    }
+
+    .trolley-animation {
+      animation: trolleyMove 1.5s ease-out forwards;
+    }
+
+    @keyframes itemDrop {
+      0% {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      60% {
+        transform: translateY(5px);
+        opacity: 1;
+      }
+      80% {
+        transform: translateY(-3px);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .item-animation-1 {
+      animation: itemDrop 0.5s ease-out 1.7s forwards;
+      opacity: 0;
+    }
+
+    .item-animation-2 {
+      animation: itemDrop 0.5s ease-out 1.9s forwards;
+      opacity: 0;
+    }
+
+    .item-animation-3 {
+      animation: itemDrop 0.5s ease-out 2.1s forwards;
+      opacity: 0;
+    }
+
+    .footer-space {
+      height: 100px; /* Extra space at the bottom */
+    }
+
+    /* Make the trolley look more 3D with shadows */
+    .trolley-shadow {
+      filter: drop-shadow(3px 5px 2px rgba(0, 0, 0, 0.2));
     }
   </style>
 
-  <div class="container px-4 py-5 px-md-5 text-center text-lg-start" >
+  <div class="container px-4 py-5 px-md-5 text-center text-lg-start">
+    <div *ngIf="isLoading" class="spinner-overlay">
+      <div class="spinner-container">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
     <div class="row gx-lg-5 align-items-center mb-5">
-      <div class="col-lg-6 mb-5 mb-lg-0">
-        <h1 class="my-5 display-3 fw-bold ls-tight">
+      <div class="col-lg-6 mb-5 mb-lg-0 intro-section">
+        <div class="intro-badge">Welcome to Quick Cart</div>
+        <h1 class="my-3 display-3 fw-bold ls-tight">
           Create Your Account<br />
           <span class="text-primary">Join us today!</span>
         </h1>
-        <p style="color: hsl(217, 10%, 50.8%)">
+
+        <!-- Shopping Trolley SVG Illustration -->
+        <div class="trolley-container">
+          <!-- Shopping Trolley -->
+          <svg
+            class="trolley-animation trolley-shadow"
+            width="100%"
+            height="100%"
+            viewBox="0 0 512 340"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <!-- Trolley Wheels -->
+            <circle
+              cx="120"
+              cy="300"
+              r="25"
+              fill="#7a9bd3"
+              stroke="#333"
+              stroke-width="3"
+            />
+            <circle
+              cx="300"
+              cy="300"
+              r="25"
+              fill="#7a9bd3"
+              stroke="#333"
+              stroke-width="3"
+            />
+            <circle cx="120" cy="300" r="8" fill="#444" />
+            <circle cx="300" cy="300" r="8" fill="#444" />
+
+            <!-- Trolley Base & Structure -->
+            <rect
+              x="80"
+              y="170"
+              width="280"
+              height="15"
+              rx="2"
+              fill="#5980c1"
+              stroke="#333"
+              stroke-width="2"
+            />
+            <rect
+              x="90"
+              y="185"
+              width="260"
+              height="90"
+              rx="5"
+              fill="#e5ecf9"
+              stroke="#5980c1"
+              stroke-width="3"
+            />
+
+            <!-- Trolley Basket -->
+            <path
+              d="M80,170 L50,50 L360,50 L330,170"
+              fill="none"
+              stroke="#5980c1"
+              stroke-width="6"
+            />
+            <path
+              d="M60,90 L350,90"
+              fill="none"
+              stroke="#5980c1"
+              stroke-width="2"
+            />
+            <path
+              d="M70,130 L340,130"
+              fill="none"
+              stroke="#5980c1"
+              stroke-width="2"
+            />
+
+            <!-- Trolley Handle -->
+            <path
+              d="M80,170 L60,170 C50,170 45,160 45,150 L45,60 C45,55 50,50 55,50 L60,50"
+              fill="none"
+              stroke="#5980c1"
+              stroke-width="6"
+              stroke-linecap="round"
+            />
+
+            <!-- Items in Trolley (with animation classes) -->
+            <g class="item-animation-1">
+              <rect
+                x="100"
+                y="70"
+                width="60"
+                height="50"
+                rx="5"
+                fill="#FFC107"
+                stroke="#333"
+                stroke-width="2"
+              />
+              <rect
+                x="110"
+                y="80"
+                width="40"
+                height="10"
+                rx="2"
+                fill="#FFECB3"
+              />
+            </g>
+
+            <g class="item-animation-2">
+              <rect
+                x="180"
+                y="60"
+                width="70"
+                height="60"
+                rx="5"
+                fill="#4CAF50"
+                stroke="#333"
+                stroke-width="2"
+              />
+              <rect
+                x="190"
+                y="75"
+                width="50"
+                height="15"
+                rx="2"
+                fill="#C8E6C9"
+              />
+            </g>
+
+            <g class="item-animation-3">
+              <rect
+                x="270"
+                y="65"
+                width="55"
+                height="55"
+                rx="5"
+                fill="#F06292"
+                stroke="#333"
+                stroke-width="2"
+              />
+              <circle cx="297" cy="90" r="15" fill="#FCE4EC" />
+            </g>
+          </svg>
+        </div>
+
+        <p style="color: #445577; font-size: 1.1rem">
           Sign up to access exclusive features and offers tailored just for you
+          at Quick Cart - your one-stop shopping destination.
         </p>
       </div>
 
@@ -32,190 +481,233 @@
         ></div>
 
         <div class="card bg-glass">
-          <div class="card-body px-4 py-5 px-md-5">
+          <div class="card-header">
+            <div class="brand-logo">Quick <span>Cart</span></div>
+            <p class="mb-0">Create your account to get started</p>
+          </div>
+          <div class="card-body px-4 py-4 px-md-5">
             <form
               class="form"
               #registrationForm="ngForm"
               (ngSubmit)="onSubmit(registrationForm)"
             >
-              <!-- User Name input -->
-              <div class="form-outline mb-4">
-                <input
-                  type="text"
-                  id="form3Example1"
-                  class="form-control"
-                  placeholder="Enter Your Name"
-                  #username="ngModel"
-                  ngModel
-                  name="username"
-                  required
-                />
-                <label class="form-label" for="form3Example1">User Name</label>
-                <div *ngIf="username.invalid && username.touched" class="error">
-                  <div *ngIf="username.errors?.['required']">
-                    User Name is required
+              <div class="form-scrollable">
+                <!-- User Name input -->
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    id="form3Example1"
+                    class="form-control"
+                    placeholder="Enter Your Name"
+                    #username="ngModel"
+                    ngModel
+                    name="username"
+                    required
+                  />
+                  <label class="form-label" for="form3Example1"
+                    >User Name</label
+                  >
+                  <div
+                    *ngIf="username.invalid && username.touched"
+                    class="error"
+                  >
+                    <div *ngIf="username.errors?.['required']">
+                      User Name is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    id="form3Example2"
+                    class="form-control"
+                    placeholder="Enter Your First Name"
+                    #userFirstName="ngModel"
+                    ngModel
+                    name="userFirstName"
+                    required
+                  />
+                  <label class="form-label" for="form3Example2"
+                    >First Name</label
+                  >
+                  <div
+                    *ngIf="userFirstName.invalid && userFirstName.touched"
+                    class="error"
+                  >
+                    <div *ngIf="userFirstName.errors?.['required']">
+                      First Name is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    id="form3Example1"
+                    class="form-control"
+                    placeholder="Enter Last Name"
+                    #Lastname="ngModel"
+                    ngModel
+                    name="Lastname"
+                    required
+                  />
+                  <label class="form-label" for="form3Example1"
+                    >Last Name</label
+                  >
+                  <div
+                    *ngIf="Lastname.invalid && Lastname.touched"
+                    class="error"
+                  >
+                    <div *ngIf="Lastname.errors?.['required']">
+                      Last Name is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input
+                    type="text"
+                    id="form3Example2"
+                    class="form-control"
+                    placeholder="Enter Email"
+                    #Email="ngModel"
+                    ngModel
+                    name="Email"
+                    required
+                    pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                  />
+                  <label class="form-label" for="form3Example2">Email</label>
+                  <div *ngIf="Email.invalid && Email.touched" class="error">
+                    <div *ngIf="Email.errors?.['required']">
+                      Email is required
+                    </div>
+                    <div *ngIf="Email.errors?.['pattern']">
+                      Enter a valid email
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input
+                    type="tel"
+                    id="form3Example3"
+                    class="form-control"
+                    placeholder="Enter Mobile Number"
+                    #Mobile="ngModel"
+                    ngModel
+                    name="mobileNumber"
+                    required
+                    pattern="^[0-9]{10}$"
+                  />
+                  <label class="form-label" for="form3Example3"
+                    >Mobile Number</label
+                  >
+                  <div *ngIf="Mobile.invalid && Mobile.touched" class="error">
+                    <div *ngIf="Mobile.errors?.['required']">
+                      Mobile Number is required
+                    </div>
+                    <div *ngIf="Mobile.errors?.['pattern']">
+                      Enter a valid 10-digit mobile number
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <input
+                    type="password"
+                    id="form3Example4"
+                    class="form-control"
+                    placeholder="Enter Password"
+                    #Password="ngModel"
+                    ngModel
+                    name="Password"
+                    required
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{7,}$"
+                  />
+                  <label class="form-label" for="form3Example4">Password</label>
+                  <div
+                    *ngIf="Password.invalid && Password.touched"
+                    class="error"
+                  >
+                    <div *ngIf="Password.errors?.['required']">
+                      Password is required
+                    </div>
+                    <div *ngIf="Password.errors?.['pattern']">
+                      Password must be at least 7 characters long, include one
+                      uppercase letter, and one digit.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <textarea
+                    id="fullAddress"
+                    class="form-control"
+                    placeholder="Enter Full Address"
+                    #FullAddress="ngModel"
+                    ngModel
+                    name="address"
+                    required
+                    rows="3"
+                  ></textarea>
+                  <label class="form-label" for="fullAddress"
+                    >Full Address</label
+                  >
+                  <div
+                    *ngIf="FullAddress.invalid && FullAddress.touched"
+                    class="error"
+                  >
+                    <div *ngIf="FullAddress.errors?.['required']">
+                      Full Address is required
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <label class="form-label" for="roleSelect">Select Role</label>
+                  <select
+                    id="roleSelect"
+                    class="form-control"
+                    #role="ngModel"
+                    ngModel
+                    name="role"
+                    required
+                  >
+                    <option value="" disabled selected>Select your role</option>
+                    <option value="user">User</option>
+                    <option value="seller">Seller</option>
+                  </select>
+                  <div *ngIf="role.invalid && role.touched" class="error">
+                    <div *ngIf="role.errors?.['required']">
+                      Role selection is required
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <div class="form-outline mb-4">
-                <input
-                  type="text"
-                  id="form3Example2"
-                  class="form-control"
-                  placeholder="Enter Your userFirstName"
-                  #userFirstName="ngModel"
-                  ngModel
-                  name="userFirstName"
-                  required
-                />
-                <label class="form-label" for="form3Example2">FirstName</label>
-                <div
-                  *ngIf="userFirstName.invalid && userFirstName.touched"
-                  class="error"
+              <div class="mt-4">
+                <button
+                  type="submit"
+                  data-mdb-button-init
+                  data-mdb-ripple-init
+                  class="btn submit"
+                  [disabled]="registrationForm.invalid"
                 >
-                  <div *ngIf="userFirstName.errors?.['required']">
-                    userFirstName is required
-                  </div>
+                  Create Account
+                </button>
+                <div class="text-center mt-3">
+                  Already have an account?
+                  <a routerLink="/login" class="text-primary">Login</a>
                 </div>
               </div>
-              <div class="form-outline mb-4">
-                <input
-                  type="text"
-                  id="form3Example1"
-                  class="form-control"
-                  placeholder="Enter Last Name"
-                  #Lastname="ngModel"
-                  ngModel
-                  name="Lastname"
-                  required
-                />
-                <label class="form-label" for="form3Example1">Last Name</label>
-                <div *ngIf="Lastname.invalid && Lastname.touched" class="error">
-                  <div *ngIf="Lastname.errors?.['required']">
-                    Last Name is required
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-outline mb-4">
-                <input
-                  type="text"
-                  id="form3Example2"
-                  class="form-control"
-                  placeholder="Enter Email"
-                  #Email="ngModel"
-                  ngModel
-                  name="Email"
-                  required
-                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-                />
-                <label class="form-label" for="form3Example2">Email</label>
-                <div *ngIf="Email.invalid && Email.touched" class="error">
-                  <div *ngIf="Email.errors?.['required']">
-                    Email is required
-                  </div>
-                  <div *ngIf="Email.errors?.['pattern']">
-                    Enter a valid email
-                  </div>
-                </div>
-              </div>
-              <div class="form-outline mb-4">
-                <input
-                  type="tel"
-                  id="form3Example3"
-                  class="form-control"
-                  placeholder="Enter Mobile Number"
-                  #Mobile="ngModel"
-                  ngModel
-                  name="mobileNumber"
-                  required
-                  pattern="^[0-9]{10}$"
-                />
-                <label class="form-label" for="form3Example3"
-                  >Mobile Number</label
-                >
-                <div *ngIf="Mobile.invalid && Mobile.touched" class="error">
-                  <div *ngIf="Mobile.errors?.['required']">
-                    Mobile Number is required
-                  </div>
-                  <div *ngIf="Mobile.errors?.['pattern']">
-                    Enter a valid 10-digit mobile number
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-outline mb-4">
-                <input
-                  type="text"
-                  id="form3Example4"
-                  class="form-control"
-                  placeholder="Enter Password"
-                  #Password="ngModel"
-                  ngModel
-                  name="Password"
-                  required
-                  pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{7,}$"
-                />
-
-                <label class="form-label" for="form3Example4">Password</label>
-                <div *ngIf="Password.invalid && Password.touched" class="error">
-                  <div *ngIf="Password.errors?.['required']">
-                    Password is required
-                  </div>
-                  <div *ngIf="Password.errors?.['pattern']">
-                    Password must be at least 7 characters long, include one
-                    uppercase letter, and one special character.
-                  </div>
-                </div>
-              </div>
-
-              <div class="form-outline mb-4">
-                <textarea
-                  id="fullAddress"
-                  class="form-control"
-                  placeholder="Enter Full Address"
-                  #FullAddress="ngModel"
-                  ngModel
-                  name="address"
-                  required
-                ></textarea>
-                <label class="form-label" for="fullAddress">Full Address</label>
-                <div
-                  *ngIf="FullAddress.invalid && FullAddress.touched"
-                  class="error"
-                >
-                  <div *ngIf="FullAddress.errors?.['required']">
-                    Full Address is required
-                  </div>
-                </div>
-              </div>
-              
-              <div class="form-outline mb-4">
-                <label class="form-label" for="roleSelect">Select Role</label>
-                <select id="roleSelect" class="form-control" #role="ngModel" ngModel name="role" required>
-                  <option value="" disabled selected>Select your role</option>
-                  <option value="user">User </option>
-                  <option value="seller">Seller</option>
-                </select>
-                <div *ngIf="role.invalid && role.touched" class="error">
-                  <div *ngIf="role.errors?.['required']">Role selection is required</div>
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                data-mdb-button-init
-                data-mdb-ripple-init
-                class="btn mb-4 mx-2 submit"
-                [disabled]="registrationForm.invalid"
-              >
-                Register
-              </button>
             </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Extra space at the bottom of the page -->
+  <div class="footer-space"></div>
 </section>

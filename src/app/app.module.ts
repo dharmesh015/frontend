@@ -38,7 +38,7 @@ import { ProductViewDetailsComponent } from './product-view-details/product-view
 import { BuyProductComponent } from './buy-product/buy-product.component';
 import { EditproductComponent } from './editproduct/editproduct.component';
 import { ProfilepageComponent } from './profilepage/profilepage.component';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SellerComponent } from './seller/seller.component';
@@ -49,6 +49,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { ChangeRoleDialogComponent } from './change-role-dialog/change-role-dialog.component';
 import { from } from 'rxjs';
 import { ShowOrderComponent } from './show-order/show-order.component';
+import { LoadingspinnerComponent } from './loadingspinner/loadingspinner.component';
 
 
 
@@ -77,7 +78,8 @@ import { ShowOrderComponent } from './show-order/show-order.component';
     UpdateUserDialogComponent,
     HomepageComponent,
     ChangeRoleDialogComponent,
-    ShowOrderComponent
+    ShowOrderComponent,
+    LoadingspinnerComponent
     
    
     
@@ -100,7 +102,8 @@ import { ShowOrderComponent } from './show-order/show-order.component';
     MatCardModule,
     MatTableModule,
     CommonModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
  
   ],
   providers: [

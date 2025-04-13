@@ -42,17 +42,17 @@ export class UserService {
     return false;
   }
 
-  public register(data: Registrationuser) {
+  public register(data: Registrationuser):Observable<string> {
     console.log('Sending Data: ' + JSON.stringify(data));
-    return this.httpclient.post(this.apiUrl + '/registerNewUser ', data, {
-      headers: this.requestHeader.append('No-Auth', 'True'),
-    });
+    return this.httpclient.post(this.apiUrl + '/registerNewUser ', data,{ responseType: 'text' }) .pipe(map((response) => response as string));
   }
-  public getuser() {
+  public getuser(): Observable<any> {
     const token = this.userAuthService.getToken();
-    return this.httpclient.get<Registrationuser>(
-      'http://localhost:9090/getdata/' + token
-    );
+    return this.httpclient.get(
+      'http://localhost:9090/getdata/' + token,{
+        responseType: 'text',
+      }
+    ) .pipe(map((response) => response as string));
   }
   sendEmail(email: string): Observable<string> {
     return this.httpclient

@@ -144,7 +144,7 @@ export class AdminComponent implements OnInit {
   changeUserRole(user: userdata): void {
     const dialogRef = this.dialog.open(ChangeRoleDialogComponent, {
       data: { userName: user.userName, currentRole:user.role[0]},
-      width: '400px',
+      width: '300px',
     });
   
     dialogRef.afterClosed().subscribe((result) => {

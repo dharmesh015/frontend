@@ -201,7 +201,7 @@
                 <ng-container matColumnDef="date">
                   <th mat-header-cell *matHeaderCellDef>Order Date</th>
                   <td mat-cell *matCellDef="let order">
-                    {{ order.date }}
+                    {{ order.date | date:'short'}}
                   </td>
                 </ng-container>
 
