@@ -20,8 +20,25 @@ export class HeaderComponent {
     private cdRef: ChangeDetectorRef,
     
   ) {}
+  // isMenuOpen = false;
+  isAccountDropdownOpen = false;
  
 
+  toggleMenu(): void {
+    this.isMenuOpen = !this.isMenuOpen;
+    if (!this.isMenuOpen) {
+      this.isAccountDropdownOpen = false;
+    }
+  }
+  
+  // Toggle account dropdown
+  toggleAccountDropdown(): void {
+
+    this.isAccountDropdownOpen = !this.isAccountDropdownOpen;
+    setTimeout(() => {
+      this.isAccountDropdownOpen = false; 
+  }, 2000);
+  }
   public logout() {
     this.userathservice.clear();
     this.router.navigate(['/home']);

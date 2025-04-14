@@ -1,205 +1,5 @@
 <section class="background-radial-gradient overflow-hidden">
-  <style>
-    .background-radial-gradient {
-      background-color: hsl(0, 0%, 96%);
-      min-height: 100vh;
-      padding: 3rem 0 6rem 0;
-      background-image: radial-gradient(
-          650px circle at 0% 0%,
-          hsla(220, 100%, 80%, 0.1) 15%,
-          hsla(220, 100%, 80%, 0.05) 35%,
-          transparent 100%
-        ),
-        radial-gradient(
-          1250px circle at 100% 100%,
-          hsla(220, 100%, 80%, 0.1) 15%,
-          hsla(220, 100%, 80%, 0.05) 35%,
-          transparent 100%
-        );
-    }
-
-    .card {
-      background-color: hsla(0, 0%, 100%, 0.9) !important;
-      backdrop-filter: saturate(200%) blur(25px);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      border-radius: 15px;
-      margin-top: -20px;
-      overflow: hidden;
-    }
-
-    .card-header {
-      background: linear-gradient(to right, #5980c1, #7a9bd3);
-      color: white;
-      padding: 1.5rem;
-      border-radius: 15px 15px 0 0;
-      text-align: center;
-    }
-
-    .brand-logo {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: #163a79;
-      margin-bottom: 1.5rem;
-      text-align: center;
-    }
-
-    .brand-logo span {
-      color: #333;
-    }
-
-    .submit {
-      background-color: #5980c1;
-      color: white;
-      padding: 10px 25px;
-      border-radius: 30px;
-      font-weight: 600;
-      transition: all 0.3s ease;
-      width: 100%;
-      margin-bottom: 10px;
-    }
-
-    .submit:hover {
-      background-color: #406cb1;
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(89, 128, 193, 0.4);
-    }
-
-    .error {
-      border-color: rgb(0, 0, 0);
-      border: 2px;
-      background-color: rgb(228, 135, 135);
-      margin: 5px;
-      padding: 5px;
-      border-radius: 50px;
-      justify-items: center;
-      font-size: 0.85rem;
-    }
-
-    .form-control {
-      transition: border-color 0.3s ease;
-      border-radius: 10px;
-      padding: 12px 15px;
-      font-size: 1rem;
-    }
-
-    .form-control:focus {
-      border-color: #5980c1;
-      box-shadow: 0 0 8px rgba(89, 128, 193, 0.5);
-    }
-
-    .form-label {
-      transition: color 0.3s ease;
-      font-weight: 500;
-      margin-left: 5px;
-    }
-
-    .form-outline {
-      animation: fadeIn 0.3s ease-out forwards;
-    }
-
-    .form-outline:nth-child(1) {
-      animation-delay: 0.1s;
-    }
-    
-    .form-outline:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .intro-badge {
-      display: inline-block;
-      background-color: rgba(89, 128, 193, 0.15);
-      color: #163a79;
-      font-weight: 600;
-      padding: 0.5rem 1rem;
-      border-radius: 50px;
-      margin-bottom: 1rem;
-      animation: fadeIn 0.5s ease-out forwards;
-    }
-    
-    .footer-space {
-      height: 100px;
-    }
-    
-    .auth-illustration {
-      max-width: 400px;
-      margin: 2rem auto;
-      animation: fadeIn 1s ease-out forwards;
-    }
-    
-    @keyframes pulse {
-      0% {
-        transform: scale(1);
-        opacity: 0.8;
-      }
-      50% {
-        transform: scale(1.05);
-        opacity: 1;
-      }
-      100% {
-        transform: scale(1);
-        opacity: 0.8;
-      }
-    }
-    
-    @keyframes float {
-      0% {
-        transform: translateY(0px);
-      }
-      50% {
-        transform: translateY(-10px);
-      }
-      100% {
-        transform: translateY(0px);
-      }
-    }
-    
-    @keyframes glow {
-      0% {
-        filter: drop-shadow(0 0 2px rgba(89, 128, 193, 0.5));
-      }
-      50% {
-        filter: drop-shadow(0 0 8px rgba(89, 128, 193, 0.8));
-      }
-      100% {
-        filter: drop-shadow(0 0 2px rgba(89, 128, 193, 0.5));
-      }
-    }
-    
-    @keyframes spin {
-      0% {
-        transform: rotate(0deg);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
-    }
-    
-    @keyframes scan {
-      0% {
-        transform: translateY(0);
-        opacity: 0.3;
-      }
-      50% {
-        transform: translateY(50px);
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(100px);
-        opacity: 0.3;
-      }
-    }
-  </style>
+ 
 
   <div class="container px-4 py-5 px-md-5 text-center text-lg-start">
     <div class="row gx-lg-5 align-items-center mb-5">
@@ -209,23 +9,22 @@
           <span class="text-primary">Login to your account</span>
         </h1>
         
-        <!-- Authentication-focused SVG Illustration -->
         <div class="auth-illustration">
           <svg width="100%" height="100%" viewBox="0 0 500 400" xmlns="http://www.w3.org/2000/svg">
-            <!-- Digital Background Elements -->
+           
             <g opacity="0.5">
               <path d="M50,200 L100,200" stroke="#5980c1" stroke-width="1" stroke-dasharray="5,5"/>
               <path d="M400,200 L450,200" stroke="#5980c1" stroke-width="1" stroke-dasharray="5,5"/>
               <path d="M250,50 L250,100" stroke="#5980c1" stroke-width="1" stroke-dasharray="5,5"/>
               <path d="M250,300 L250,350" stroke="#5980c1" stroke-width="1" stroke-dasharray="5,5"/>
               
-              <!-- Binary Code Elements -->
+           
               <text x="70" y="180" font-family="monospace" font-size="8" fill="#406cb1">010110</text>
               <text x="390" y="180" font-family="monospace" font-size="8" fill="#406cb1">101001</text>
               <text x="240" y="90" font-family="monospace" font-size="8" fill="#406cb1">110101</text>
               <text x="240" y="330" font-family="monospace" font-size="8" fill="#406cb1">010111</text>
               
-              <!-- Circuit Pattern -->
+            
               <path d="M50,150 L80,150 L80,180 L120,180 L120,220 L150,220" stroke="#7a9bd3" stroke-width="1" fill="none"/>
               <path d="M350,150 L380,150 L380,180 L420,180 L420,220 L450,220" stroke="#7a9bd3" stroke-width="1" fill="none"/>
               <circle cx="80" cy="150" r="3" fill="#5980c1"/>
@@ -234,57 +33,55 @@
               <circle cx="420" cy="180" r="3" fill="#5980c1"/>
             </g>
             
-            <!-- Main Security Shield -->
+      
             <g style="animation: float 6s ease-in-out infinite;">
               <path d="M250,70 L350,100 L350,220 C350,270 300,320 250,340 C200,320 150,270 150,220 L150,100 Z" fill="#e5ecf9" stroke="#5980c1" stroke-width="5"/>
               
-              <!-- Shield Pattern -->
+            
               <path d="M250,70 L350,100 L350,220 C350,270 300,320 250,340 C200,320 150,270 150,220 L150,100 Z" fill="none" stroke="#5980c1" stroke-width="2" stroke-dasharray="5,5" opacity="0.5"/>
               
-              <!-- Shield Inner Glow -->
+            
               <path d="M250,85 L335,110 L335,215 C335,260 290,305 250,322 C210,305 165,260 165,215 L165,110 Z" fill="none" stroke="#7a9bd3" stroke-width="2" opacity="0.8" style="animation: glow 3s ease-in-out infinite;"/>
             </g>
             
-            <!-- Lock in Center of Shield -->
+       
             <g style="animation: pulse 4s ease-in-out infinite;">
-              <!-- Lock Body -->
+             
               <rect x="210" y="140" width="80" height="100" rx="15" fill="#5980c1" stroke="#406cb1" stroke-width="3"/>
               
-              <!-- Lock Shine -->
+        
               <path d="M220,150 L280,150 L270,230 L230,230 Z" fill="white" opacity="0.3"/>
               
-              <!-- Lock Shackle -->
+             
               <path d="M230,140 V120 C230,100 270,100 270,120 V140" fill="none" stroke="#406cb1" stroke-width="8" stroke-linecap="round"/>
               
-              <!-- Keyhole -->
+         
               <circle cx="250" cy="180" r="12" fill="#e5ecf9" stroke="#406cb1" stroke-width="2"/>
               <rect x="247" y="180" width="6" height="15" rx="3" fill="#e5ecf9" stroke="#406cb1" stroke-width="2"/>
             </g>
             
-            <!-- Fingerprint Authentication -->
+            
             <g transform="translate(250, 190) scale(0.6)">
               <circle cx="0" cy="0" r="50" fill="none" stroke="#406cb1" stroke-width="2" opacity="0.7"/>
               <path d="M-20,-10 Q-15,-30 0,-30 Q20,-30 25,-5 Q30,20 0,40 Q-30,20 -25,-5" fill="none" stroke="#5980c1" stroke-width="3" stroke-linecap="round"/>
               <path d="M-10,-5 Q-5,-15 0,-15 Q10,-15 12,0 Q15,15 0,25 Q-15,15 -12,0" fill="none" stroke="#5980c1" stroke-width="3" stroke-linecap="round"/>
               <path d="M0,0 Q5,5 0,10 Q-5,5 0,0" fill="none" stroke="#5980c1" stroke-width="3" stroke-linecap="round"/>
               
-              <!-- Scanning Animation -->
+          
               <rect x="-30" y="-40" width="60" height="5" fill="#7a9bd3" opacity="0.5" style="animation: scan 2s linear infinite;"/>
             </g>
-            
-            <!-- User Icon -->
-            <g transform="translate(180, 190)">
+         <g transform="translate(180, 190)">
               <circle cx="0" cy="-15" r="15" fill="#7a9bd3"/>
               <path d="M-20,15 Q-20,0 0,-5 Q20,0 20,15" fill="#7a9bd3" stroke="none"/>
             </g>
             
-            <!-- Check Mark -->
+          
             <g transform="translate(320, 190)">
               <circle cx="0" cy="0" r="15" fill="#7a9bd3" opacity="0.8"/>
               <path d="M-8,0 L-3,5 L8,-5" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
             </g>
             
-            <!-- Data Protection Elements -->
+          
             <g transform="translate(250, 260)">
               <path d="M-50,0 L50,0" stroke="#5980c1" stroke-width="2" stroke-dasharray="5,3"/>
               <circle cx="-30" cy="0" r="5" fill="#5980c1"/>
@@ -292,10 +89,10 @@
               <circle cx="30" cy="0" r="5" fill="#5980c1"/>
             </g>
             
-            <!-- Quick Cart Text -->
+          
             <text x="250" y="310" font-family="Arial" font-size="18" text-anchor="middle" fill="#5980c1" font-weight="bold"></text>
             
-            <!-- Rotating Security Badge -->
+          
             <g transform="translate(250, 350)" style="animation: spin 20s linear infinite;">
               <circle cx="0" cy="0" r="25" fill="none" stroke="#7a9bd3" stroke-width="1" stroke-dasharray="3,3"/>
               <text x="0" y="5" font-family="Arial" font-size="8" text-anchor="middle" fill="#5980c1">SECURED</text>
@@ -317,7 +114,7 @@
           
           <div class="card-body px-4 py-5 px-md-5">
             <form class="form" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
-              <!-- Username input -->
+           
               <div class="form-outline mb-4">
                 <input
                   type="text"
@@ -335,7 +132,7 @@
                 </div>
               </div>
 
-              <!-- Password input -->
+             
               <div class="form-outline mb-4">
                 <input
                   type="password"
@@ -356,7 +153,7 @@
                 </div>
               </div>
 
-              <!-- Submit buttons -->
+           
               <div class="mt-4">
                 <button
                   type="submit"
@@ -381,6 +178,6 @@
     </div>
   </div>
   
-  <!-- Extra space at the bottom of the page -->
+
   <div class="footer-space"></div>
 </section>

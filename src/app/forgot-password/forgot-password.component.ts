@@ -21,10 +21,10 @@ export class ForgotPasswordComponent {
   ) {}
   sendEmail(form: NgForm) {
     if (form.valid) {
-      this.isLoading = true; // Set loading to true before API call
+      this.isLoading = true; 
       this.userService.sendEmail(form.value.email).subscribe(
         (response) => {
-          this.isLoading = false; // Set loading to false when response is received
+          this.isLoading = false; 
           console.log("Response received:", response);
           
           if (response === "UNF") {
@@ -52,7 +52,7 @@ export class ForgotPasswordComponent {
           }
         },
         (error) => {
-          this.isLoading = false; // Set loading to false on error
+          this.isLoading = false; 
           Swal.fire({
             title: 'Error',
             text: 'An error occurred while processing your request. Please try again later.',

@@ -1,178 +1,215 @@
 .productlist {
   display: flex;
+  flex-direction: column;
   margin-top: 100px;
   margin-bottom: 200px;
+  /* border: 2px solid red; */
 }
 
-.main.container {
-  width: 95%;
-  max-width: 1200px;
-  padding: 0  15px;
-  /* padding-bottom: 200px; */
+.main-container {
+  max-width: 1500px;
+  
+  margin-bottom: 200px;
+  margin: 60px;
 }
 
-.video-container {
-  display: flex; 
-  justify-content: center; 
-  align-items: center; 
-  height: 70vh; 
+.button{
+  display: flex;
+  justify-content: space-between;
+  /* border: 2px black solid; */
+  height: 50px;
 }
 
 .product-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
-  margin-top: 20px;
-}
-
-
-.product-card {
-  width: 250px;
-  background-color: #eee;
-  border-radius: 8px;
-  height: 450px;
-  overflow: hidden;
-  transition: transform 0.3s ease-in-out;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   display: flex;
-  flex-direction: column;
-  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
+.product-card-container {
+  flex: 1 1 250px;
+  min-width: 250px;
+  max-width: 300px;
+  background-color: #fff;
+  border-radius: 4px;
+  overflow: hidden;
+  padding-bottom: 15px;
+}
 
 .image-container {
-  height: 100%;
-  width: 100%;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f8f8;
+  position: relative;
   overflow: hidden;
 }
 
 .product-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
+  max-width: 100%;
+  max-height: 280px;
+  object-fit: contain;
 }
 
-.product-image:hover {
-  transform: scale(1.05);
-}
-
-mat-card-content {
+.color-options {
   display: flex;
-  flex-direction: column;
-  height: 100%;
+  padding: 10px;
+  gap: 5px;
 }
 
-mat-card-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: 10px 0 5px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.color-circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #ddd;
+  cursor: pointer;
 }
 
-.description {
-  height: 80px;
-  margin-bottom: 10px;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-}
-
-.action-row {
-  margin-top: auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  padding: 10px 0;
-}
-
-.product-price {
-  font-weight: bold;
-  color: #0e3b41;
-}
-
-.button {
-  background-color: #6dadc7;
-  color: #F1EFEC;
-  border-radius: 8px;
-  padding: 8px 16px;
-  transition: all 0.3s ease;
-}
-
-.button:hover {
-  background-color: #504343fd;
-  transform: scale(1.05);
-}
-
-@media (max-width: 1200px) {
-  .product-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 992px) {
-  .product-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 576px) {
-  .product-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.background-radial-gradient {
-  background-color: #eee;
-}
-
-.mat-mdc-card-content {
-  padding: 0 !important;
-}
-
-svg {
-  display: block;
-  margin: 0 auto;
-  width: 100%;
-  max-width: 800px;
-}
-
-#promo rect {
-  fill: #3b82f6;
-  opacity: 0.1;
-}
-
-#promo text {
-  font-family: Arial, sans-serif;
+.product-title {
   font-size: 14px;
-  fill: #333;
+  font-weight: bold;
+  padding: 0 10px;
+  margin-bottom: 5px;
+  height: 40px;
+  overflow: hidden;
+}
+.search-bar {
+  background-color:#4769a3;
+  padding: 5px;
+  display: flex; /* Use flexbox for alignment */
+  justify-content: end; /* Center the search bar */
 }
 
-#promo tspan {
+.search-bar input {
+  width: 100%; /* Make the input take the full width */
+  max-width: 400px; /* Set a maximum width for larger screens */
+  padding: 10px; /* Add some padding for better touch targets */
+  border: 1px solid #ccc; /* Light gray border */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+.search-bar input:focus {
+  border-color: #007bff; /* Change border color on focus */
+  outline: none; /* Remove default outline */
+}
+
+.search-bar input::placeholder {
+  color: #aaa; /* Placeholder text color */
+  font-style: italic; /* Italicize placeholder text */
+}
+.ratings {
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  margin-bottom: 3px;
+}
+
+.stars {
+  color: #FFA41C;
+  margin-right: 5px;
+}
+
+.review-count {
+  color: #007185;
+  font-size: 14px;
+}
+
+.purchase-count {
+  color: #565959;
+  font-size: 14px;
+  padding: 0 10px;
+  margin-bottom: 5px;
+}
+
+.deal-badge {
+  background-color: #CC0C39;
+  color: white;
+  padding: 3px 10px;
+  font-size: 12px;
+  display: inline-block;
+  margin: 5px 10px;
+  border-radius: 2px;
+}
+
+.price-section {
+  padding: 5px 10px;
+}
+
+.current-price {
+  font-size: 18px;
   font-weight: bold;
 }
 
-
-
-
-.mat-mdc-card-content {
-  padding: 0 !important;
+.mrp {
+  font-size: 14px;
+  color: #565959;
 }
 
+.discount {
+  color: #CC0C39;
+  font-size: 14px;
+}
+
+.prime-logo {
+  width: 45px;
+  height: 20px;
+  margin: 5px 10px;
+}
+
+.delivery-info {
+  font-size: 14px;
+  padding: 0 10px;
+  margin-bottom: 5px;
+}
+
+.free-delivery {
+  font-weight: bold;
+}
+
+.add-to-cart {
+  background-color:#5980c1;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 10px;
+  width: 90%;
+  display: block;
+  margin: 10px auto;
+  cursor: pointer;
+  font-size: 14px;
+  text-align: center;
+}
+.add-to-cart:hover{
+  background-color:#203253a8;
+}
+.more-options {
+  font-size: 14px;
+  padding: 0 10px;
+  color: #565959;
+}
+
+.more-offers {
+  color: #007185;
+}
+
+.badge {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  background-color: #232F3E;
+  color: white;
+  padding: 3px 8px;
+  font-size: 12px;
+}
+
+.more-colors {
+  color: #007185;
+  font-size: 14px;
+  margin-left: 5px;
+}
 svg {
   display: block;
   margin: 0 auto;

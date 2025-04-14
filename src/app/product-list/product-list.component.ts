@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../_model/product.model';
 import { ProductService } from '../_service/product.service';
@@ -9,38 +8,48 @@ import { Router } from '@angular/router';
   selector: 'app-product-list',
   standalone: false,
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
 })
 export class ProductListComponent implements OnInit {
-
   products: Product[] = [];
   page: number = 0;
-  size: number = 4; 
+  size: number = 4;
   sortBy: string = 'productName';
   sortDir: string = 'asc';
-  totalProducts: number = 0; 
-  hasMoreProducts: boolean = true; 
+  totalProducts: number = 0;
+  hasMoreProducts: boolean = true;
 
-  constructor(
-    private productService: ProductService,
-    private router: Router
-  ) {}
+  constructor(private productService: ProductService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadProducts();
   }
 
   loadProducts(): void {
-    this.productService.getAllProductsPageWiseByUser(this.page, this.size, this.sortBy, this.sortDir).subscribe( (data) => {
-      this.products = data.content; 
-      this.totalProducts = data.totalElements; 
-      this.hasMoreProducts = this.products.length === this.size; 
-      console.log(data);
-      return this.products;
-    }, (error) => {
-      Swal.fire('Error', 'Failed to load products. Please try again later.', 'error');
-      console.error('Error fetching products', error);
-    });
+    this.productService
+      .getAllProductsPageWiseByUser(
+        this.page,
+        this.size,
+        this.sortBy,
+        this.sortDir
+      )
+      .subscribe(
+        (data) => {
+          this.products = data.content;
+          this.totalProducts = data.totalElements;
+          this.hasMoreProducts = this.products.length === this.size;
+          console.log(data);
+          return this.products;
+        },
+        (error) => {
+          Swal.fire(
+            'Error',
+            'Failed to load products. Please try again later.',
+            'error'
+          );
+          console.error('Error fetching products', error);
+        }
+      );
   }
 
   nextPage(): void {
@@ -59,30 +68,37 @@ export class ProductListComponent implements OnInit {
 
   sortProducts(sortBy: string): void {
     this.sortBy = sortBy;
-    this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc'; 
+    this.sortDir = this.sortDir === 'asc' ? 'desc' : 'asc';
     this.loadProducts();
   }
   editProduct(id: number): void {
     this.router.navigate(['/editproduct', id]);
   }
 
-  deleteProduct(productId: number): void {
+  deleteProduct(productId: number) {
     Swal.fire({
       title: 'Are you sure?',
-      text: 'You won\'t be able to revert this!',
+      text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
-      cancelButtonText: 'No, cancel!'
+      cancelButtonText: 'No, cancel!',
     }).then((result) => {
       if (result.isConfirmed) {
         this.productService.deleteProduct(productId).subscribe(
-          () => {
+          (response: any) => {
+            if (response == 'placed') {
+              Swal.fire('Cannot delete product that has been ordered.');
+            }else{
             Swal.fire('Deleted!', 'Your product has been deleted.', 'success');
-            this.loadProducts(); 
+            this.loadProducts();}
           },
           (error: any) => {
-            Swal.fire('Error!', 'There was an error deleting the product.', 'error');
+            Swal.fire(
+              'Error!',
+              'There was an error deleting the product.',
+              'error'
+            );
             console.error('Error deleting product', error);
           }
         );

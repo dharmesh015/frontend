@@ -73,7 +73,8 @@ body {
   overflow: hidden;
 }
 .search-bar {
-  margin: 20px 0; /* Add some space above and below the search bar */
+  background-color:#4769a3;
+  padding: 5px;
   display: flex; /* Use flexbox for alignment */
   justify-content: end; /* Center the search bar */
 }

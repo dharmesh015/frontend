@@ -1,13 +1,13 @@
-
-<nav class="custom-navbar">
+<nav class="custom-navbar" >
   <div class="navbar-container">
-    <div class="navbar-brand" style="margin-left:-70px; ">
+    <div class="navbar-brand" style="margin-left:-70px;">
       <a href="#" class="brand-link">QC</a>
     </div>
     <button class="navbar-toggler" (click)="isMenuOpen = !isMenuOpen">
       <span class="toggler-icon"></span>
       <span class="toggler-icon"></span>
       <span class="toggler-icon"></span>
+     
     </button>
     
     <div class="navbar-menu" [ngClass]="{'is-open': isMenuOpen}">
@@ -36,29 +36,50 @@
           <span>showcart</span>
         </a>
         
-     
-        <a *ngIf="roleMatchs(['Admin'])" routerLink='/admin'  routerLinkActive="active" class="nav-link">
+        <a *ngIf="roleMatchs(['Admin'])" routerLink="/admin" routerLinkActive="active" class="nav-link">
           <span class="nav-link-bg"></span>
-          <mat-icon>info</mat-icon>
+          <i class="fa-solid fa-user-tie"></i>
           <span>admin</span>
-        </a> 
-        <a *ngIf="isLoggedIn()" routerLink="/Profilepage" routerLinkActive="active" class="nav-link">
+        </a>
+        
+        <!-- Mobile-only profile and logout links -->
+        <a *ngIf="isLoggedIn()" routerLink="/Profilepage" class="nav-link mobile-only-link">
           <span class="nav-link-bg"></span>
           <mat-icon>account_circle</mat-icon>
           <span>Profile</span>
+        </a>
+        
+        <a *ngIf="isLoggedIn()" (click)="logout()" class="nav-link mobile-only-link clickable">
+          <span class="nav-link-bg"></span>
+          <mat-icon>logout</mat-icon>
+          <span>Logout</span>
         </a>
       </div>
       
       <div class="navbar-auth">
         <button *ngIf="!isLoggedIn()" routerLink="/login" class="auth-button login-btn">
-          <mat-icon *ngIf="!isLoggedIn()">login</mat-icon>
-          <span *ngIf="!isLoggedIn()">Login</span>
+          <mat-icon>login</mat-icon>
+          <span>Login</span>
         </button>
         
-        <button *ngIf="isLoggedIn()" (click)="logout()" class="auth-button logout-btn">
-          <mat-icon>logout</mat-icon>
-          <span>Logout</span>
-        </button>
+        <div *ngIf="isLoggedIn()" class="account-dropdown desktop-only">
+          <button class="auth-button account-btn" (click)="toggleAccountDropdown()">
+            <i class="fa-sharp fa-solid fa-list-ul" style="color: #74C0FC;"></i>
+          </button>
+          
+          <div class="account-dropdown-menu" [ngClass]="{'show': isAccountDropdownOpen}">
+            <div class="dropdown-items-container">
+              <a routerLink="/Profilepage" class="dropdown-item">
+                <mat-icon>account_circle</mat-icon>
+                <span>Profile</span>
+              </a>
+              <button (click)="logout()" class="dropdown-item">
+                <mat-icon>logout</mat-icon>
+                <span>Logout</span>
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

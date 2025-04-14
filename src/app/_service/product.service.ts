@@ -36,11 +36,14 @@ export class ProductService {
     );
   }
 
-  deleteProduct(productId: number): any {
+  deleteProduct(productId: number):Observable<any>{
     console.log('service' + productId);
     return this.httpClient.delete(
-      'http://localhost:9090/deleteProduct/' + productId
-    );
+      'http://localhost:9090/deleteProduct/' + productId,{
+        responseType: 'text',
+      })
+      .pipe(map((response) => response as string));
+  
   }
 
 public getProductById(id: number): Observable<Product> {

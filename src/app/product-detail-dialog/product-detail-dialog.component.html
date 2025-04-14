@@ -1,14 +1,14 @@
+<div class="search-bar" >
+  <input
+    type="text"
+    placeholder="Search for products..."
+    [(ngModel)]="searchTerm"
+    (input)="filterProducts()"
+    class="form-control"
+  />
+</div>
 <div class="main-container">
   <!-- Search Bar -->
-  <div class="search-bar">
-    <input
-      type="text"
-      placeholder="Search for products..."
-      [(ngModel)]="searchTerm"
-      (input)="filterProducts()"
-      class="form-control"
-    />
-  </div>
 
   <div class="product-grid">
     <!-- Product 1 -->
@@ -26,7 +26,7 @@
         {{ product.productName }}
       </div>
       <div class="ratings">
-        <span class="stars">{{ '★' }}</span>
+        <span class="stars">{{ '★★★★'}}</span>
         <span class="review-count">{{ "241" }} reviews</span>
       </div>
       <div class="purchase-count">

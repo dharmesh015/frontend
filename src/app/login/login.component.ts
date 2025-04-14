@@ -25,15 +25,15 @@ export class LoginComponent {
   userdata: Requestuser = new Requestuser('', '');
   login(form: NgForm) {
     if (form.invalid) {
-      // Mark all fields as touched to show validation messages
+
       Object.keys(form.controls).forEach((field) => {
         const control = form.controls[field];
         control.markAsTouched({ onlySelf: true });
       });
-      return; // Prevent form submission
+      return; 
     }
     if (form.valid) {
-      // Populate the user object with form dat
+  
       this.userdata.userName = form.value.username;
       this.userdata.userPassword = form.value.password;
 
@@ -58,13 +58,13 @@ export class LoginComponent {
           Swal.fire({
             title: 'Invalid Credentials',
             text: 'The username or password you entered is incorrect. Please try again.',
-            icon: 'error', // Change the icon to 'error' to indicate a problem
-            confirmButtonText: 'OK', // Customize the button text
+            icon: 'error', 
+            confirmButtonText: 'OK', 
           });
         }
       );
 
-      // Log the user object or send it to a service
+   
       console.log(form.value.username + '/--/' + form.value.password);
     }
   }

@@ -52,10 +52,10 @@ export class RegistrationComponent {
                         text: 'The email address you entered is already registered. Please use a different email or log in to your account.',
                         icon: 'warning',
                     });
-                    return; // Exit the function if the email already exists
+                    return;
                 }
 
-                // Proceed with seller registration if the email is not in use
+         
                 if (form.value.role === 'seller') {
                     this.isLoading = true;
                     console.log('Registration for seller!');
@@ -81,7 +81,7 @@ export class RegistrationComponent {
                         }
                     );
                 } else {
-                    // If not a seller, navigate to home
+              
                     this.router.navigate(['/home']);
                 }
             },

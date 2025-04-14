@@ -43,6 +43,7 @@
   }
   
   .product-header h1 {
+  
     font-weight: 700;
     font-size: 32px;
     margin: 0;
@@ -51,6 +52,7 @@
   
   /* Product Content (Cart Content Equivalent) */
   .product-content {
+ 
     display: grid;
     grid-template-columns: 1fr 350px;
     gap: 30px;
@@ -58,7 +60,7 @@
   
   /* Product Table Section */
   .product-table-container {
-    background: white;
+  
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-soft);
     overflow: hidden;
@@ -66,11 +68,13 @@
   }
   
   .product-table {
+    background:#eeeeee7a;
     width: 100%;
     border-collapse: collapse;
   }
   
   .product-table th {
+    background:#eeeeeeb7;
     text-align: left;
     padding: 15px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);

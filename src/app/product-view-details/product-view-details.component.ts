@@ -32,6 +32,13 @@ export class ProductViewDetailsComponent implements OnInit {
       this.getProductDetails(this.productId);
     });
   }
+
+  getDeliveryDate(): string {
+    const currentDate = new Date(); 
+    const deliveryDate = new Date(currentDate); 
+    deliveryDate.setDate(currentDate.getDate() + 3); 
+    return deliveryDate.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  }
   getProductDetails(id: number): void {
     this.productService.getProductById(id).subscribe(
       (data: Product) => {

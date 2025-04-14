@@ -49,7 +49,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { ChangeRoleDialogComponent } from './change-role-dialog/change-role-dialog.component';
 import { from } from 'rxjs';
 import { ShowOrderComponent } from './show-order/show-order.component';
-import { LoadingspinnerComponent } from './loadingspinner/loadingspinner.component';
+
 
 
 
@@ -78,8 +78,7 @@ import { LoadingspinnerComponent } from './loadingspinner/loadingspinner.compone
     UpdateUserDialogComponent,
     HomepageComponent,
     ChangeRoleDialogComponent,
-    ShowOrderComponent,
-    LoadingspinnerComponent
+    ShowOrderComponent
     
    
     
