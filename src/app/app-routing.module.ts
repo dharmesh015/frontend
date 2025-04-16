@@ -60,7 +60,7 @@ const routes: Routes = [
     path: 'showcart',
     component: CartComponent,
     canActivate: [AuthGuard],
-    data: { roles: ['User'] },
+    data: { roles: ['User',] },
   },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'ProductViewDetails/:id', component: ProductViewDetailsComponent },
@@ -75,10 +75,9 @@ const routes: Routes = [
   },
   {
     path: 'showorder',
-    component: ShowOrderComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ['Seller'] },
-  },
+    component: ShowOrderComponent },
+  
+
   { path: 'homepage', component: HomepageComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', component: ForbiddenComponent },

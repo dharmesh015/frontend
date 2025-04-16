@@ -11,7 +11,7 @@
         <table mat-table [dataSource]="orders" class="table table-striped table-bordered">
             <!-- Order Full Name Column -->
             <ng-container matColumnDef="fullName">
-                <th mat-header-cell *matHeaderCellDef style="text-align: center;">Full Name</th>
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;">Customer Name</th>
                 <td mat-cell *matCellDef="let order">{{ order.orderFullName }}</td>
             </ng-container>
 
@@ -49,6 +49,11 @@
             <ng-container matColumnDef="date">
                 <th mat-header-cell *matHeaderCellDef style="text-align: center;">Date</th>
                 <td mat-cell *matCellDef="let order">{{ order.orderDate | date:'short' }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="seller">
+                <th mat-header-cell *matHeaderCellDef style="text-align: center;">Seller Name</th>
+                <td mat-cell *matCellDef="let order">{{ order.product.sellername  }}</td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

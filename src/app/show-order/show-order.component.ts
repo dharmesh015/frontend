@@ -14,19 +14,42 @@ import { MyOrderDetails } from '../_model/order.model';
 export class ShowOrderComponent implements OnInit {
   orders: MyOrderDetails[] = [];
   sellerName!: string ;
-  displayedColumns: string[] = ['fullName', 'orderId', 'product', 'amount', 'status', 'contact', 'date'];
+  displayedColumns: string[] = ['fullName', 'orderId', 'product', 'amount', 'status', 'contact', 'date','seller'];
   constructor(private orderService: OrderService,private authUser:UserAuthServiceService) {}
 
   ngOnInit(): void {
+    const user = this.authUser.getUser();
     this.sellerName = this.authUser.getUser().userName;
-    this.loadOrders();
+    // this.loadOrders();
+    const userRole = this.authUser.getUser().role[0].roleName;
+    console.log("userRole--"+userRole) // Method to get user role (admin or seller)
+    
+    // Check user role to determine which orders to fetch
+    if (userRole === 'Admin') {
+      this.loadAllOrders();
+    } else {
+      this.loadSellerOrders();
+    }
   }
 
-  loadOrders(): void {
+  loadSellerOrders(): void {
     this.orderService.getOrdersBySeller(this.sellerName).subscribe(
       (data: MyOrderDetails[]) => {
         console.log(data)
         this.orders = data;
+      },
+      (error) => {
+        console.error('Error fetching orders', error);
+      }
+    );
+  }
+
+  loadAllOrders(): void {
+    this.orderService.getOrderDetails().subscribe(
+      (data: MyOrderDetails[]) => {
+        console.log(data)
+        this.orders = data;
+        console.log( this.orders )
       },
       (error) => {
         console.error('Error fetching orders', error);

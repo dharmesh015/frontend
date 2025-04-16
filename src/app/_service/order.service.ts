@@ -17,4 +17,8 @@ export class OrderService {
   getOrdersBySeller(sellerName: string):Observable<MyOrderDetails[]> {
     return this.http.get<MyOrderDetails[]>(`${this.baseUrl}/seller/${sellerName}`);
   }
+
+  getOrderDetails():Observable<MyOrderDetails[]> {
+    return this.http.get<MyOrderDetails[]>(`${this.baseUrl}/getAllOrderDetails`);
+  }
 }
