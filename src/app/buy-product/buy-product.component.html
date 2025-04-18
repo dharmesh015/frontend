@@ -67,7 +67,7 @@
       </div>
     </div>
 
-
+  
     <div class="order-section">
 
       <div class="shipping-form">
@@ -115,14 +115,14 @@
             </div>
             
        
-            <!-- <button class="payment-button" [disabled]="!orderForm.valid || isProcessingOrder" (click)="processPayment(orderForm)">
-                <span *ngIf="!isProcessingOrder">Proceed to Payment</span>
-                <span *ngIf="isProcessingOrder">Processing...</span>
-            </button> -->
-            <button class="payment-button" [disabled]="!orderForm.valid || isProcessingOrder" (click)="payment(orderForm)">
+            <button class="payment-button" [disabled]="!orderForm.valid || isProcessingOrder" (click)="processPayment(orderForm)">
                 <span *ngIf="!isProcessingOrder">Proceed to Payment</span>
                 <span *ngIf="isProcessingOrder">Processing...</span>
             </button>
+            <!-- <button class="payment-button" [disabled]="!orderForm.valid || isProcessingOrder" (click)="payment(orderForm)">
+                <span *ngIf="!isProcessingOrder">Proceed to Payment</span>
+                <span *ngIf="isProcessingOrder">Processing...</span>
+            </button> -->
         </form>
       </div>
     </div>

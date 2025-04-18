@@ -1,10 +1,13 @@
 <section class="image-slider-container">
   <div class="slider">
-    <div
-      class="slides-container"
-      [style.transform]="'translateX(-' + currentSlide * 100 + '%)'"
-    >
-      <div *ngFor="let slide of slides; let i = index" class="slide">
+    <div class="slides-track" [ngClass]="direction">
+      <div *ngFor="let slide of slides; let i = index" 
+           class="slide" 
+           [class.active]="i === currentSlide"
+           [class.prev]="(i === (currentSlide - 1 + slides.length) % slides.length) || 
+                         (currentSlide === 0 && i === slides.length - 1)"
+           [class.next]="(i === (currentSlide + 1) % slides.length) || 
+                         (currentSlide === slides.length - 1 && i === 0)">
         <img [src]="slide.url" [alt]="slide.alt" class="slide-image" />
         <div class="slide-content">
           <h2 class="slide-title">{{ slide.title }}</h2>
@@ -45,13 +48,12 @@
   </div>
 
   <div class="productlist">
-    <div class="button" >
+    <div class="button">
       <button
         mat-button
         (click)="previousPage()"
         [disabled]="page === 0"
         aria-label="Previous page"
-        s
       >
         <mat-icon>chevron_left</mat-icon>
       </button>
@@ -66,10 +68,7 @@
     </div>
 
     <div class="main-container">
-      <!-- Search Bar -->
-
       <div class="product-grid">
-        <!-- Product 1 -->
         <div *ngFor="let product of products" class="product-card-container">
           <div class="image-container">
             <img
@@ -89,16 +88,11 @@
           </div>
           <div class="purchase-count">{{ 256 }}+ bought in the past month</div>
           <div class="price-section">
-            <span class="current-price"
-              >₹{{ product.productDiscountedPrice }}</span
-            >
+            <span class="current-price">₹{{ product.productDiscountedPrice }}</span>
             <span class="mrp">M.R.P: ₹{{ product.productActualPrice }}</span>
-            <span class="discount"
-              >({{
-                product.productActualPrice - product.productDiscountedPrice
-              }}
-              off)</span
-            >
+            <span class="discount">
+              ({{ product.productActualPrice - product.productDiscountedPrice }} off)
+            </span>
           </div>
           <div class="delivery-info">
             <span class="free-delivery">FREE delivery Sat, 12 Apr</span>

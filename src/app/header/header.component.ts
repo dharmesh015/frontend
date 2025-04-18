@@ -10,8 +10,9 @@ import { UserService } from '../_service/user.service';
   styleUrls: ['./header.component.css'],
 })
 
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   isMenuOpen = false;
+  isLoggedInflag=true;
 
   constructor(
     private userathservice: UserAuthServiceService,
@@ -20,6 +21,10 @@ export class HeaderComponent {
     private cdRef: ChangeDetectorRef,
     
   ) {}
+  ngOnInit(): void {
+    this.isLoggedInflag=this.userathservice.isLoggedIn();
+    this.isLoggedIn();
+  }
   // isMenuOpen = false;
   isAccountDropdownOpen = false;
  

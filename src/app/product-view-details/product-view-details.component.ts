@@ -106,6 +106,10 @@ export class ProductViewDetailsComponent implements OnInit {
   }
   buyNow(productId:number):void {
     console.log('buy called');
+    if (!this.authserice.isLoggedIn()) {
+      // Redirect to login page if not logged in
+      this.router.navigate(['/login']);
+    } else {
     this.router.navigate([
       '/buyProduct',
       {
@@ -114,7 +118,7 @@ export class ProductViewDetailsComponent implements OnInit {
       },
     ]);
   }
-
+  }
   isuser(){
     return this.authserice.isUser();
   }

@@ -49,6 +49,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { ChangeRoleDialogComponent } from './change-role-dialog/change-role-dialog.component';
 import { from } from 'rxjs';
 import { ShowOrderComponent } from './show-order/show-order.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 
@@ -102,7 +103,8 @@ import { ShowOrderComponent } from './show-order/show-order.component';
     MatTableModule,
     CommonModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatPaginatorModule
  
   ],
   providers: [

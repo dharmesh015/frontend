@@ -58,9 +58,7 @@ const routes: Routes = [
   { path: 'editproduct/:id', component: EditproductComponent },
   {
     path: 'showcart',
-    component: CartComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ['User',] },
+    component: CartComponent
   },
   { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'ProductViewDetails/:id', component: ProductViewDetailsComponent },
@@ -69,9 +67,7 @@ const routes: Routes = [
 
   {
     path: 'buyProduct',
-    component: BuyProductComponent,
-    canActivate: [AuthGuard],
-    data: { roles: ['User'] },
+    component: BuyProductComponent
   },
   {
     path: 'showorder',

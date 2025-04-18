@@ -63,7 +63,7 @@ export class UserAuthServiceService {
   }
 
   public isLoggedIn(): boolean {
-    return !!this.getToken() && this.getRoles().length > 0;
+    return !!this.getToken();
   }
 
   public isAdmin(): boolean {

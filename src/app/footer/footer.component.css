@@ -105,3 +105,6 @@ button:disabled {
 .footer .fab.fa-instagram {
   color: #e4405f; /* Instagram red-pink */
 }
+.text{
+  font-size: 15px;
+}

@@ -11,7 +11,6 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './forgot-password.component.css',
 })
 export class ForgotPasswordComponent {
- 
   isLoading = false;
   token: string = '';
   constructor(
@@ -21,20 +20,20 @@ export class ForgotPasswordComponent {
   ) {}
   sendEmail(form: NgForm) {
     if (form.valid) {
-      this.isLoading = true; 
+      this.isLoading = true;
       this.userService.sendEmail(form.value.email).subscribe(
         (response) => {
-          this.isLoading = false; 
-          console.log("Response received:", response);
-          
-          if (response === "UNF") {
+          this.isLoading = false;
+          console.log('Response received:', response);
+
+          if (response === 'UNF') {
             Swal.fire({
               title: 'User Not Found',
               text: 'The email address you entered is not associated with any account. Please try again.',
               icon: 'error',
               confirmButtonText: 'OK',
             });
-          } else if (response === "S") {
+          } else if (response === 'S') {
             Swal.fire({
               title: 'Email Sent',
               text: 'A password reset link has been sent to your email address.',
@@ -52,7 +51,7 @@ export class ForgotPasswordComponent {
           }
         },
         (error) => {
-          this.isLoading = false; 
+          this.isLoading = false;
           Swal.fire({
             title: 'Error',
             text: 'An error occurred while processing your request. Please try again later.',
@@ -69,4 +68,5 @@ export class ForgotPasswordComponent {
         confirmButtonText: 'OK',
       });
     }
-  }}
+  }
+}
